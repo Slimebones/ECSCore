@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core {
+namespace Slimebones.ECSCore {
     /// <summary>
     /// Connects Unity logic with ECS layer.
     /// </summary>

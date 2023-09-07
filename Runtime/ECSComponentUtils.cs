@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-namespace JetPants.ClumsyDelivery.Core {
+namespace Slimebones.ECSCore {
     public class ECSComponentUtils {
         /// <summary>
         /// Adds a new component for entity, or skip, if such component exists.

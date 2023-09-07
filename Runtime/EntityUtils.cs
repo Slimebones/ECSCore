@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-namespace JetPants.ClumsyDelivery.Core {
+namespace Slimebones.ECSCore {
     public static class EntityUtils {
         // Destroy Entity and attached GameObject (if any attached).
         public static void DestroyWithGameObject(Entity entity) {

@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core {
+namespace Slimebones.ECSCore {
     public class MissingECSGameObjectException : Exception {
         public MissingECSGameObjectException(string misser)
             : base(string.Format(

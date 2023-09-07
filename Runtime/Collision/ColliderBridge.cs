@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core.Collision {
+namespace Slimebones.ECSCore.Collision {
     /// <summary>
     /// Bridge between Unity Collisions and ECS.
     /// </summary>

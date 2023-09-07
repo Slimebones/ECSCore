@@ -1,9 +1,9 @@
 using Scellecs.Morpeh;
 using System;
 using System.Linq;
-using static JetPants.ClumsyDelivery.Utils.Delegates;
+using static Slimebones.ECSCore.Utils.Delegates;
 
-namespace JetPants.ClumsyDelivery.Core.Mouse {
+namespace Slimebones.ECSCore.Mouse {
     public static class MouseUtils {
         /// <summary>
         /// Executes action for each MouseEvent.

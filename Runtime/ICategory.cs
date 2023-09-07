@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core {
+namespace Slimebones.ECSCore {
     /// <summary>
     /// Represents Filter returning special combination of Components which
     /// define some logical object.

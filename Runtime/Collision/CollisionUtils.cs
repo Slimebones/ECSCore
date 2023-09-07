@@ -1,9 +1,9 @@
 using Scellecs.Morpeh;
 using System;
 using System.Linq;
-using static JetPants.ClumsyDelivery.Utils.Delegates;
+using static Slimebones.ECSCore.Utils.Delegates;
 
-namespace JetPants.ClumsyDelivery.Core.Collision {
+namespace Slimebones.ECSCore.Collision {
     public static class CollisionUtils {
         /// <summary>
         /// Executes action for each collision event.

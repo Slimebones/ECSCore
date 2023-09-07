@@ -1,8 +1,8 @@
-using JetPants.ClumsyDelivery.Core.Mouse;
+using Slimebones.ECSCore.Mouse;
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core.Global {
+namespace Slimebones.ECSCore.Global {
     /// <summary>
     /// Activate global Unity logic for ECS layer.
     /// </summary>

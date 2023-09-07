@@ -1,5 +1,5 @@
 {
-    "name": "Core",
+    "name": "ECSCore",
     "rootNamespace": "",
     "references": [
         "GUID:3377deebfb0acde45876d12c6e3d27cc",

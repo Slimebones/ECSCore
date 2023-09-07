@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core {
+namespace Slimebones.ECSCore {
     public static class ECSGameObjectUtils {
         public static ref ECSGameObject GetOrError(Entity e) {
             if (!e.Has<ECSGameObject>()) {

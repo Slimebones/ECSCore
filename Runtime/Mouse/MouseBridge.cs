@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace JetPants.ClumsyDelivery.Core.Mouse {
+namespace Slimebones.ECSCore.Mouse {
     public class MouseBridge: Bridge {
         public void OnMouseEnter() {
             CreateMouseEvent(MouseEventType.Enter);

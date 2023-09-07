@@ -1,4 +1,4 @@
-namespace JetPants.ClumsyDelivery.Core.Mouse {
+namespace Slimebones.ECSCore.Mouse {
     public enum MouseEventType {
         Enter,
         Over,

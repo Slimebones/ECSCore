@@ -2,9 +2,9 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using JetPants.ClumsyDelivery.Core.Mouse;
+using Slimebones.ECSCore.Mouse;
 
-namespace JetPants.ClumsyDelivery.Core.Global {
+namespace Slimebones.ECSCore.Global {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]

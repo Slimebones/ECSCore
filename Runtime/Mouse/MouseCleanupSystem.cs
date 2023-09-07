@@ -3,7 +3,7 @@ using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
 
-namespace JetPants.ClumsyDelivery.Core.Mouse {
+namespace Slimebones.ECSCore.Mouse {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]

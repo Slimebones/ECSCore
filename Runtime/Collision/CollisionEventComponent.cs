@@ -3,7 +3,7 @@ using UnityEngine;
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
 
-namespace JetPants.ClumsyDelivery.Core.Collision {
+namespace Slimebones.ECSCore.Collision {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]

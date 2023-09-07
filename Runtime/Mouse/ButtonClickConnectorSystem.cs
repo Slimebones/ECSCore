@@ -2,8 +2,8 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using JetPants.ClumsyDelivery.Core.Mouse;
-using JetPants.ClumsyDelivery.Core;
+using Slimebones.ECSCore.Mouse;
+using Slimebones.ECSCore;
 using UnityEngine.UI;
 
 /// <summary>
