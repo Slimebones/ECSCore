@@ -16,6 +16,9 @@ namespace Slimebones.ECSCore.Collision {
     /// <remarks>
     /// Can be Trigger or not. `collider` field is set on Trigger events,
     /// `collision` field is set otherwise.
+    ///
+    /// For 2D alternative fields are used, such as `collider2D` and
+    /// `collision2D`.
     /// </remarks>
     [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
@@ -24,7 +27,9 @@ namespace Slimebones.ECSCore.Collision {
     public struct CollisionEvent : IComponent {
         public CollisionEventType type;
         public UnityEngine.Collision collision;
+        public Collision2D collision2D;
         public UnityEngine.Collider collider;
+        public Collider2D collider2D;
         public Entity hostEntity;
         public Entity guestEntity;
         public bool isTrigger;
