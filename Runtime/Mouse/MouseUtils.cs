@@ -16,7 +16,7 @@ namespace Slimebones.ECSCore.Mouse {
             World world,
             MouseEventType[] allowedTypes = null
         ) {
-            Filter eventF = world.Filter.With<MouseEvent>();
+            Filter eventF = world.Filter.With<MouseEvent>().Build();
 
             foreach (Entity eventE in eventF) {
                 ref MouseEvent mouseEvent =

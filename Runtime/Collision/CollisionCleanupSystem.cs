@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Collision {
         private Filter colliders;
 
         public override void OnAwake() {
-            colliders = World.Filter.With<CollisionEvent>();
+            colliders = World.Filter.With<CollisionEvent>().Build();
         }
 
         public override void OnUpdate(float deltaTime) {

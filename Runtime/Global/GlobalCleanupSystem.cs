@@ -13,7 +13,7 @@ namespace Slimebones.ECSCore.Global {
         private Filter globalMouseEvents;
 
         public override void OnAwake() {
-            globalMouseEvents = World.Filter.With<MouseEvent>();
+            globalMouseEvents = World.Filter.With<MouseEvent>().Build();
         }
 
         public override void OnUpdate(float deltaTime) {

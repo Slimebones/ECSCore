@@ -16,7 +16,7 @@ namespace Slimebones.ECSCore.Collision {
             World world,
             CollisionEventType[] allowedTypes = null
         ) {
-            Filter collisionEventFilter = world.Filter.With<CollisionEvent>();
+            Filter collisionEventFilter = world.Filter.With<CollisionEvent>().Build();
 
             foreach (Entity collisionEventEntity in collisionEventFilter) {
                 ref CollisionEvent collisionEvent =

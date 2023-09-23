@@ -18,7 +18,7 @@ public sealed class ButtonClickConnectorSystem : UpdateSystem {
 
     public override void OnAwake() {
         mouseInteractableF = World
-            .Filter.With<MouseInteractable>().With<ECSGameObject>();
+            .Filter.With<MouseInteractable>().With<ECSGameObject>().Build();
 
         // selects every mouse interactable and assigns it's mouse bridge to
         // it's button. If there is no button Unity component, just skip.

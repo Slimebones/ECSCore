@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Mouse {
         private Filter toCleanF;
 
         public override void OnAwake() {
-            toCleanF = World.Filter.With<MouseEvent>();
+            toCleanF = World.Filter.With<MouseEvent>().Build();
         }
 
         public override void OnUpdate(float deltaTime) {

@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Global {
         private Filter globalF;
 
         public override void OnAwake() {
-            globalF = World.Filter.With<Global>();
+            globalF = World.Filter.With<Global>().Build();
 
             Entity globalE = globalF.First();
             ref Global _global = ref globalE.GetComponent<Global>();

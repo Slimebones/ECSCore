@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Mouse {
         private Filter interactables;
 
         public override void OnAwake() {
-            interactables = World.Filter.With<MouseInteractable>();
+            interactables = World.Filter.With<MouseInteractable>().Build();
 
             foreach (var e in interactables) {
                 ref MouseInteractable interactable =

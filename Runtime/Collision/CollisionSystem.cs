@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Collision {
         private Filter colliders;
 
         public override void OnAwake() {
-            colliders = World.Filter.With<Collider>();
+            colliders = World.Filter.With<Collider>().Build();
 
             foreach (Entity entity in colliders) {
                 ref Collider collider = ref entity.GetComponent<Collider>();
