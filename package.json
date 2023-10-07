@@ -1,0 +1,8 @@
+{
+	"name": "com.slimebones.ecscore",
+	"author": "Slimebones",
+	"displayName": "ECSCore",
+	"description": "Core things for working with Morpeh ECS.",
+	"version": "0.1.0",
+	"hideInEditor": false
+}
