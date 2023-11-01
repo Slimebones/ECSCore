@@ -16,7 +16,7 @@ namespace Slimebones.ECSCore.Global {
 
             Entity globalE = globalF.First();
             ref Global _global = ref globalE.GetComponent<Global>();
-            ref ECSGameObject gameObject = ref ECSGameObjectUtils.GetOrError(
+            ref ECSGameObject gameObject = ref GameObjectUtils.GetOrError(
                 globalE
             );
 

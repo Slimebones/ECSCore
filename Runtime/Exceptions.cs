@@ -40,12 +40,12 @@ namespace Slimebones.ECSCore {
         : Exception where TComponent: struct, IComponent
     {
         public MissingECSComponentException(
-            GameObject go
+            GameObject unityGO
         )
             : base(string.Format(
                 "missing ECS component <{0}> on Unity game object <{1}>",
                 typeof(TComponent).FullName,
-                go
+                unityGO
             )) {}
     }
 }

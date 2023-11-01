@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 
-namespace Slimebones.ECSCore {
-    public class ECSComponentUtils {
+namespace Slimebones.ECSCore.Component {
+    public class ComponentUtils {
         /// <summary>
         /// Adds a new component for entity, or skip, if such component exists.
         /// </summary>

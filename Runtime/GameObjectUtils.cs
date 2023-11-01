@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using UnityEngine;
 
 namespace Slimebones.ECSCore {
-    public static class ECSGameObjectUtils {
+    public static class GameObjectUtils {
         public static ref ECSGameObject GetOrError(Entity e) {
             if (!e.Has<ECSGameObject>()) {
                 // every collider should have game object attached

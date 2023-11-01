@@ -25,7 +25,8 @@ public sealed class ButtonClickConnectorSystem : UpdateSystem {
 
         foreach (var e in mouseInteractableF) {
 
-            ref GameObject unityGO = ref ECSGameObjectUtils.GetUnityOrError(e);
+            ref GameObject unityGO =
+                ref GameObjectUtils.GetUnityOrError(e);
 
             // get button and mouse bridge unity components and setup a
             // romantic date for them
