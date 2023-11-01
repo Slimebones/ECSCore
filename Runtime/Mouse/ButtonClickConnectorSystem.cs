@@ -2,56 +2,66 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Mouse;
 using Slimebones.ECSCore;
 using UnityEngine.UI;
+using Slimebones.ECSCore.Base;
 
-/// <summary>
-/// Connects mouse interactables with Unity UI Buttons OnClick events.
-/// </summary>
-[Il2CppSetOption(Option.NullChecks, false)]
-[Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-[Il2CppSetOption(Option.DivideByZeroChecks, false)]
-[CreateAssetMenu(menuName = "ECS/Systems/" + nameof(ButtonClickConnectorSystem))]
-public sealed class ButtonClickConnectorSystem : UpdateSystem {
-    private Filter mouseInteractableF;
+namespace Slimebones.ECSCore.Mouse
+{
 
-    public override void OnAwake() {
-        mouseInteractableF = World
-            .Filter.With<MouseInteractable>().With<ECSGameObject>().Build();
+    /// <summary>
+    /// Connects mouse interactables with Unity UI Buttons OnClick events.
+    /// </summary>
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+    [CreateAssetMenu(menuName = "ECS/Systems/" + nameof(ButtonClickConnectorSystem))]
+    public sealed class ButtonClickConnectorSystem: UpdateSystem
+    {
+        private Filter mouseInteractableF;
 
-        // selects every mouse interactable and assigns it's mouse bridge to
-        // it's button. If there is no button Unity component, just skip.
+        public override void OnAwake()
+        {
+            mouseInteractableF = World
+                .Filter.With<MouseInteractable>().With<ECSGameObject>().Build();
 
-        foreach (var e in mouseInteractableF) {
+            // selects every mouse interactable and assigns it's mouse bridge to
+            // it's button. If there is no button Unity component, just skip.
 
-            ref GameObject unityGO =
-                ref GameObjectUtils.GetUnityOrError(e);
+            foreach (var e in mouseInteractableF)
+            {
 
-            // get button and mouse bridge unity components and setup a
-            // romantic date for them
+                ref GameObject unityGO =
+                    ref GameObjectUtils.GetUnityOrError(e);
 
-            bool hasButton = unityGO.TryGetComponent(
-                out Button button
-            );
-            bool hasMouseBridge = unityGO.TryGetComponent(
-                out MouseBridge mouseBridge
-            );
+                // get button and mouse bridge unity components and setup a
+                // romantic date for them
 
-            if (!hasButton) {
-                // for non-button entities, just skip
-                continue;
-            }
-            if (!hasMouseBridge) {
-                throw new MissingUnityComponentException<MouseBridge>(
-                    unityGO
+                bool hasButton = unityGO.TryGetComponent(
+                    out Button button
                 );
+                bool hasMouseBridge = unityGO.TryGetComponent(
+                    out MouseBridge mouseBridge
+                );
+
+                if (!hasButton)
+                {
+                    // for non-button entities, just skip
+                    continue;
+                }
+                if (!hasMouseBridge)
+                {
+                    throw new MissingUnityComponentException<MouseBridge>(
+                        unityGO
+                    );
+                }
+
+                button.onClick.AddListener(mouseBridge.OnMouseDown);
             }
-
-            button.onClick.AddListener(mouseBridge.OnMouseDown); 
         }
-    }
 
-    public override void OnUpdate(float deltaTime) {
+        public override void OnUpdate(float deltaTime)
+        {
+        }
     }
 }

@@ -1,28 +1,36 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace Slimebones.ECSCore {
+namespace Slimebones.ECSCore.Base
+{
     /// <summary>
     /// Connects Unity logic with ECS layer.
     /// </summary>
-    public class Bridge: MonoBehaviour {
+    public class Bridge: MonoBehaviour
+    {
         protected Entity entity;
         protected World world;
 
-        public Entity Entity {
-            get {
+        public Entity Entity
+        {
+            get
+            {
                 return entity;
             }
-            set {
+            set
+            {
                 entity = value;
             }
         }
 
-        public World World {
-            get {
+        public World World
+        {
+            get
+            {
                 return world;
             }
-            set {
+            set
+            {
                 world = value;
             }
         }

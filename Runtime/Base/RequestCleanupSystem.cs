@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-namespace Slimebones.ECSCore.Component
+namespace Slimebones.ECSCore.Base
 {
     public class RequestCleanupSystem: ICleanupSystem
     {

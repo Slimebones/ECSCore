@@ -1,7 +1,9 @@
 using Scellecs.Morpeh;
 
-namespace Slimebones.ECSCore.Component {
-    public class ComponentUtils {
+namespace Slimebones.ECSCore.Base
+{
+    public class ComponentUtils
+    {
         /// <summary>
         /// Adds a new component for entity, or skip, if such component exists.
         /// </summary>
@@ -9,9 +11,11 @@ namespace Slimebones.ECSCore.Component {
         /// <param name="entity"></param>
         public static void AddOrSkip<TComponent>(
             Entity entity
-        ) where TComponent: struct, IComponent {
+        ) where TComponent : struct, IComponent
+        {
             entity.GetComponent<TComponent>(out bool hasComponent);
-            if (!hasComponent) {
+            if (!hasComponent)
+            {
                 entity.AddComponent<TComponent>();
             }
         }

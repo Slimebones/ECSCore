@@ -1,7 +1,9 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Mouse {
+namespace Slimebones.ECSCore.Mouse
+{
     public class MouseBridge: Bridge {
         public void OnMouseEnter() {
             CreateMouseEvent(MouseEventType.Enter);

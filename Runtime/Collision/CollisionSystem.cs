@@ -2,8 +2,10 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base;
 
-namespace Slimebones.ECSCore.Collision {
+namespace Slimebones.ECSCore.Collision
+{
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]

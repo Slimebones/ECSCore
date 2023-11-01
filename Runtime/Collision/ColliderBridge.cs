@@ -1,7 +1,9 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Collision {
+namespace Slimebones.ECSCore.Collision
+{
     /// <summary>
     /// Bridge between Unity Collisions and ECS.
     /// </summary>

@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using System;
 
-namespace Slimebones.ECSCore.Component
+namespace Slimebones.ECSCore.Base
 {
     public static class RequestComponentUtils
     {

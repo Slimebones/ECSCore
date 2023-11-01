@@ -1,8 +1,10 @@
 using Slimebones.ECSCore.Mouse;
 using Scellecs.Morpeh;
 using UnityEngine;
+using Slimebones.ECSCore.Base;
 
-namespace Slimebones.ECSCore.Global {
+namespace Slimebones.ECSCore.Global
+{
     /// <summary>
     /// Activate global Unity logic for ECS layer.
     /// </summary>
