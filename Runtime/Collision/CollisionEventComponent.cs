@@ -2,6 +2,7 @@ using Scellecs.Morpeh;
 using UnityEngine;
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
+using Slimebones.ECSCore.Base;
 
 namespace Slimebones.ECSCore.Collision {
     [Il2CppSetOption(Option.NullChecks, false)]
@@ -24,7 +25,7 @@ namespace Slimebones.ECSCore.Collision {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CollisionEvent : IComponent {
+    public struct CollisionEvent : IEventComponent {
         public CollisionEventType type;
         public UnityEngine.Collision collision;
         public Collision2D collision2D;

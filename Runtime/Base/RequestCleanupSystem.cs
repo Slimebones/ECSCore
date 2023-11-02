@@ -13,14 +13,14 @@ namespace Slimebones.ECSCore.Base
 
         public void OnAwake()
         {
-            requestF = World.Filter.With<RequestPointer>().Build();
+            requestF = World.Filter.With<RequestMeta>().Build();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (var e in requestF)
             {
-                ref var pointer = ref e.GetComponent<RequestPointer>();
+                ref var pointer = ref e.GetComponent<RequestMeta>();
                 if (pointer.callCount > pointer.requiredCallCountToComplete)
                 {
                     World.RemoveEntity(e);

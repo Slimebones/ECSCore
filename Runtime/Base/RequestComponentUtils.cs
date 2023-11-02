@@ -12,9 +12,9 @@ namespace Slimebones.ECSCore.Base
         {
             var e = world.CreateEntity();
             ref T c = ref e.AddComponent<T>();
-            ref var pointer = ref e.AddComponent<RequestPointer>();
-            pointer.callCount = 0;
-            pointer.requiredCallCountToComplete = requiredCallCountToComplete;
+            ref var meta = ref e.AddComponent<RequestMeta>();
+            meta.callCount = 0;
+            meta.requiredCallCountToComplete = requiredCallCountToComplete;
             return ref c;
         }
 
@@ -22,8 +22,8 @@ namespace Slimebones.ECSCore.Base
             Entity e
         )
         {
-            ref var pointer = ref e.GetComponent<RequestPointer>();
-            pointer.callCount++;
+            ref var meta = ref e.GetComponent<RequestMeta>();
+            meta.callCount++;
         }
     }
 }
