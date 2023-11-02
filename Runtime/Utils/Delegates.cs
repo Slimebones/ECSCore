@@ -12,5 +12,6 @@ namespace Slimebones.ECSCore.Utils {
             ref T2 arg2,
             ref T3 arg3
         );
+        public delegate T ReturnFunc<out T>();
     }
 }
