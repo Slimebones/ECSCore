@@ -18,5 +18,14 @@ namespace Slimebones.ECSCore.Input
         /// that type.
         /// </remarks>
         public Dictionary<InputEventType, ReturnFunc<bool>> map;
+
+        public InputSpec(
+            string name,
+            Dictionary<InputEventType, ReturnFunc<bool>> map
+        )
+        {
+            this.name = name;
+            this.map = map;
+        }
     }
 }

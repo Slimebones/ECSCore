@@ -7,8 +7,8 @@ namespace Slimebones.ECSCore.Base
         // Destroy Entity and attached GameObject (if any attached).
         public static void DestroyWithGameObject(Entity entity)
         {
-            ECSGameObject gameObject =
-                entity.GetComponent<ECSGameObject>(out bool hasGameObject);
+            GameObjectStorage gameObject =
+                entity.GetComponent<GameObjectStorage>(out bool hasGameObject);
 
             if (hasGameObject)
             {

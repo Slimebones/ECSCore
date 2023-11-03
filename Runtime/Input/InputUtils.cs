@@ -36,6 +36,26 @@ namespace Slimebones.ECSCore.Input
             return false;
         }
 
+        public static bool Listen(
+            string name,
+            InputEventType type,
+            World world
+        )
+        {
+            Filter f = world.Filter.With<InputEvent>().Build();
+
+            foreach (var e in f)
+            {
+                ref var c = ref e.GetComponent<InputEvent>();
+                if (c.name == name && c.type == type)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static ref InputEvent ListenReturn(
             string name,
             World world

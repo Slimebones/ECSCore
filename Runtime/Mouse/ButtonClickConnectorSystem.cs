@@ -23,7 +23,7 @@ namespace Slimebones.ECSCore.Mouse
         public override void OnAwake()
         {
             mouseInteractableF = World
-                .Filter.With<MouseInteractable>().With<ECSGameObject>().Build();
+                .Filter.With<MouseInteractable>().With<GameObjectStorage>().Build();
 
             // selects every mouse interactable and assigns it's mouse bridge to
             // it's button. If there is no button Unity component, just skip.

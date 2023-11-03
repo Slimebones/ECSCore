@@ -20,7 +20,7 @@ namespace Slimebones.ECSCore.Mouse
                 ref MouseInteractable interactable =
                     ref e.GetComponent<MouseInteractable>();
 
-                ref ECSGameObject goECS = ref GameObjectUtils.GetOrError(e);
+                ref GameObjectStorage goECS = ref GameObjectUtils.GetOrError(e);
 
                 interactable.bridge =
                     goECS.value.AddComponent<MouseBridge>();

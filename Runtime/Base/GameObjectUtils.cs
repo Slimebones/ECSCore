@@ -5,19 +5,19 @@ namespace Slimebones.ECSCore.Base
 {
     public static class GameObjectUtils
     {
-        public static ref ECSGameObject GetOrError(Entity e)
+        public static ref GameObjectStorage GetOrError(Entity e)
         {
-            if (!e.Has<ECSGameObject>())
+            if (!e.Has<GameObjectStorage>())
             {
                 // every collider should have game object attached
                 throw new MissingECSGameObjectException(e);
             }
-            return ref e.GetComponent<ECSGameObject>();
+            return ref e.GetComponent<GameObjectStorage>();
         }
 
         public static ref GameObject GetUnityOrError(Entity e)
         {
-            ref ECSGameObject GOECS = ref GetOrError(e);
+            ref GameObjectStorage GOECS = ref GetOrError(e);
 
             if (GOECS.value == null)
             {

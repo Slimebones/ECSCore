@@ -10,7 +10,7 @@ namespace Slimebones.ECSCore.Base
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class ECSGameObjectComponent: MonoProvider<ECSGameObject>
+    public sealed class GameObjectStorageComponent: MonoProvider<GameObjectStorage>
     {
     }
 
@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.Base
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct ECSGameObject: IComponent
+    public struct GameObjectStorage: IComponent
     {
         public GameObject value;
     }
