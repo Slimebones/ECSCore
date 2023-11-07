@@ -3,7 +3,9 @@ using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Collision;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.Condition
 {
@@ -25,6 +27,13 @@ namespace Slimebones.ECSCore.Condition
         public bool isFirstTriggerWithoutPeriod;
 
         public Filter allowedEntitiesF;
+
+        [Tooltip(
+            "Parent object of the slider where the time to the next spawn"
+            + " will be streamed. The parent object itself will be enabled"
+            + " only on preparation start."
+        )]
+        public GameObject stateSliderParent;
 
         [HideInInspector]
         public float lastTriggeredTime = 0f;
@@ -76,6 +85,10 @@ namespace Slimebones.ECSCore.Condition
                     if (collisionEvent.type == CollisionEventType.Exit)
                     {
                         isEntered = false;
+                        if (stateSliderParent != null)
+                        {
+                            stateSliderParent.SetActive(false);
+                        }
                     }
                 }
             }
@@ -100,6 +113,14 @@ namespace Slimebones.ECSCore.Condition
         {
             if (!isEntered)
             {
+                if (stateSliderParent != null)
+                {
+                    stateSliderParent.SetActive(true);
+                    stateSliderParent
+                        .GetComponentInChildren<Slider>()
+                        .value = 0;
+                }
+
                 isEntered = true;
 
                 // set last triggered time even without an actual trigger
@@ -108,6 +129,16 @@ namespace Slimebones.ECSCore.Condition
                 // trigger if the first trigger is not supposed to be
                 // after the first period
                 return isFirstTriggerWithoutPeriod;
+            }
+
+            if (stateSliderParent != null)
+            {
+                stateSliderParent.GetComponentInChildren<Slider>().value =
+                    Mathf.Lerp(
+                        0f,
+                        1f,
+                        (Time.time - lastTriggeredTime) / triggerStayPeriod
+                    );
             }
 
             if (Time.time - lastTriggeredTime > triggerStayPeriod)
