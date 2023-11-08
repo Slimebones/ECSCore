@@ -1,16 +1,13 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Collision;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.Condition
 {
-    [System.Serializable]
-    public class TriggerCondition: ICondition<Filter>
+    [Serializable]
+    public class TriggerCondition: ICondition
     {
         public UnityEngine.Collider trigger;
         [Tooltip(
@@ -43,7 +40,10 @@ namespace Slimebones.ECSCore.Condition
         public bool Check(
             Entity e,
             World world,
-            Filter hostEntitiesF = null
+            Filter hostEntitiesF = null,
+            Filter f2 = null,
+            Filter f3 = null,
+            Filter f4 = null
         )
         {
             if (trigger == null)
