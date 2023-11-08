@@ -32,6 +32,8 @@ namespace Slimebones.ECSCore.Condition
         )]
         public GameObject stateSliderParent;
 
+        public bool isAlwaysTrueWhileEntered = false;
+
         [HideInInspector]
         public float lastTriggeredTime = 0f;
 
@@ -39,11 +41,7 @@ namespace Slimebones.ECSCore.Condition
 
         public bool Check(
             Entity e,
-            World world,
-            Filter hostEntitiesF = null,
-            Filter f2 = null,
-            Filter f3 = null,
-            Filter f4 = null
+            World world
         )
         {
             if (trigger == null)
@@ -68,13 +66,6 @@ namespace Slimebones.ECSCore.Condition
                         collisionEvent.collider.GetInstanceID()
                             == trigger.GetInstanceID()
                     )
-                    && (
-                        hostEntitiesF != null
-                        && IsHostEntityAllowed(
-                            collisionEvent.hostEntity,
-                            hostEntitiesF
-                        )
-                    )
                 )
                 {
                     if (collisionEvent.type == CollisionEventType.Stay)
@@ -93,17 +84,12 @@ namespace Slimebones.ECSCore.Condition
                 }
             }
 
-            return false;
-        }
-
-        private bool IsHostEntityAllowed(Entity e, Filter allowedEntities)
-        {
-            foreach (var aE in allowedEntities)
+            // do not return false if the trigger is already entered to avoid
+            // problems with trigger listening in FPS updates, where
+            // some collision events can be missed
+            if (isAlwaysTrueWhileEntered)
             {
-                if (e == aE)
-                {
-                    return true;
-                }
+                return isEntered;
             }
 
             return false;
@@ -141,7 +127,10 @@ namespace Slimebones.ECSCore.Condition
                     );
             }
 
-            if (Time.time - lastTriggeredTime > triggerStayPeriod)
+            if (
+                triggerStayPeriod == 0
+                || Time.time - lastTriggeredTime > triggerStayPeriod
+            )
             {
                 lastTriggeredTime = Time.time;
                 return true;
