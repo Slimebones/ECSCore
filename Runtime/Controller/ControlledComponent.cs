@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace Slimebones.ECSCore.Controller
 {
@@ -17,6 +18,7 @@ namespace Slimebones.ECSCore.Controller
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct Controlled: IComponent
     {
-        public string[] keys;
+        [SerializeReference]
+        public IController[] controllers;
     }
 }
