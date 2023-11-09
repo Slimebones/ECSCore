@@ -27,6 +27,7 @@ namespace Slimebones.ECSCore.Collision {
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct CollisionEvent : IEventComponent {
         public CollisionEventType type;
+        public UnityEngine.Collider hostCollider;
         public UnityEngine.Collision collision;
         public Collision2D collision2D;
         public UnityEngine.Collider collider;

@@ -8,6 +8,13 @@ namespace Slimebones.ECSCore.Collision
     /// Bridge between Unity Collisions and ECS.
     /// </summary>
     public class ColliderBridge: Bridge {
+        [HideInInspector] public UnityEngine.Collider hostCollider;
+
+        public void Start()
+        {
+            hostCollider = GetComponent<UnityEngine.Collider>();
+        }
+
         public void OnCollisionEnter2D(Collision2D collision2D) {
             ref CollisionEvent collisionEvent = ref CreateCollision2DEvent(
                 collision2D
@@ -161,6 +168,7 @@ namespace Slimebones.ECSCore.Collision
             ref var collisionEvent =
                 ref EventComponentUtils.Create<CollisionEvent>(World);
             collisionEvent.hostEntity = entity;
+            collisionEvent.hostCollider = hostCollider;
 
             return ref collisionEvent;
         }

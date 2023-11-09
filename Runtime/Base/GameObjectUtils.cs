@@ -15,7 +15,7 @@ namespace Slimebones.ECSCore.Base
             return ref e.GetComponent<GameObjectData>();
         }
 
-        public static ref GameObject GetUnityOrError(Entity e)
+        public static GameObject GetUnityOrError(Entity e)
         {
             ref GameObjectData GOECS = ref GetOrError(e);
 
@@ -24,7 +24,7 @@ namespace Slimebones.ECSCore.Base
                 throw new UnsetECSGameObjectValueException(e);
             }
 
-            return ref GOECS.value;
+            return GOECS.value;
         }
     }
 }

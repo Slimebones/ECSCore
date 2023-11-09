@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Collision;
 using System;
 using UnityEngine;
@@ -9,7 +10,9 @@ namespace Slimebones.ECSCore.Condition
     [Serializable]
     public class TriggerCondition: ICondition
     {
+        public UnityEngine.Collider hostCollider;
         public UnityEngine.Collider trigger;
+
         [Tooltip(
             "How long the host object should stay in the trigger in order"
             + " to give a positive result. On trigger=null, this would mean"
@@ -57,6 +60,34 @@ namespace Slimebones.ECSCore.Condition
             {
                 ref var collisionEvent =
                     ref eventE.GetComponent<CollisionEvent>();
+
+                if (hostCollider != null)
+                {
+                    UnityEngine.Collider factHostCollider =
+                        collisionEvent.hostCollider;
+                        
+
+                    if (factHostCollider == null)
+                    {
+                        // also skip if game object found, but there is no
+                        // collider on it, but it is not possible due to
+                        // how the collisions work
+                        Debug.LogWarningFormat(
+                            "cannot get collider of host entity {0}, but"
+                            + "the collision is somehow happened"
+                        );
+                        continue;
+                    }
+
+                    if (
+                        factHostCollider.GetInstanceID()
+                            != hostCollider.GetInstanceID()
+                    )
+                    {
+                        // unmatched colliders
+                        continue;
+                    }
+                }
 
                 // check if the same collider and the same host entity as
                 // allowed

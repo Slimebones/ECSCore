@@ -20,8 +20,7 @@ namespace Slimebones.ECSCore.Collision
                 ref Collider collider = ref entity.GetComponent<Collider>();
 
                 // get collider's game object
-                ref GameObject GOUnity =
-                    ref GameObjectUtils.GetUnityOrError(entity);
+                GameObject GOUnity = GameObjectUtils.GetUnityOrError(entity);
 
                 // create a new MonoBehaviour as a ColliderBridge and attach it
                 // to a game object and it's ECS component
