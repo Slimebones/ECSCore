@@ -12,7 +12,8 @@ namespace Slimebones.ECSCore {
     /// For CargoCategory, it would be a Filter returning Entities with
     /// Components `Price` and `SoldOnFinish`.
     /// </example>
-    public interface ICategory: IFilterExtension {
-        public bool In(Entity entity);
+    public interface ICategory: IFilterExtension
+    {
+        public bool Has(Entity e);
     }
 }
