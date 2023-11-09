@@ -12,17 +12,18 @@ namespace Slimebones.ECSCore.Condition
             World world
         )
         {
-            List<bool> flags = new List<bool>();
-
             foreach (var condition in conditions)
             {
-                flags.Add(condition.Check(
+                if (!condition.Check(
                     e,
                     world
-                ));
+                ))
+                {
+                    return false;
+                }
             }
 
-            return flags.All(x => x);
+            return true;
         }
     }
 }
