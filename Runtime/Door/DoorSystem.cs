@@ -45,6 +45,12 @@ namespace Slimebones.ECSCore.Door
             {
                 ref var c = ref e.GetComponent<Door>();
 
+                // perf: don't check doors which no more will open
+                if (c.state == DoorState.Opened && !c.isBackClosed)
+                {
+                    continue;
+                }
+
                 bool areConditionsPositive =
                     c.openConditions == null
                     || ConditionUtils.All(
