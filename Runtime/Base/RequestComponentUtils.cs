@@ -25,5 +25,15 @@ namespace Slimebones.ECSCore.Base
             ref var meta = ref e.GetComponent<RequestMeta>();
             meta.callCount++;
         }
+
+        public static bool IsCompleted(Entity e)
+        {
+            ref var requestMeta =
+                ref e.GetComponent<RequestMeta>();
+            return
+                requestMeta.callCount
+                >= requestMeta.requiredCallCountToComplete;
+        }
+
     }
 }
