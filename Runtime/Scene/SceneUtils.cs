@@ -8,20 +8,33 @@ namespace Slimebones.ECSCore.Scene {
         /// Loads level with next integer.
         /// </summary>
         /// <param name="world"></param>
-        public static void LoadNextLevel(World world) {
+        public static void LoadNextLevelOrBackup(
+            World world,
+            string prefix,
+            string backup
+        )
+        {
             string currentScene = SceneStorage.currentRealScene;
 
-            if (!currentScene.StartsWith("Level_")) {
+            if (!currentScene.StartsWith(prefix)) {
                 throw new NotLevelException(currentScene); 
             }
 
             int levelNumber = GetLevelNumber(currentScene);
             levelNumber++;
 
-            // TODO(ryzhovalex):
-            //      consider max possible level, after reaching it,
-            //      do something special
-            Load("Level_" + levelNumber, world);
+            string finalName = prefix + levelNumber;
+            if (IsExists(finalName))
+            {
+                Load(finalName, world);
+                return;
+            }
+            Load(backup, world);
+        }
+
+        public static bool IsExists(string name)
+        {
+            return SceneUtility.GetBuildIndexByScenePath(name) >= 0;
         }
 
         public static void Load(
