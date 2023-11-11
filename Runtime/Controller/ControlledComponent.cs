@@ -20,5 +20,6 @@ namespace Slimebones.ECSCore.Controller
     {
         [SerializeReference]
         public IController[] controllers;
+        public bool isEnabled;
     }
 }

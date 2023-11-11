@@ -34,6 +34,11 @@ namespace Slimebones.ECSCore.Controller
             {
                 ref var c = ref e.GetComponent<Controlled>();
 
+                if (!c.isEnabled)
+                {
+                    continue;
+                }
+
                 foreach (var controller in c.controllers)
                 {
                     controller.Update(deltaTime, e);
