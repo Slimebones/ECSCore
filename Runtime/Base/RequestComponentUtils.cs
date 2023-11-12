@@ -1,5 +1,4 @@
 using Scellecs.Morpeh;
-using System;
 
 namespace Slimebones.ECSCore.Base
 {
@@ -18,21 +17,45 @@ namespace Slimebones.ECSCore.Base
             return ref c;
         }
 
-        public static void RegisterCall(
+        /// <summary>
+        /// Registers a call for a request entity.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>
+        /// False if the request had been already completed before
+        /// this register. True otherwise. Useful to avoid double request
+        /// usage. Note that call is registered despite the returned result
+        /// for compatibility reasons.
+        /// </returns>
+        public static bool RegisterCall(
             Entity e
         )
         {
+            bool result = true;
             ref var meta = ref e.GetComponent<RequestMeta>();
+
+            if (IsCompletedMeta(ref meta))
+            {
+                result = false;
+            }
+
             meta.callCount++;
+
+            return result;
         }
 
         public static bool IsCompleted(Entity e)
         {
             ref var requestMeta =
                 ref e.GetComponent<RequestMeta>();
+            return IsCompletedMeta(ref requestMeta);
+        }
+
+        private static bool IsCompletedMeta(ref RequestMeta meta)
+        {
             return
-                requestMeta.callCount
-                >= requestMeta.requiredCallCountToComplete;
+                meta.callCount
+                >= meta.requiredCallCountToComplete;
         }
 
     }

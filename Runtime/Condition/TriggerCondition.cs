@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Collision;
+using Slimebones.ECSCore.UI;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,7 @@ namespace Slimebones.ECSCore.Condition
             + " will be streamed. The parent object itself will be enabled"
             + " only on preparation start."
         )]
-        public GameObject stateSliderParent;
+        public GameObjectDataComponent stateSliderPanel;
 
         public bool isAlwaysTrueWhileEntered = false;
 
@@ -50,7 +51,7 @@ namespace Slimebones.ECSCore.Condition
             if (trigger == null)
             {
                 // trigger as like it has been staying
-                return Trigger();
+                return Trigger(world);
             }
 
             Filter collisionEventF =
@@ -101,15 +102,15 @@ namespace Slimebones.ECSCore.Condition
                 {
                     if (collisionEvent.type == CollisionEventType.Stay)
                     {
-                        return Trigger();
+                        return Trigger(world);
                     }
 
                     if (collisionEvent.type == CollisionEventType.Exit)
                     {
                         isEntered = false;
-                        if (stateSliderParent != null)
+                        if (stateSliderPanel != null)
                         {
-                            stateSliderParent.SetActive(false);
+                            SetStateSliderPanel(false, world);
                         }
                     }
                 }
@@ -126,16 +127,27 @@ namespace Slimebones.ECSCore.Condition
             return false;
         }
 
-        private bool Trigger()
+        private void SetStateSliderPanel(bool isActive, World world)
+        {
+            if (isActive)
+            {
+                PanelUtils.Move<EnabledCanvas>(
+                    stateSliderPanel.Entity, world
+                );
+                return;
+            }
+            PanelUtils.Move<DisabledCanvas>(
+                stateSliderPanel.Entity, world
+            );
+        }
+
+        private bool Trigger(World world)
         {
             if (!isEntered)
             {
-                if (stateSliderParent != null)
+                if (stateSliderPanel != null)
                 {
-                    stateSliderParent.SetActive(true);
-                    stateSliderParent
-                        .GetComponentInChildren<Slider>()
-                        .value = 0;
+                    SetStateSliderPanel(true, world);
                 }
 
                 isEntered = true;
@@ -148,9 +160,9 @@ namespace Slimebones.ECSCore.Condition
                 return isFirstTriggerWithoutPeriod;
             }
 
-            if (stateSliderParent != null)
+            if (stateSliderPanel != null)
             {
-                stateSliderParent.GetComponentInChildren<Slider>().value =
+                stateSliderPanel.GetComponentInChildren<Slider>().value =
                     Mathf.Lerp(
                         0f,
                         1f,
