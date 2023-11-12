@@ -23,5 +23,22 @@ namespace Slimebones.ECSCore.UI
             request.targetE = e;
             request.canvasE = world.Filter.With<T>().Build().First();
         }
+
+        /// <summary>
+        /// Moves entity to either enabled or disabled canvas depending on
+        /// given flag.
+        /// </summary>
+        /// <param name="isEnabled"></param>
+        /// <param name="e"></param>
+        /// <param name="world"></param>
+        public static void DecideMove(bool isEnabled, Entity e, World world)
+        {
+            if (isEnabled)
+            {
+                Move<EnabledCanvas>(e, world);
+                return;
+            }
+            Move<DisabledCanvas>(e, world);
+        }
     }
 }
