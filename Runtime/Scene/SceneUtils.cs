@@ -53,7 +53,11 @@ namespace Slimebones.ECSCore.Scene {
         /// Restarts current scene.
         /// </summary>
         /// <param name="world"></param>
-        public static void Restart(World world, bool isLoadingScreenEnabled) {
+        public static void Restart(
+            World world,
+            bool isLoadingScreenEnabled = false
+        )
+        {
             Load(
                 SceneManager.GetActiveScene().name,
                 world,
