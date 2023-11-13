@@ -26,6 +26,10 @@ namespace Slimebones.ECSCore.Base
 
         public void Dispose()
         {
+            foreach (var e in eventF)
+            {
+                World.RemoveEntity(e);
+            }
         }
     }
 }
