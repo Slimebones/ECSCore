@@ -22,5 +22,6 @@ namespace Slimebones.ECSCore.Base
     {
         public int requiredCallCountToComplete;
         public int callCount;
+        public bool isLocked;
     }
 }

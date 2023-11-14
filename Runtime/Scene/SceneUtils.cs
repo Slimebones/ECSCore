@@ -40,13 +40,19 @@ namespace Slimebones.ECSCore.Scene {
         public static void Load(
             string name,
             World world,
-            bool isLoadingScreenEnabled = false
+            bool isLoadingScreenEnabled = false,
+            bool shouldAllRequestsBeUnlocked = true
         ) {
             // create a request to scene systems to load a new scene
             ref LoadSceneRequest loadRequest =
                 ref RequestComponentUtils.Create<LoadSceneRequest>(0, world);
             loadRequest.sceneName = name;
             loadRequest.isLoadingScreenEnabled = isLoadingScreenEnabled;
+
+            if (shouldAllRequestsBeUnlocked)
+            {
+                RequestComponentUtils.UnlockAll();
+            }
         }
 
         /// <summary>
