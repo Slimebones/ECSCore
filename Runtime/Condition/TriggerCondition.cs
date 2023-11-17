@@ -1,7 +1,8 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Collision;
-using Slimebones.ECSCore.UI;
+using Slimebones.ECSCore.UI.Canvas;
+using Slimebones.ECSCore.UI.Panel;
 using System;
 using UnityEngine;
 using UnityEngine.UI;

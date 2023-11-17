@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.UI;
+using Slimebones.ECSCore.UI.Button;
+using Slimebones.ECSCore.UI.Settings;
 
 namespace Slimebones.ECSCore
 {
@@ -13,6 +14,7 @@ namespace Slimebones.ECSCore
         public void OnAwake()
         {
             World.GetStash<Button>().AsDisposable();
+            World.GetStash<DropdownSetting>().AsDisposable();
         }
 
         public void OnUpdate(float deltaTime)

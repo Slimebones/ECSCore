@@ -2,9 +2,9 @@ using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.UI
+namespace Slimebones.ECSCore.UI.Canvas
 {
-    public class UISystem: ISystem
+    public class CanvasSystem: ISystem
     {
         private Filter requestF;
 

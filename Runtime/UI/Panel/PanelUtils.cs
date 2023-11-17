@@ -1,8 +1,9 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.UI.Canvas;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.UI
+namespace Slimebones.ECSCore.UI.Panel
 {
     public static class PanelUtils
     {
@@ -13,11 +14,11 @@ namespace Slimebones.ECSCore.UI
         /// Entity should contain GameObjectData.
         /// </remarks>
         public static void Move<T>(Entity e, World world)
-            where T: struct, ICanvasComponent
+            where T : struct, ICanvasComponent
         {
             ref var request =
                 ref RequestComponentUtils.Create<MoveToCanvasRequest>(
-                    1, 
+                    1,
                     world
                 );
             request.targetE = e;

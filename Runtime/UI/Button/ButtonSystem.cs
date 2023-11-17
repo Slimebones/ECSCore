@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using UnityUI = UnityEngine.UI;
 
-namespace Slimebones.ECSCore.UI
+namespace Slimebones.ECSCore.UI.Button
 {
     /// <summary>
     /// Adds listeners to buttons.
