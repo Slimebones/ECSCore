@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Linq;
 
 namespace Slimebones.ECSCore.Utils {
     /// <summary>
@@ -39,6 +41,31 @@ namespace Slimebones.ECSCore.Utils {
         ) : base (
             String.Format(
                 "{0} is not found", title
+            )
+        ) {}
+    }
+
+    public abstract class ExpectException: Exception
+    {
+        public ExpectException(
+            string message
+        ): base(message) {}
+    }
+
+    /// <summary>
+    /// Some length of an enumerable is expected.
+    /// </summary>
+    public class LengthExpectException<T>: ExpectException
+    {
+        public LengthExpectException(
+            T[] array,
+            int expectedLength
+        ) : base(
+            string.Format(
+                "array {0} is expected to be of length {1}, got length {2}",
+                string.Join(",", array),
+                expectedLength,
+                array.Length
             )
         ) {}
     }
