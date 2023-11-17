@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
 using System;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Slimebones.ECSCore.Config.Specs
             }
             catch
             {
-                Debug.LogErrorFormat(
+                Log.Error(
                     "cannot parse resolution {0}, use default {1}",
                     value,
                     DefaultValue
