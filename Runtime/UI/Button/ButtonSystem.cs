@@ -1,6 +1,4 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
-using UnityUI = UnityEngine.UI;
 
 namespace Slimebones.ECSCore.UI.Button
 {
