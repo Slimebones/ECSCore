@@ -3,12 +3,12 @@ using Scellecs.Morpeh.Providers;
 using Slimebones.ECSCore.Base;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Slimebones.ECSCore.UI.Canvas
+namespace Slimebones.ECSCore.UI.Panel
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class MoveToCanvasRequestComponent: MonoProvider<MoveToCanvasRequest>
+    public sealed class SetPanelStateRequestComponent: MonoProvider<SetPanelStateRequest>
     {
     }
 
@@ -16,9 +16,9 @@ namespace Slimebones.ECSCore.UI.Canvas
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct MoveToCanvasRequest: IRequestComponent
+    public struct SetPanelStateRequest: IRequestComponent
     {
-        public Entity targetE;
-        public Entity canvasE;
+        public string key;
+        public PanelStateChange state;
     }
 }

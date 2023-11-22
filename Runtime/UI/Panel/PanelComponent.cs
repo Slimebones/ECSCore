@@ -1,13 +1,14 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
+using Slimebones.ECSCore.Base;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Slimebones.ECSCore.UI.Canvas
+namespace Slimebones.ECSCore.UI.Panel
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class DisabledCanvasComponent: MonoProvider<DisabledCanvas>
+    public sealed class PanelComponent: MonoProvider<Panel>
     {
     }
 
@@ -15,7 +16,8 @@ namespace Slimebones.ECSCore.UI.Canvas
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct DisabledCanvas: ICanvasComponent
+    public struct Panel: IComponent
     {
+        public string key;
     }
 }

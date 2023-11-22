@@ -1,45 +1,59 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.UI.Canvas;
-using UnityEngine;
 
 namespace Slimebones.ECSCore.UI.Panel
 {
     public static class PanelUtils
     {
-        /// <summary>
-        /// Moves a panel entity to another canvas.
-        /// </summary>
-        /// <remarks>
-        /// Entity should contain GameObjectData.
-        /// </remarks>
-        public static void Move<T>(Entity e, World world)
-            where T : struct, ICanvasComponent
+        public static void Enable(
+            string key,
+            World world
+        )
         {
-            ref var request =
-                ref RequestComponentUtils.Create<MoveToCanvasRequest>(
-                    1,
-                    world
-                );
-            request.targetE = e;
-            request.canvasE = world.Filter.With<T>().Build().First();
+            SetState(key, PanelStateChange.Enable, world);
         }
 
-        /// <summary>
-        /// Moves entity to either enabled or disabled canvas depending on
-        /// given flag.
-        /// </summary>
-        /// <param name="isEnabled"></param>
-        /// <param name="e"></param>
-        /// <param name="world"></param>
-        public static void DecideMove(bool isEnabled, Entity e, World world)
+        public static void Disable(
+            string key,
+            World world
+        )
+        {
+            SetState(key, PanelStateChange.Disable, world);
+        }
+
+        public static void Toggle(
+            string key,
+            World world
+        )
+        {
+            SetState(key, PanelStateChange.Toggle, world);
+        }
+
+        public static void DecideEnable(
+            bool isEnabled, string key, World world
+        )
         {
             if (isEnabled)
             {
-                Move<EnabledCanvas>(e, world);
+                Enable(key, world);
                 return;
             }
-            Move<DisabledCanvas>(e, world);
+            Disable(key, world);
+        }
+
+        public static void SetState(
+            string key, PanelStateChange state, World world
+        )
+        {
+            ref var request =
+                ref RequestComponentUtils.Create<SetPanelStateRequest>(
+                    1,
+                    world
+                );
+
+            request.key = key;
+            request.state = state;
         }
     }
 }

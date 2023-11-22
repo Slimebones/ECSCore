@@ -132,7 +132,7 @@ namespace Slimebones.ECSCore.Condition
         {
             if (isActive)
             {
-                PanelUtils.Move<EnabledCanvas>(
+                PanelUtils.Move<MainCanvas>(
                     stateSliderPanel.Entity, world
                 );
                 return;
