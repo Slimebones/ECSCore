@@ -1,7 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ClumsyDelivery.UI.Panel;
 using Slimebones.ECSCore.Collision;
-using Slimebones.ECSCore.UI.Canvas;
 using Slimebones.ECSCore.UI.Panel;
 using System;
 using UnityEngine;
@@ -30,12 +29,7 @@ namespace Slimebones.ECSCore.Condition
 
         public Filter allowedEntitiesF;
 
-        [Tooltip(
-            "Parent object of the slider where the time to the next spawn"
-            + " will be streamed. The parent object itself will be enabled"
-            + " only on preparation start."
-        )]
-        public GameObjectDataComponent stateSliderPanel;
+        public PanelProviderRef displayPanelRef;
 
         public bool isAlwaysTrueWhileEntered = false;
 
@@ -109,9 +103,9 @@ namespace Slimebones.ECSCore.Condition
                     if (collisionEvent.type == CollisionEventType.Exit)
                     {
                         isEntered = false;
-                        if (stateSliderPanel != null)
+                        if (IsDisplayPanelRefDefined())
                         {
-                            SetStateSliderPanel(false, world);
+                            SetDisplayPanelState(false, world);
                         }
                     }
                 }
@@ -128,17 +122,19 @@ namespace Slimebones.ECSCore.Condition
             return false;
         }
 
-        private void SetStateSliderPanel(bool isActive, World world)
+        private void SetDisplayPanelState(bool isActive, World world)
         {
             if (isActive)
             {
-                PanelUtils.Move<MainCanvas>(
-                    stateSliderPanel.Entity, world
+                PanelUtils.Enable(
+                    displayPanelRef.key,
+                    world
                 );
                 return;
             }
-            PanelUtils.Move<DisabledCanvas>(
-                stateSliderPanel.Entity, world
+            PanelUtils.Disable(
+                displayPanelRef.key,
+                world
             );
         }
 
@@ -146,9 +142,9 @@ namespace Slimebones.ECSCore.Condition
         {
             if (!isEntered)
             {
-                if (stateSliderPanel != null)
+                if (IsDisplayPanelRefDefined())
                 {
-                    SetStateSliderPanel(true, world);
+                    SetDisplayPanelState(true, world);
                 }
 
                 isEntered = true;
@@ -161,14 +157,18 @@ namespace Slimebones.ECSCore.Condition
                 return isFirstTriggerWithoutPeriod;
             }
 
-            if (stateSliderPanel != null)
+            if (IsDisplayPanelRefDefined())
             {
-                stateSliderPanel.GetComponentInChildren<Slider>().value =
-                    Mathf.Lerp(
-                        0f,
-                        1f,
-                        (Time.time - lastTriggeredTime) / triggerStayPeriod
-                    );
+                displayPanelRef
+                    .provider
+                    .GetComponentInChildren<Slider>()
+                    .value =
+                        Mathf.Lerp(
+                            0f,
+                            1f,
+                            (Time.time - lastTriggeredTime)
+                                / triggerStayPeriod
+                        );
             }
 
             if (
@@ -181,6 +181,15 @@ namespace Slimebones.ECSCore.Condition
             }
 
             return false;
+        }
+
+        public bool IsDisplayPanelRefDefined()
+        {
+            return (
+                displayPanelRef != null
+                && displayPanelRef.key != ""
+                && displayPanelRef.provider != null
+            );
         }
     }
 }

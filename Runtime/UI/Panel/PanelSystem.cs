@@ -1,5 +1,4 @@
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Providers;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Logging;
 using System.Collections.Generic;
@@ -11,6 +10,8 @@ namespace Slimebones.ECSCore.UI.Panel
     {
         private Filter panelF;
         private Filter reqF;
+
+        private bool isStorageInitialized;
 
         private Dictionary<string, GameObject> panelGOByKey =
             new Dictionary<string, GameObject>();
