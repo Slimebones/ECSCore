@@ -26,8 +26,8 @@ namespace Slimebones.ECSCore.Config.Specs
                     value,
                     DefaultValue
                 );
-                Config.SetNoCallback(Key, DefaultValue);
-                resolution = ParseResolution(DefaultValue);
+                Config.Set(Key, DefaultValue);
+                return;
             }
 
             // TODO(ryzhovalex):

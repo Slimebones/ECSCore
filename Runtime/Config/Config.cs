@@ -73,7 +73,7 @@ namespace Slimebones.ECSCore.Config
             specByKey[key].OnChange(value, world);
         }
 
-        public static void SetNoCallback(
+        private static void SetNoCallback(
             string key,
             string value
         )

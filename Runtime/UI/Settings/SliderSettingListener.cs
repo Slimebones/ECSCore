@@ -1,6 +1,9 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Config.Specs;
 using Slimebones.ECSCore.React;
+using Slimebones.ECSCore.Utils;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +12,8 @@ namespace Slimebones.ECSCore.UI.Settings
 {
     public class SliderSettingListener: IListener
     {
+        public TextMeshProUGUI displayText;
+
         private string key;
         private Slider sliderUnity;
 
@@ -18,7 +23,13 @@ namespace Slimebones.ECSCore.UI.Settings
             var go = GameObjectUtils.GetUnityOrError(e);
             sliderUnity = go.GetComponent<Slider>();
             sliderUnity.onValueChanged.AddListener(Call);
-            sliderUnity.value = float.Parse(Config.Config.Get(key));
+
+            string valueStr = Config.Config.Get(key);
+            float precisionValue = ApplyPrecision(float.Parse(valueStr));
+            sliderUnity.value = precisionValue;
+            // reset precised precision to the config
+            Config.Config.Set(key, precisionValue.ToString());
+            SetDisplayText(precisionValue.ToString());
         }
 
         public void Unsubscribe()
@@ -28,7 +39,25 @@ namespace Slimebones.ECSCore.UI.Settings
 
         private void Call(float value)
         {
-            Config.Config.Set(key, value.ToString());
+            float precisionValue = ApplyPrecision(value);
+            Config.Config.Set(key, precisionValue.ToString());
+            SetDisplayText(precisionValue.ToString());
+        }
+
+        private float ApplyPrecision(float value)
+        {
+            return (float)Math.Round(
+                value,
+                MouseSensitivityConfigSpec.Precision
+            );
+        }
+
+        private void SetDisplayText(string text)
+        {
+            if (displayText != null)
+            {
+                displayText.text = text;
+            }
         }
     }
 }
