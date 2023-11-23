@@ -1,5 +1,7 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.Screen;
 using Slimebones.ECSCore.Utils;
 using System;
 using UnityEngine;
@@ -10,19 +12,19 @@ namespace Slimebones.ECSCore.Config.Specs
     {
         public string Key => "resolution";
 
-        public string DefaultValue => "1920x1080";
+        public string DefaultValue => "1920x1080@auto";
 
         public void OnChange(string value, World world)
         {
-            int[] resolution; 
+            Resolution resolution; 
             try
             {
-                resolution = ParseResolution(value);
+                resolution = Parse(value);
             }
             catch
             {
                 Log.Error(
-                    "cannot parse resolution {0}, use default {1}",
+                    "cannot parse resolution {0} => use default {1}",
                     value,
                     DefaultValue
                 );
@@ -30,27 +32,43 @@ namespace Slimebones.ECSCore.Config.Specs
                 return;
             }
 
-            // TODO(ryzhovalex):
-            //      for now it is always a full screen, in the future make
-            //      it via system accepting two (resolution and fullscreen and
-            //      hz) settings
-            Screen.SetResolution(resolution[0], resolution[1], true);
+            ref var req =
+                ref RequestComponentUtils.Create<SetScreenResolutionRequest>(
+                    1,
+                    world
+                );
+            req.resolution = resolution;
         }
 
-        private int[] ParseResolution(string value)
+        private Resolution Parse(string value)
         {
-            string[] parts = value.Split("x");
+            Resolution resolution = new Resolution();
 
-            if (parts.Length == 2)
+            string[] resolutionParts = value.Split("x");
+            if (resolutionParts.Length != 2)
             {
-                return new int[]
-                {
-                    int.Parse(parts[0]),
-                    int.Parse(parts[1])
-                };
+                throw new LengthExpectException<char>(value.ToCharArray(), 2);
             }
 
-            throw new LengthExpectException<char>(value.ToCharArray(), 2);
+            resolution.width = int.Parse(resolutionParts[0]);
+
+            string[] refreshRateParts = resolutionParts[1].Split("@");
+            if (refreshRateParts.Length != 2)
+            {
+                throw new LengthExpectException<char>(value.ToCharArray(), 2);
+            }
+
+            resolution.height = int.Parse(refreshRateParts[0]);
+            if (refreshRateParts[1] == "auto")
+            {
+                resolution.refreshRate = 0;
+            }
+            else
+            {
+                resolution.refreshRate = int.Parse(refreshRateParts[1]);
+            }
+
+            return resolution;
         }
     }
 }

@@ -13,6 +13,13 @@ namespace Slimebones.ECSCore.Base
             World world
         ) where T : struct, IRequestComponent
         {
+            if (requiredCallCountToComplete == 0)
+            {
+                throw new Exception(
+                    "cannot create request with 0 required call count"
+                );
+            }
+
             var e = world.CreateEntity();
             ref T c = ref e.AddComponent<T>();
 
