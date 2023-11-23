@@ -45,7 +45,7 @@ namespace Slimebones.ECSCore.Scene {
         ) {
             // create a request to scene systems to load a new scene
             ref LoadSceneRequest loadRequest =
-                ref RequestComponentUtils.Create<LoadSceneRequest>(0, world);
+                ref RequestComponentUtils.Create<LoadSceneRequest>(1, world);
             loadRequest.sceneName = name;
             loadRequest.isLoadingScreenEnabled = isLoadingScreenEnabled;
 
