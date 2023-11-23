@@ -64,27 +64,22 @@ namespace Slimebones.ECSCore.Graphics
                     finalResolution.refreshRate
                 );
 
-                //if (reqC.isVsyncEnabled != null)
-                //{
-                //    QualitySettings.vSyncCount =
-                //        reqC.isVsyncEnabled == true
-                //        ? 1
-                //        : 0;
-                //}
+                if (reqC.isVsyncEnabled != null)
+                {
+                    QualitySettings.vSyncCount =
+                        reqC.isVsyncEnabled == true
+                        ? 1
+                        : 0;
+                }
+
+                lastResolution = finalResolution;
+                lastMode = finalMode;
             }
 
-            // update data only after all requests handled
-            UpdateLastData();
         }
 
         public void Dispose()
         {
-        }
-
-        private void UpdateLastData()
-        {
-            lastResolution = Screen.currentResolution;
-            lastMode = Screen.fullScreenMode;
         }
     }
 }
