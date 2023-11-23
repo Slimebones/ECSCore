@@ -50,10 +50,17 @@ namespace Slimebones.ECSCore.UI.Panel
                     continue;
                 }
 
-                panelGOByKey[reqC.key].SetActive(GetFinalState(
+                bool finalState = GetFinalState(
                     ref reqC,
                     panelGOByKey[reqC.key]
-                ));
+                );
+                panelGOByKey[reqC.key].SetActive(finalState);
+
+                ref var evt =
+                    ref EventComponentUtils.Create<PanelStateEvent>(World);
+                evt.key = reqC.key;
+                evt.isEnabled = finalState;
+                evt.go = panelGOByKey[reqC.key];
             }
         }
 
