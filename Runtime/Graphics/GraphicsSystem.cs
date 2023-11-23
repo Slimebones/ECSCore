@@ -2,9 +2,9 @@ using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Screen
+namespace Slimebones.ECSCore.Graphics
 {
-    public class ScreenSystem: ISystem
+    public class GraphicsSystem: ISystem
     {
         private static Resolution lastResolution;
         private static FullScreenMode lastMode;
@@ -19,10 +19,10 @@ namespace Slimebones.ECSCore.Screen
         public void OnAwake()
         {
             setResolutionReqF =
-                World.Filter.With<SetScreenResolutionRequest>().Build();
+                World.Filter.With<SetGraphicsRequest>().Build();
 
-            lastResolution = UnityEngine.Screen.currentResolution;
-            lastMode = UnityEngine.Screen.fullScreenMode;
+            lastResolution = Screen.currentResolution;
+            lastMode = Screen.fullScreenMode;
         }
 
         public void OnUpdate(float deltaTime)
@@ -35,7 +35,7 @@ namespace Slimebones.ECSCore.Screen
                 }
 
                 ref var reqC =
-                    ref reqE.GetComponent<SetScreenResolutionRequest>();
+                    ref reqE.GetComponent<SetGraphicsRequest>();
 
                 Resolution finalResolution;
                 FullScreenMode finalMode;
@@ -57,12 +57,20 @@ namespace Slimebones.ECSCore.Screen
                     finalMode = lastMode;
                 }
 
-                UnityEngine.Screen.SetResolution(
+                Screen.SetResolution(
                     finalResolution.width,
                     finalResolution.height,
                     finalMode,
                     finalResolution.refreshRate
                 );
+
+                //if (reqC.isVsyncEnabled != null)
+                //{
+                //    QualitySettings.vSyncCount =
+                //        reqC.isVsyncEnabled == true
+                //        ? 1
+                //        : 0;
+                //}
             }
 
             // update data only after all requests handled
@@ -75,8 +83,8 @@ namespace Slimebones.ECSCore.Screen
 
         private void UpdateLastData()
         {
-            lastResolution = UnityEngine.Screen.currentResolution;
-            lastMode = UnityEngine.Screen.fullScreenMode;
+            lastResolution = Screen.currentResolution;
+            lastMode = Screen.fullScreenMode;
         }
     }
 }

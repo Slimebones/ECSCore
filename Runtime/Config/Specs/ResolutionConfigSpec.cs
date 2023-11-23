@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Logging;
-using Slimebones.ECSCore.Screen;
 using Slimebones.ECSCore.Utils;
 using System;
 using UnityEngine;
@@ -33,7 +33,7 @@ namespace Slimebones.ECSCore.Config.Specs
             }
 
             ref var req =
-                ref RequestComponentUtils.Create<SetScreenResolutionRequest>(
+                ref RequestComponentUtils.Create<SetGraphicsRequest>(
                     1,
                     world
                 );

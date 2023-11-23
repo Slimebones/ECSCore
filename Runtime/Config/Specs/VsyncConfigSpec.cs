@@ -8,23 +8,23 @@ using System;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
-    public class FullscreenConfigSpec: IConfigSpec
+    public class VsyncConfigSpec: IConfigSpec
     {
-        public string Key => "fullscreen";
+        public string Key => "vsync";
 
-        public string DefaultValue => "1";
+        public string DefaultValue => "0";
 
         public void OnChange(string value, World world)
         {
-            bool isFullscreen; 
+            bool flag; 
             try
             {
-                isFullscreen = Parse(value);
+                flag = Parse(value);
             }
             catch
             {
                 Log.Error(
-                    "cannot parse fullscreen {0}, use default {1}",
+                    "cannot parse vsync {0}, use default {1}",
                     value,
                     DefaultValue
                 );
@@ -38,10 +38,7 @@ namespace Slimebones.ECSCore.Config.Specs
                     1,
                     world
                 );
-            req.fullScreenMode =
-                isFullscreen
-                ? UnityEngine.FullScreenMode.FullScreenWindow
-                : UnityEngine.FullScreenMode.Windowed;
+            req.isVsyncEnabled = flag;
         }
 
         private bool Parse(string value)
