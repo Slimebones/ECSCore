@@ -1,14 +1,13 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Slimebones.ECSCore.UI.Panel
+namespace Slimebones.ECSCore.Key
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PanelComponent: MonoProvider<Panel>
+    public sealed class KeyComponent: MonoProvider<Key>
     {
     }
 
@@ -16,7 +15,8 @@ namespace Slimebones.ECSCore.UI.Panel
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct Panel: IComponent
+    public struct Key: IComponent
     {
+        public string key;
     }
 }

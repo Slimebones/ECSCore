@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.Utils;
 using TMPro;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Slimebones.ECSCore.UI.Settings
 
         public void Subscribe(Entity e, World world)
         {
-            key = e.GetComponent<DropdownSetting>().key;
+            key = e.GetComponent<Key.Key>().key;
             var go = GameObjectUtils.GetUnityOrError(e);
             dropdownUnity = go.GetComponent<TMP_Dropdown>();
             dropdownUnity.onValueChanged.AddListener(Call);

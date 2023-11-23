@@ -98,7 +98,7 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             foreach (var panelE in panelF)
             {
-                var key = panelE.GetComponent<Panel>().key;
+                var key = panelE.GetComponent<Key.Key>().key;
                 var panelGO = GameObjectUtils.GetUnityOrError(
                     panelE
                 );

@@ -8,7 +8,7 @@ namespace Slimebones.ECSCore.Config.Specs
 {
     public class ResolutionConfigSpec: IConfigSpec
     {
-        public string Key => "Resolution";
+        public string Key => "resolution";
 
         public string DefaultValue => "1920x1080";
 
@@ -32,8 +32,8 @@ namespace Slimebones.ECSCore.Config.Specs
 
             // TODO(ryzhovalex):
             //      for now it is always a full screen, in the future make
-            //      it via system accepting two (resolution and fullscreen)
-            //      settings
+            //      it via system accepting two (resolution and fullscreen and
+            //      hz) settings
             Screen.SetResolution(resolution[0], resolution[1], true);
         }
 

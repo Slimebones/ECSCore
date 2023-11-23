@@ -1,5 +1,4 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.UI.Button;
 using Slimebones.ECSCore.UI.Settings;
 
 namespace Slimebones.ECSCore
@@ -16,8 +15,7 @@ namespace Slimebones.ECSCore
             // TODO(ryzhovalex):
             //      UI is no more disposable due to new panel logic, maybe
             //      only for now
-            //World.GetStash<Button>().AsDisposable();
-            //World.GetStash<DropdownSetting>().AsDisposable();
+            //World.GetStash<React>().AsDisposable();
         }
 
         public void OnUpdate(float deltaTime)

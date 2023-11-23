@@ -100,7 +100,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Panel>().key,
+                e.GetComponent<Key.Key>().key,
                 state,
                 world
             );

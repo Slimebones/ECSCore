@@ -1,16 +1,15 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Utils;
 using System;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.UI.Button
+namespace Slimebones.ECSCore.React
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class ButtonComponent: MonoProvider<Button>
+    public sealed class ReactComponent: MonoProvider<React>
     {
     }
 
@@ -18,7 +17,7 @@ namespace Slimebones.ECSCore.UI.Button
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct Button: IComponent, IDisposable
+    public struct React: IComponent, IDisposable
     {
         [SerializeReference]
         public IListener[] listeners;

@@ -1,7 +1,6 @@
 using Scellecs.Morpeh;
-using UnityUI = UnityEngine.UI;
 
-namespace Slimebones.ECSCore.Utils
+namespace Slimebones.ECSCore.React
 {
     public interface IListener
     {
