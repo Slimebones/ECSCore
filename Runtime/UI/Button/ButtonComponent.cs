@@ -25,15 +25,10 @@ namespace Slimebones.ECSCore.UI.Button
 
         public void Dispose()
         {
-            // TODO(ryzhovalex):
-            //      No unsubscribe is made for now due to new UI system.
-            //      In future consider listening for panel re-enables
-            //      and take re-subs accordingly.
-            //
-            //foreach (var listener in listeners)
-            //{
-            //    listener.Unsubscribe();
-            //}
+            foreach (var listener in listeners)
+            {
+                listener.Unsubscribe();
+            }
         }
     }
 }

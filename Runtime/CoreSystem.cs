@@ -13,8 +13,11 @@ namespace Slimebones.ECSCore
 
         public void OnAwake()
         {
-            World.GetStash<Button>().AsDisposable();
-            World.GetStash<DropdownSetting>().AsDisposable();
+            // TODO(ryzhovalex):
+            //      UI is no more disposable due to new panel logic, maybe
+            //      only for now
+            //World.GetStash<Button>().AsDisposable();
+            //World.GetStash<DropdownSetting>().AsDisposable();
         }
 
         public void OnUpdate(float deltaTime)
