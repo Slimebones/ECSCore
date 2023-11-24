@@ -31,7 +31,7 @@ namespace Slimebones.ECSCore.Utils {
             string title,
             string value
         ) : base (
-            String.Format(
+            string.Format(
                 "{0} <{1}> is not found", title, value
             )
         ) {}
@@ -39,9 +39,20 @@ namespace Slimebones.ECSCore.Utils {
         public NotFoundException(
             string title
         ) : base (
-            String.Format(
+            string.Format(
                 "{0} is not found", title
             )
+        ) {}
+    }
+
+    /// <summary>
+    /// An object cannot be none.
+    /// </summary>
+    public class CannotBeNullException : Exception {
+        public CannotBeNullException(
+            string title
+        ) : base (
+            title + " cannot be none"
         ) {}
     }
 

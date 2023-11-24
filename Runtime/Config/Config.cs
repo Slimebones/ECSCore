@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Controller;
 using Slimebones.ECSCore.File;
+using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,14 +23,14 @@ namespace Slimebones.ECSCore.Config
 
         // key strings are not capitalized for this dictionary (litle
         // performance)
-        private static Dictionary<string, IConfigSpec> specByKey =
-            new Dictionary<string, IConfigSpec>();
+        private static Dictionary<string, IConfigSpec<object>> specByKey =
+            new Dictionary<string, IConfigSpec<object>>();
 
         /// <summary>
         /// Loads the dictionary.
         /// </summary>
         public static void Init(
-            IConfigSpec[] specs,
+            IConfigSpec<object>[] specs,
             World world
         )
         {
@@ -42,7 +43,7 @@ namespace Slimebones.ECSCore.Config
             {
                 if (specByKey.ContainsKey(spec.Key))
                 {
-                    Debug.LogWarningFormat(
+                    Log.Warning(
                         "spec with key {0} already exists, skip",
                         spec.Key
                     );
@@ -96,10 +97,10 @@ namespace Slimebones.ECSCore.Config
             {
                 file.Write(
                     spec.Key,
-                    spec.DefaultValue,
+                    spec.DefaultValueStr,
                     DefaultSectionName
                 );
-                return spec.DefaultValue;
+                return spec.DefaultValueStr;
             }
             else
             {

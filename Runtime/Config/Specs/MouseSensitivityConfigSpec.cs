@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public string Key => "mouse-sensitivity";
 
-        public string DefaultValue => "1.0";
+        public string DefaultValueStr => "1.0";
 
         public void OnChange(string value, World world)
         {
@@ -26,9 +26,9 @@ namespace Slimebones.ECSCore.Config.Specs
                 Log.Error(
                     "cannot parse sensitivity {0}, use default {1}",
                     value,
-                    DefaultValue
+                    DefaultValueStr
                 );
-                Config.Set(Key, DefaultValue);
+                Config.Set(Key, DefaultValueStr);
                 return;
             }
 

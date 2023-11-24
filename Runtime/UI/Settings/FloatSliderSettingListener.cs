@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.UI.Settings
 {
-    public class SliderSettingListener: IListener
+    public class FloatSliderSettingListener: IListener
     {
         public TextMeshProUGUI displayText;
 

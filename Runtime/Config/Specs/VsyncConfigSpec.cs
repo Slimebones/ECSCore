@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Config.Specs
     {
         public string Key => "vsync";
 
-        public string DefaultValue => "0";
+        public string DefaultValueStr => "0";
 
         public void OnChange(string value, World world)
         {
@@ -26,9 +26,9 @@ namespace Slimebones.ECSCore.Config.Specs
                 Log.Error(
                     "cannot parse vsync {0}, use default {1}",
                     value,
-                    DefaultValue
+                    DefaultValueStr
                 );
-                Config.Set(Key, DefaultValue);
+                Config.Set(Key, DefaultValueStr);
                 return;
             }
 

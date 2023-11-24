@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Config.Specs
     {
         public string Key => "resolution";
 
-        public string DefaultValue => "1920x1080@auto";
+        public string DefaultValueStr => "1920x1080@auto";
 
         public void OnChange(string value, World world)
         {
@@ -26,9 +26,9 @@ namespace Slimebones.ECSCore.Config.Specs
                 Log.Error(
                     "cannot parse resolution {0} => use default {1}",
                     value,
-                    DefaultValue
+                    DefaultValueStr
                 );
-                Config.Set(Key, DefaultValue);
+                Config.Set(Key, DefaultValueStr);
                 return;
             }
 
