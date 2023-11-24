@@ -113,6 +113,24 @@ namespace Slimebones.ECSCore.Utils.Parsing
 
             return true;
         }
+
+        public static bool Parse(
+            string valueStr,
+            BoolParseOpts opts,
+            out BoolParseRes res
+        )
+        {
+            res = new BoolParseRes();
+
+            if (valueStr != "0" && valueStr != "1")
+            {
+                return false;
+            }
+
+            res.Value = valueStr == "1";
+            return true;
+        }
+
    }
 
 }

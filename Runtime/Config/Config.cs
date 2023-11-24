@@ -1,12 +1,16 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Controller;
 using Slimebones.ECSCore.File;
+using Slimebones.ECSCore.Key;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.UI;
 using Slimebones.ECSCore.Utils;
 using Slimebones.ECSCore.Utils.Parsing;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Config
@@ -25,13 +29,18 @@ namespace Slimebones.ECSCore.Config
             );
         private static World world;
 
-        private static List<string> keys = new List<string>();
-        private static List<IConfigSpec<object>> _specs =
-            new List<IConfigSpec<object>>();
+        private static Dictionary<string, SpecMeta<object>> specMetaByKey =
+            new Dictionary<string, IConfigSpec<object>>();
 
         public static void Init(World world)
         {
             Config.world = world;
+        }
+
+        public static void SubscribeSetting(Entity e, UIInputType uiInputType)
+        {
+            var go = GameObjectUtils.GetUnityOrError(e);
+            var key = e.GetComponent<Key.Key>().key;
         }
 
         /// <summary>
@@ -43,16 +52,33 @@ namespace Slimebones.ECSCore.Config
         {
             foreach (var spec in specs)
             {
-                if (keys.Contains(spec.Key))
+                if (specByKey.ContainsKey(spec.Key))
                 {
                     Log.Error(
                         "spec with key {0} already exists => skip",
                         spec.Key
                     );
                 }
-                keys.Add(spec.Key);
-                _specs.Add((IConfigSpec<object>)spec);
 
+                SpecMeta meta = new SpecMeta();
+                meta.spec = (IConfigSpec<object>)spec;
+                meta.isParser = spec is IParser<T>;
+                // spec cannot be parser and parseable at the same time,
+                // take only parsers and ignore rest in such cases
+                if (!meta.isParser)
+                {
+                    // allows for general (IParseable<>) generic comparison
+                    // ref: https://stackoverflow.com/a/503359
+                    meta.isParseable = spec.GetType().GetInterfaces().Any(
+                        x =>
+                            x.IsGenericType
+                            && x.GetGenericTypeDefinition()
+                                == typeof(IParseable<>)
+                    );
+                }
+                specMetaByKey[spec.Key] = meta;
+
+                
                 IParseRes<T> parseRes;
                 T value = ParsingUtils.Parse(
                     GetValueStrForSpec(
