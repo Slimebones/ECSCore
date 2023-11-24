@@ -2,8 +2,8 @@ using System;
 
 
 namespace Slimebones.ECSCore.Utils {
-    public class Dt {
-        public static long GetUtcTimestamp() {
+    public class DT {
+        public static long GetUTCTimestamp() {
             return DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
     }

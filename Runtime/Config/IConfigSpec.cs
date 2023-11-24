@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Utils.Parsing;
 
 namespace Slimebones.ECSCore.Config
 {
@@ -10,7 +11,7 @@ namespace Slimebones.ECSCore.Config
         /// there.
         /// </summary>
         public string DefaultValueStr { get; }
-        public void OnChange(string value, World world);
-        public T Parse(string value);
+        public IParseOpts<T> ParseOpts { get; }
+        public void OnChange(T value, World world);
     }
 }

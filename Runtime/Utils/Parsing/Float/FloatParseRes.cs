@@ -1,14 +1,14 @@
 ﻿namespace Slimebones.ECSCore.Utils.Parsing
 {
-    public class IntParseRes: IParseRes<int>
+    public class FloatParseRes: IParseRes<float>
     {
-        private int value;
+        private float value;
 
         private bool isOutAnyLimit = false;
         private bool isOutMaxLimit = false;
         private bool isOutMinLimit = false;
 
-        public int Value {
+        public float Value {
             get => value;
             set => this.value = value;
         }

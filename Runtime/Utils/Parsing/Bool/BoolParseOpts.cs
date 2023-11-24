@@ -4,15 +4,15 @@ using System;
 
 namespace Slimebones.ECSCore.Utils.Parsing
 {
-    public class IntParseOpts: IParseOpts<int>
+    public class BoolParseOpts: IParseOpts<bool>
     {
-        private readonly int? min;
-        private readonly int? max;
+        private readonly bool? min;
+        private readonly bool? max;
         private readonly int? precision;
 
-        public IntParseOpts(
-            int? min = null,
-            int? max = null,
+        public BoolParseOpts(
+            bool? min = null,
+            bool? max = null,
             int? precision = null
         )
         {
@@ -21,12 +21,12 @@ namespace Slimebones.ECSCore.Utils.Parsing
             this.precision = precision;
         }
 
-        public int? Min
+        public bool? Min
         {
             get => min;
         }
 
-        public int? Max
+        public bool? Max
         {
             get => max;
         }

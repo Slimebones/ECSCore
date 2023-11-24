@@ -3,6 +3,7 @@ using Slimebones.ECSCore.Controller;
 using Slimebones.ECSCore.File;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
+using Slimebones.ECSCore.Utils.Parsing;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -18,39 +19,53 @@ namespace Slimebones.ECSCore.Config
         private static string Filename = "config.ini";
         private static string DefaultSectionName = "Game";
 
-        private static IniFile file;
+        private static IniFile file =
+            new IniFile(
+                Application.persistentDataPath + "/" + Filename
+            );
         private static World world;
 
-        // key strings are not capitalized for this dictionary (litle
-        // performance)
-        private static Dictionary<string, IConfigSpec<object>> specByKey =
-            new Dictionary<string, IConfigSpec<object>>();
+        private static List<string> keys = new List<string>();
+        private static List<IConfigSpec<object>> _specs =
+            new List<IConfigSpec<object>>();
+
+        public static void Init(World world)
+        {
+            Config.world = world;
+        }
 
         /// <summary>
         /// Loads the dictionary.
         /// </summary>
-        public static void Init(
-            IConfigSpec<object>[] specs,
-            World world
+        public static void Register<T>(
+            IConfigSpec<T>[] specs
         )
         {
-            Config.world = world;
-            file = new IniFile(
-                Application.persistentDataPath + "/" + Filename
-            );
-
             foreach (var spec in specs)
             {
-                if (specByKey.ContainsKey(spec.Key))
+                if (keys.Contains(spec.Key))
                 {
-                    Log.Warning(
-                        "spec with key {0} already exists, skip",
+                    Log.Error(
+                        "spec with key {0} already exists => skip",
                         spec.Key
                     );
                 }
-                specByKey[spec.Key] = spec;
+                keys.Add(spec.Key);
+                _specs.Add((IConfigSpec<object>)spec);
 
-                spec.OnChange(GetValueForSpec(spec), world);
+                IParseRes<T> parseRes;
+                T value = ParsingUtils.Parse(
+                    GetValueStrForSpec(
+                        (IConfigSpec<object>)spec
+                    ),
+                    spec.ParseOpts,
+                    out parseRes
+                );
+
+                //spec.OnChange(
+                //    value,
+                //    world
+                //);
             }
         }
 
@@ -71,7 +86,7 @@ namespace Slimebones.ECSCore.Config
         )
         {
             SetNoCallback(key, value);
-            specByKey[key].OnChange(value, world);
+            intSpecByKey[key].OnChange(value, world);
         }
 
         private static void SetNoCallback(
@@ -79,7 +94,7 @@ namespace Slimebones.ECSCore.Config
             string value
         )
         {
-            if (!specByKey.ContainsKey(key))
+            if (!intSpecByKey.ContainsKey(key))
             {
                 throw new NotFoundException(
                     "config spec with key",
@@ -89,7 +104,9 @@ namespace Slimebones.ECSCore.Config
             file.Write(key, value, DefaultSectionName);
         }
 
-        private static string GetValueForSpec(IConfigSpec spec)
+        private static string GetValueStrForSpec(
+            IConfigSpec<object> spec
+        )
         {
             if (!file.KeyExists(
                 spec.Key, DefaultSectionName
