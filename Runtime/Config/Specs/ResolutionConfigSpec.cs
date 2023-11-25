@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Slimebones.ECSCore.Config.Specs
 {
     public class ResolutionConfigSpec:
-        IConfigSpec<Resolution>, IParser<Resolution>
+        IConfigSpec<Resolution>
     {
         public string Key => "resolution";
         public string DefaultValueStr => "1920x1080@auto";

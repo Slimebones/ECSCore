@@ -3,7 +3,7 @@ using Slimebones.ECSCore.Utils.Parsing;
 
 namespace Slimebones.ECSCore.Config
 {
-    public interface IConfigSpec<T>
+    public interface IConfigSpec<T>: IParser<T>
     {
         public string Key { get; }
         public string DefaultValueStr { get; }

@@ -29,8 +29,8 @@ namespace Slimebones.ECSCore.Config
             );
         private static World world;
 
-        private static Dictionary<string, SpecMeta<object>> specMetaByKey =
-            new Dictionary<string, IConfigSpec<object>>();
+        private static Dictionary<string, ConfigSpecMeta> specMetaByKey =
+            new Dictionary<string, ConfigSpecMeta>();
 
         public static void Init(World world)
         {
@@ -41,6 +41,15 @@ namespace Slimebones.ECSCore.Config
         {
             var go = GameObjectUtils.GetUnityOrError(e);
             var key = e.GetComponent<Key.Key>().key;
+
+            CheckContainsKey(key);
+            var meta = specMetaByKey[key];
+            if (!meta.settingGOsByType.ContainsKey(uiInputType))
+            {
+                meta.settingGOsByType[uiInputType] = new List<GameObject>();
+            }
+            meta.settingGOsByType[uiInputType].Add(go);
+            meta.spec.OnInit(e, world);
         }
 
         /// <summary>
@@ -52,7 +61,7 @@ namespace Slimebones.ECSCore.Config
         {
             foreach (var spec in specs)
             {
-                if (specByKey.ContainsKey(spec.Key))
+                if (specMetaByKey.ContainsKey(spec.Key))
                 {
                     Log.Error(
                         "spec with key {0} already exists => skip",
@@ -60,7 +69,7 @@ namespace Slimebones.ECSCore.Config
                     );
                 }
 
-                SpecMeta meta = new SpecMeta();
+                ConfigSpecMeta meta = new ConfigSpecMeta();
                 meta.spec = (IConfigSpec<object>)spec;
                 meta.isParser = spec is IParser<T>;
                 // spec cannot be parser and parseable at the same time,
@@ -79,14 +88,14 @@ namespace Slimebones.ECSCore.Config
                 specMetaByKey[spec.Key] = meta;
 
                 
-                IParseRes<T> parseRes;
-                T value = ParsingUtils.Parse(
-                    GetValueStrForSpec(
-                        (IConfigSpec<object>)spec
-                    ),
-                    spec.ParseOpts,
-                    out parseRes
-                );
+                //IParseRes<T> parseRes;
+                //T value = ParsingUtils.Parse(
+                //    GetValueStrForSpec(
+                //        (IConfigSpec<object>)spec
+                //    ),
+                //    spec.ParseOpts,
+                //    out parseRes
+                //);
 
                 //spec.OnChange(
                 //    value,
@@ -112,7 +121,7 @@ namespace Slimebones.ECSCore.Config
         )
         {
             SetNoCallback(key, value);
-            intSpecByKey[key].OnChange(value, world);
+            specMetaByKey[key].spec.OnChange(value, world);
         }
 
         private static void SetNoCallback(
@@ -120,14 +129,19 @@ namespace Slimebones.ECSCore.Config
             string value
         )
         {
-            if (!intSpecByKey.ContainsKey(key))
+            CheckContainsKey(key);
+            file.Write(key, value, DefaultSectionName);
+        }
+
+        private static void CheckContainsKey(string key)
+        {
+            if (!specMetaByKey.ContainsKey(key))
             {
                 throw new NotFoundException(
                     "config spec with key",
                     key
                 );
             }
-            file.Write(key, value, DefaultSectionName);
         }
 
         private static string GetValueStrForSpec(
