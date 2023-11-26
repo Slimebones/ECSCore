@@ -5,11 +5,13 @@ using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
 using Slimebones.ECSCore.Utils.Parsing;
 using System;
+using TMPro;
 using UnityEngine;
+using static TMPro.TMP_Dropdown;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
-    public class ResolutionConfigSpec: IConfigSpec
+    public class ResolutionConfigSpec: IConfigSpec, IParser<string>
     {
         public string Key => "resolution";
         public string DefaultValueStr => "1920x1080@auto";
@@ -21,14 +23,10 @@ namespace Slimebones.ECSCore.Config.Specs
             set => world = value;
         }
 
-        public bool OnInit(string value, out string newValue)
-        {
-            newValue = "";
-            return true;
-        }
-
         public bool OnChange(string value, out string newValue)
         {
+            newValue = "";
+
             Resolution resolution; 
             try
             {
@@ -41,10 +39,16 @@ namespace Slimebones.ECSCore.Config.Specs
                     value,
                     DefaultValueStr
                 );
-                Config.Set(Key, DefaultValueStr);
-                return;
+                newValue = DefaultValueStr;
+                return true;
             }
 
+            SendSetResolutionRequest(resolution);
+            return false;
+        }
+
+        private void SendSetResolutionRequest(Resolution resolution)
+        {
             ref var req =
                 ref RequestComponentUtils.Create<SetGraphicsRequest>(
                     1,
@@ -53,42 +57,32 @@ namespace Slimebones.ECSCore.Config.Specs
             req.resolution = resolution;
         }
 
-        public Action<string> OnSettingInit(Entity e, string lastValue)
+        public Action<string> OnSettingInit(Entity e)
         {
-            throw new NotImplementedException();
+            var go = GameObjectUtils.GetUnityOrError(e);
+            TMP_Dropdown dropdownUnity = go.GetComponent<TMP_Dropdown>();
+            InitSettingOptions(dropdownUnity);
+            return (string value) =>
+                SelectSettingOptionFromConfig(value, dropdownUnity);
         }
 
-
-        //private void Call(int index)
-        //{
-        //    var option = dropdownUnity.options[index];
-
-        //    Config.Config.Set(
-        //        key,
-        //        option.text.Replace(" ", "").Replace("Hz", "")
-        //    );
-        //}
-
-        public void OnChange1(Resolution value)
-        {
-        }
-
-        private void InitOptions()
+        private void InitSettingOptions(TMP_Dropdown dropdownUnity)
         {
             // clear demo options
             dropdownUnity.options.Clear();
 
-            foreach (var resolution in UnityEngine.Screen.resolutions)
+            foreach (var resolution in Screen.resolutions)
             {
                 OptionData optionData = new OptionData(resolution.ToString());
                 dropdownUnity.options.Add(optionData);
             }
         }
 
-        private void SelectFromConfig()
+        private void SelectSettingOptionFromConfig(
+            string value,
+            TMP_Dropdown dropdownUnity
+        )
         {
-            string value = Config.Config.Get(key);
-
             bool isAuto = value.EndsWith("@auto");
 
             for (int i = 0; i < dropdownUnity.options.Count; i++)
@@ -112,7 +106,7 @@ namespace Slimebones.ECSCore.Config.Specs
                         == value
                 )
                 {
-                    dropdownUnity.value = i;
+                    dropdownUnity.SetValueWithoutNotify(i);
                     return;
                 }
             }
@@ -125,7 +119,6 @@ namespace Slimebones.ECSCore.Config.Specs
             );
             int lastIndex = dropdownUnity.options.Count - 1;
             dropdownUnity.value = lastIndex;
-            Call(lastIndex);
         }
 
         private Resolution Parse(string valueStr)
@@ -161,6 +154,16 @@ namespace Slimebones.ECSCore.Config.Specs
             }
 
             return resolution;
+        }
+
+        public string ParseIn(string valueStr)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ParseOut(string resolutionStr)
+        {
+            return resolutionStr.Replace(" ", "").Replace("Hz", "");
         }
     }
 }

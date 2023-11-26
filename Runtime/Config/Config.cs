@@ -1,10 +1,12 @@
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Config.InternalSettingListeners;
 using Slimebones.ECSCore.Controller;
 using Slimebones.ECSCore.File;
 using Slimebones.ECSCore.Key;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.UI;
 using Slimebones.ECSCore.Utils;
 using Slimebones.ECSCore.Utils.Parsing;
@@ -55,16 +57,9 @@ namespace Slimebones.ECSCore.Config
                 }
 
                 spec.World = World;
+                specByKey[spec.Key] = spec;
 
-                string newValue;
-                bool isValueChanged = spec.OnInit(
-                    GetInitialValueForSpec(spec),
-                    out newValue
-                );
-                if (isValueChanged)
-                {
-                    SetSpecValue(newValue, spec);
-                }
+                SetSpecValue(GetInitialValueForSpec(spec), spec);
             }
         }
 
@@ -73,18 +68,19 @@ namespace Slimebones.ECSCore.Config
             var key = e.GetComponent<Key.Key>().key;
             CheckContainsKey(key);
 
-            SubscribeByInputType(
-                key,
-                GameObjectUtils.GetUnityOrError(e),
-                uiInputType
-            );
-
             if (!settingUpdateActionsByKey.ContainsKey(key))
             {
                 settingUpdateActionsByKey[key] = new List<Action<string>>();
             }
-            settingUpdateActionsByKey[key].Add(
-                specByKey[key].OnSettingInit(e, Get(key))
+            var settingAction = specByKey[key].OnSettingInit(e);
+            settingUpdateActionsByKey[key].Add(settingAction);
+            // setup initial value
+            settingAction(Get(key));
+
+            SubscribeByInputType(
+                key,
+                GameObjectUtils.GetUnityOrError(e),
+                uiInputType
             );
         }
 
@@ -94,24 +90,28 @@ namespace Slimebones.ECSCore.Config
             UIInputType uiInputType
         )
         {
+            IKeyedGOListener listener;
             switch (uiInputType)
             {
                 case UIInputType.Dropdown:
-                    var handler = new DropdownSettingListener();
-                    handler.Init(key, go);
-                    dropdown
-                        .onValueChanged
-                        .AddListener((int index) =>
-                            (new DropdownSettingListener()).OnDropdownValue(
-                                key, index, dropdown
-                            )
-                        );
+                    listener = new DropdownSettingKeyedGOListener();
+                    break;
+                case UIInputType.Toggle:
+                    listener = new ToggleSettingKeyedGOListener();
+                    break;
+                case UIInputType.FloatSlider:
+                    listener = new FloatSliderSettingKeyedGOListener();
+                    break;
+                case UIInputType.IntSlider:
+                    listener = new IntSliderSettingKeyedGOListener();
                     break;
                 default:
                     throw new NotFoundException(
                         "input type", uiInputType.ToString()
                     );
             }
+
+            listener.Subscribe(key, go, World);
         }
 
         public static string Get(
@@ -123,6 +123,12 @@ namespace Slimebones.ECSCore.Config
                 throw new NotFoundException("key", key);
             }
             return file.Read(key, DefaultSectionName);
+        }
+
+        public static IConfigSpec GetSpec(string key)
+        {
+            CheckContainsKey(key);
+            return specByKey[key];
         }
 
         public static void Set(
@@ -161,9 +167,9 @@ namespace Slimebones.ECSCore.Config
         {
             if (!settingUpdateActionsByKey.ContainsKey(key))
             {
-                throw new NotFoundException(
-                    "setting update action for key", key
-                );
+                // just skip if there are no such key, in case of initiali
+                // disable settings
+                return;
             }
 
             foreach (var action in settingUpdateActionsByKey[key])

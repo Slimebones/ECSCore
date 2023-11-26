@@ -1,21 +1,27 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Graphics;
-using Slimebones.ECSCore.Input;
 using Slimebones.ECSCore.Logging;
-using Slimebones.ECSCore.Utils;
 using System;
+using UnityEngine;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
     public class FullscreenConfigSpec: IConfigSpec
     {
         public string Key => "fullscreen";
-
         public string DefaultValueStr => "1";
 
-        public void OnChange(string value, World world)
+        private World world;
+        public World World
         {
+            get => world;
+            set => world = value;
+        }
+
+        public bool OnChange(string value, out string newValue)
+        {
+            newValue = "";
             bool isFullscreen; 
             try
             {
@@ -28,20 +34,31 @@ namespace Slimebones.ECSCore.Config.Specs
                     value,
                     DefaultValueStr
                 );
-                Config.Set(Key, DefaultValueStr);
-                return;
+                newValue = DefaultValueStr;
+                return true;
             }
 
+            SendFullscreenModeReq(
+                isFullscreen
+                    ? FullScreenMode.FullScreenWindow
+                    : FullScreenMode.Windowed
+            );
+            return false;
+        }
 
+        public Action<string> OnSettingInit(Entity e)
+        {
+            return ConfigSpecUtils.OnBasicToggleSettingInit(e);
+        }
+
+        private void SendFullscreenModeReq(FullScreenMode mode)
+        {
             ref var req =
                 ref RequestComponentUtils.Create<SetGraphicsRequest>(
                     1,
-                    world
+                    World
                 );
-            req.fullScreenMode =
-                isFullscreen
-                ? UnityEngine.FullScreenMode.FullScreenWindow
-                : UnityEngine.FullScreenMode.Windowed;
+            req.fullScreenMode = mode;
         }
 
         private bool Parse(string value)

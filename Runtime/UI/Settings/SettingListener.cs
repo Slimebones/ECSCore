@@ -8,6 +8,7 @@ namespace Slimebones.ECSCore.UI.Settings
     public class SettingListener: IEntityListener
     {
         public UIInputType uiInputType;
+        public TextMeshProUGUI displayText = null;
 
         public void Subscribe(Entity e, World world)
         {

@@ -1,9 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Graphics;
-using Slimebones.ECSCore.Input;
 using Slimebones.ECSCore.Logging;
-using Slimebones.ECSCore.Utils;
 using System;
 
 namespace Slimebones.ECSCore.Config.Specs
@@ -14,8 +12,16 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public string DefaultValueStr => "0";
 
-        public void OnChange(string value, World world)
+        private World world;
+        public World World
         {
+            get => world;
+            set => world = value;
+        }
+
+        public bool OnChange(string value, out string newValue)
+        {
+            newValue = "";
             bool flag; 
             try
             {
@@ -24,22 +30,23 @@ namespace Slimebones.ECSCore.Config.Specs
             catch
             {
                 Log.Error(
-                    "cannot parse vsync {0}, use default {1}",
+                    "cannot parse vsync {0} => use default {1}",
                     value,
                     DefaultValueStr
                 );
-                Config.Set(Key, DefaultValueStr);
-                return;
+                newValue = DefaultValueStr;
+                return true;
             }
 
-
-            ref var req =
-                ref RequestComponentUtils.Create<SetGraphicsRequest>(
-                    1,
-                    world
-                );
-            req.isVsyncEnabled = flag;
+            SendStateReq(flag);
+            return false;
         }
+
+        public Action<string> OnSettingInit(Entity e)
+        {
+            return ConfigSpecUtils.OnBasicToggleSettingInit(e);
+        }
+
 
         private bool Parse(string value)
         {
@@ -56,5 +63,14 @@ namespace Slimebones.ECSCore.Config.Specs
             throw new Exception();
         }
 
+        private void SendStateReq(bool flag)
+        {
+            ref var req =
+                ref RequestComponentUtils.Create<SetGraphicsRequest>(
+                    1,
+                    world
+                );
+            req.isVsyncEnabled = flag;
+        }
     }
 }

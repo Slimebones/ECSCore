@@ -5,6 +5,7 @@
         TextField = 0,
         Dropdown = 1,
         Toggle = 2,
-        Slider = 3
+        FloatSlider = 3,
+        IntSlider = 4,
     }
 }

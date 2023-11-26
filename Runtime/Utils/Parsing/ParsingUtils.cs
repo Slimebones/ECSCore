@@ -8,7 +8,7 @@ namespace Slimebones.ECSCore.Utils.Parsing
             string valueStr,
             IParseOpts<T> opts,
             out IParseRes<T> res
-        ) where T: struct
+        ) where T : struct
         {
             if (
                 typeof(T) != typeof(int)
@@ -131,6 +131,21 @@ namespace Slimebones.ECSCore.Utils.Parsing
             return true;
         }
 
+        public static bool TryParseOut<T>(
+            object testedObj, T value, out string parsed
+        )
+        {
+            parsed = "";
+
+            IParser<T> parser = testedObj as IParser<T>;
+            if (parser != null)
+            {
+                parsed = parser.ParseOut(value);
+                return true;
+            }
+
+            return false;
+        }
    }
 
 }

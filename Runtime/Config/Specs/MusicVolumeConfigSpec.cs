@@ -3,8 +3,12 @@ using Slimebones.ECSCore.Audio;
 using Slimebones.ECSCore.Base;
 using Slimebones.ECSCore.Input;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.React;
+using Slimebones.ECSCore.UI.Settings;
 using Slimebones.ECSCore.Utils.Parsing;
 using System;
+using TMPro;
+using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
@@ -12,43 +16,88 @@ namespace Slimebones.ECSCore.Config.Specs
     {
         public string Key => "music-volume";
         public string DefaultValueStr => "100";
+        public static readonly int MinValue = 0;
+        public static readonly int MaxValue = 100;
 
-        public static readonly IntParseOpts parseOpts =
-            new IntParseOpts(
-                min: 0,
-                max: 100
-            );
-
-        public void OnChange(string value, World world)
+        private World world;
+        public World World
         {
-            IntParseRes parseRes;
-            bool retflag = ParsingUtils.Parse(
-                value,
-                parseOpts,
-                out parseRes
-            );
-            if (!retflag)
+            get => world;
+            set => world = value;
+        }
+
+        public Action<string> OnSettingInit(Entity e)
+        {
+            var go = GameObjectUtils.GetUnityOrError(e);
+            Slider sliderUnity = go.GetComponent<Slider>();
+
+            TextMeshProUGUI displayText =
+                ReactUtils.GetListenerFromReactEntity<SettingListener>(e)
+                    .displayText;
+
+            sliderUnity.minValue = MinValue;
+            sliderUnity.maxValue = MaxValue;
+            sliderUnity.wholeNumbers = true;
+
+            return (string value) =>
+            {
+                int parsed = Parse(value);
+                sliderUnity.SetValueWithoutNotify(parsed);
+                SetDisplayText(parsed.ToString(), displayText);
+            };
+        }
+
+        public bool OnChange(string value, out string newValue)
+        {
+            newValue = "";
+
+            int volume;
+            try
+            {
+                volume = Parse(value);
+            }
+            catch
             {
                 Log.Error(
                     "cannot parse music {0}, use default {1}",
                     value,
                     DefaultValueStr
                 );
-                Config.Set(Key, DefaultValueStr);
-                return;
+                newValue = DefaultValueStr;
+                return true;
             }
 
-            // reset on limit error
-            if (parseRes.isOutOfAnyLimit)
-            {
-                Config.Set(Key, parseRes.value.ToString());
-                return;
-            }
+            SendVolumeReq(volume);
+            return false;
+        }
 
+        private void SendVolumeReq(int volume)
+        {
             ref var reqc = ref RequestComponentUtils.Create<SetAudioReq>(
-                1, world
+                1, World
             );
-            reqc.volume = parseRes.value;
+            reqc.key = "main-music";
+            reqc.volume = volume;
+        }
+
+        private int Parse(string value)
+        {
+            int res = int.Parse(value);
+
+            if (res < MinValue || res > MaxValue)
+            {
+                throw new Exception();
+            }
+
+            return res;
+        }
+        
+        private void SetDisplayText(string text, TextMeshProUGUI displayText)
+        {
+            if (displayText != null)
+            {
+                displayText.text = text;
+            }
         }
     }
 }

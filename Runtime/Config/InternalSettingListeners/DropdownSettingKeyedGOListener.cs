@@ -1,11 +1,12 @@
 ﻿using Scellecs.Morpeh;
 using Slimebones.ECSCore.React;
+using Slimebones.ECSCore.Utils.Parsing;
 using TMPro;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Config.InternalSettingListeners
 {
-    internal class DropdownSettingListener: IKeyedGOListener
+    internal class DropdownSettingKeyedGOListener: IKeyedGOListener
     {
         private string key;
         private TMP_Dropdown dropdownUnity;
@@ -24,7 +25,14 @@ namespace Slimebones.ECSCore.Config.InternalSettingListeners
 
         private void Call(int index)
         {
-            Config.Set(key, dropdownUnity.options[index].text);
+            IConfigSpec spec = Config.GetSpec(key);
+            string finalValue = dropdownUnity.options[index].text;
+            string parsed;
+            if (ParsingUtils.TryParseOut(spec, finalValue, out parsed))
+            {
+                finalValue = parsed;
+            }
+            Config.Set(key, finalValue);
         }
     }
 }
