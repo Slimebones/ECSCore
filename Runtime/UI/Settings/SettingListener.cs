@@ -5,7 +5,7 @@ using TMPro;
 
 namespace Slimebones.ECSCore.UI.Settings
 {
-    public class SettingListener: IListener
+    public class SettingListener: IEntityListener
     {
         public UIInputType uiInputType;
 
@@ -17,16 +17,6 @@ namespace Slimebones.ECSCore.UI.Settings
         public void Unsubscribe()
         {
             // do nothing for now
-        }
-
-        private void Call(int index)
-        {
-            var option = dropdownUnity.options[index];
-
-            Config.Config.Set(
-                key,
-                option.text.Replace(" ", "").Replace("Hz", "")
-            );
         }
     }
 }

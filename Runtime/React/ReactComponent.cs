@@ -20,7 +20,7 @@ namespace Slimebones.ECSCore.React
     public struct React: IComponent, IDisposable
     {
         [SerializeReference]
-        public IListener[] listeners;
+        public IEntityListener[] listeners;
 
         public void Dispose()
         {

@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.UI.Settings
 {
-    public class IntSliderSettingListener: IListener
+    public class IntSliderSettingListener: IEntityListener
     {
         public TextMeshProUGUI displayText;
 

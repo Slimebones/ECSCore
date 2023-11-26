@@ -4,24 +4,30 @@ using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
 using Slimebones.ECSCore.Utils.Parsing;
+using System;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
-    public class ResolutionConfigSpec:
-        IConfigSpec<Resolution>
+    public class ResolutionConfigSpec: IConfigSpec
     {
         public string Key => "resolution";
         public string DefaultValueStr => "1920x1080@auto";
 
         private World world;
-
-        public void OnInit(Entity e, World world)
+        public World World
         {
-            this.world = world;
+            get => world;
+            set => world = value;
         }
 
-        public void OnChange(Resolution value)
+        public bool OnInit(string value, out string newValue)
+        {
+            newValue = "";
+            return true;
+        }
+
+        public bool OnChange(string value, out string newValue)
         {
             Resolution resolution; 
             try
@@ -45,6 +51,26 @@ namespace Slimebones.ECSCore.Config.Specs
                     world
                 );
             req.resolution = resolution;
+        }
+
+        public Action<string> OnSettingInit(Entity e, string lastValue)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //private void Call(int index)
+        //{
+        //    var option = dropdownUnity.options[index];
+
+        //    Config.Config.Set(
+        //        key,
+        //        option.text.Replace(" ", "").Replace("Hz", "")
+        //    );
+        //}
+
+        public void OnChange1(Resolution value)
+        {
         }
 
         private void InitOptions()
@@ -102,12 +128,7 @@ namespace Slimebones.ECSCore.Config.Specs
             Call(lastIndex);
         }
 
-        public Resolution PostParse(Resolution value)
-        {
-            return value;
-        }
-
-        public Resolution Parse(string valueStr)
+        private Resolution Parse(string valueStr)
         {
             Resolution resolution = new Resolution();
 

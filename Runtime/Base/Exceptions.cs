@@ -48,4 +48,18 @@ namespace Slimebones.ECSCore {
                 unityGO
             )) {}
     }
+
+    /// <summary>
+    /// Max recursion reached
+    /// </summary>
+    public class RecursionException: Exception
+    {
+        public RecursionException(
+            int max
+        )
+            : base(string.Format(
+                "max recursion of {0} has been reached",
+                max
+            )) {}
+    }
 }

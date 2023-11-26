@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 
 namespace Slimebones.ECSCore.React
 {
-    public interface IListener
+    public interface IEntityListener
     {
         // subscriber pattern: https://stackoverflow.com/a/63490134
         public void Subscribe(

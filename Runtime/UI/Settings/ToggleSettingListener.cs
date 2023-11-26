@@ -10,7 +10,7 @@ using static TMPro.TMP_Dropdown;
 
 namespace Slimebones.ECSCore.UI.Settings1
 {
-    public class ToggleSettingListener: IListener
+    public class ToggleSettingListener: IEntityListener
     {
         private string key;
         private Toggle toggleUnity;
