@@ -8,7 +8,7 @@ namespace Slimebones.ECSCore.Config.Specs
 {
     public class VsyncConfigSpec: IConfigSpec
     {
-        public string Key => "vsync";
+        public string Key => "slimebones.ecscore.config-spec.vsync";
 
         public string DefaultValueStr => "0";
 

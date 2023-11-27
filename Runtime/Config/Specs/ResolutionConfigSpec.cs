@@ -13,7 +13,7 @@ namespace Slimebones.ECSCore.Config.Specs
 {
     public class ResolutionConfigSpec: IConfigSpec, IParser<string>
     {
-        public string Key => "resolution";
+        public string Key => "slimebones.ecscore.config-spec.resolution";
         public string DefaultValueStr => "1920x1080@auto";
 
         private World world;

@@ -1,6 +1,5 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base;
 using Unity.IL2CPP.CompilerServices;
 
 namespace Slimebones.ECSCore.Audio
@@ -8,7 +7,7 @@ namespace Slimebones.ECSCore.Audio
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class SetAudioReqComponent: MonoProvider<SetAudioReq>
+    public sealed class MusicAudioComponent: MonoProvider<MusicAudio>
     {
     }
 
@@ -16,10 +15,7 @@ namespace Slimebones.ECSCore.Audio
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SetAudioReq: IRequestComponent
+    public struct MusicAudio: IComponent
     {
-        public string key;
-
-        public float? volume;
     }
 }

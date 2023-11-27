@@ -9,7 +9,8 @@ namespace Slimebones.ECSCore.Config.Specs
 {
     public class FullscreenConfigSpec: IConfigSpec
     {
-        public string Key => "fullscreen";
+        public string Key =>
+            "slimebones.ecscore.config-spec.fullscreen";
         public string DefaultValueStr => "1";
 
         private World world;

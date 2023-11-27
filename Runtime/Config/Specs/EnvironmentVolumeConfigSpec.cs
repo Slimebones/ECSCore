@@ -1,19 +1,21 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Audio;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Input;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.UI.Settings;
+using Slimebones.ECSCore.Utils.Parsing;
 using System;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
-    public class MusicVolumeConfigSpec: IConfigSpec
+    public class EnvironmentVolumeConfigSpec: IConfigSpec
     {
-        public string Key => "slimebones.ecscore.config-spec.music-volume";
+        public string Key =>
+            "slimebones.ecscore.config-spec.environment-volume";
         public string DefaultValueStr => "100";
         public static readonly int MinValue = 0;
         public static readonly int MaxValue = 100;
@@ -75,7 +77,7 @@ namespace Slimebones.ECSCore.Config.Specs
             ref var reqc = ref RequestComponentUtils.Create<SetAudioByTypeReq>(
                 1, World
             );
-            reqc.type = AudioType.Music;
+            reqc.type = AudioType.Environment;
             reqc.volume = (float)volume / MaxValue;
         }
 

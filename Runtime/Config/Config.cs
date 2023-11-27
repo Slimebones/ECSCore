@@ -117,10 +117,10 @@ namespace Slimebones.ECSCore.Config
             return file.Read(key, DefaultSectionName);
         }
 
-        public static IConfigSpec GetSpec(string key)
+        public static T GetSpec<T>(string key) where T: IConfigSpec
         {
             CheckContainsKey(key);
-            return specByKey[key];
+            return (T)specByKey[key];
         }
 
         public static void Set(

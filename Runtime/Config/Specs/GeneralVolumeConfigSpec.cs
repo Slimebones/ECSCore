@@ -5,15 +5,15 @@ using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.UI.Settings;
 using System;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine.UI;
 
 namespace Slimebones.ECSCore.Config.Specs
 {
-    public class MusicVolumeConfigSpec: IConfigSpec
+    public class GeneralVolumeConfigSpec: IConfigSpec
     {
-        public string Key => "slimebones.ecscore.config-spec.music-volume";
+        public string Key =>
+            "slimebones.ecscore.config-spec.general-volume";
         public string DefaultValueStr => "100";
         public static readonly int MinValue = 0;
         public static readonly int MaxValue = 100;
@@ -75,7 +75,7 @@ namespace Slimebones.ECSCore.Config.Specs
             ref var reqc = ref RequestComponentUtils.Create<SetAudioByTypeReq>(
                 1, World
             );
-            reqc.type = AudioType.Music;
+            reqc.type = AudioType.General;
             reqc.volume = (float)volume / MaxValue;
         }
 

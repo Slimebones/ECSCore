@@ -25,7 +25,7 @@ namespace Slimebones.ECSCore.Config.InternalSettingListeners
 
         private void Call(int index)
         {
-            IConfigSpec spec = Config.GetSpec(key);
+            IConfigSpec spec = Config.GetSpec<IConfigSpec>(key);
             string finalValue = dropdownUnity.options[index].text;
             string parsed;
             if (ParsingUtils.TryParseOut(spec, finalValue, out parsed))

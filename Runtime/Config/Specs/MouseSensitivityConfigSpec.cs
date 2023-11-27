@@ -14,7 +14,7 @@ namespace Slimebones.ECSCore.Config.Specs
 {
     public class MouseSensitivityConfigSpec: IConfigSpec, IParser<float>
     {
-        public string Key => "mouse-sensitivity";
+        public string Key => "slimebones.ecscore.config-spec.mouse-sensitivity";
         public string DefaultValueStr => "1.0";
         public static readonly float MinValue = 0f;
         public static readonly float MaxValue = 5f;

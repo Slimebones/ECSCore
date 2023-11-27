@@ -27,7 +27,7 @@ namespace Slimebones.ECSCore.Config.InternalSettingListeners
         private void Call(float value)
         {
             int valueInt = (int)value;
-            IConfigSpec spec = Config.GetSpec(key);
+            IConfigSpec spec = Config.GetSpec<IConfigSpec>(key);
             string finalValue;
             if (!ParsingUtils.TryParseOut(spec, valueInt, out finalValue))
             {
