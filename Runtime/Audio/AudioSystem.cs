@@ -4,6 +4,7 @@ using Slimebones.ECSCore.Config.Specs;
 using Slimebones.ECSCore.Key;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
+using System;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Audio
@@ -11,7 +12,8 @@ namespace Slimebones.ECSCore.Audio
     public class AudioSystem: ISystem
     {
         private Entity dataE;
-        private Filter reqf;
+        private Filter typeReqF;
+        private Filter keyReqF;
 
         public Filter musicAudioF;
         public Filter environmentAudioF;
@@ -23,7 +25,8 @@ namespace Slimebones.ECSCore.Audio
 
         public void OnAwake()
         {
-            reqf = World.Filter.With<SetAudioByTypeReq>().Build();
+            typeReqF = World.Filter.With<SetAudioByTypeReq>().Build();
+            keyReqF = World.Filter.With<SetAudioByEntityReq>().Build();
             musicAudioF =
                 World.Filter.With<Audio>().With<MusicAudio>().Build();
             environmentAudioF =
@@ -35,51 +38,96 @@ namespace Slimebones.ECSCore.Audio
 
         public void OnUpdate(float deltaTime)
         {
-            ref var dataC = ref dataE.GetComponent<InternalAudioData>();
+            ProcessReqByType();
+            ProcessReqByKey();
+        }
 
-            foreach (var reqe in reqf)
+        private void ProcessReqByKey()
+        {
+            foreach (var reqe in keyReqF)
             {
-                if (!RequestComponentUtils.RegisterCall(reqe))
+                try
                 {
+                    if (!ReqUtils.RegisterCall(reqe))
+                    {
+                        continue;
+                    }
+
+                    ref var reqc = ref reqe.GetComponent<SetAudioByEntityReq>();
+
+                    var audioSource = GameObjectUtils.GetUnityOrError(
+                        reqc.e
+                    ).GetComponent<AudioSource>();
+
+                    if (reqc.clip != null)
+                    {
+                        audioSource.clip = reqc.clip;
+                        audioSource.Play();
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Log.Skip(reqe, exc);
                     continue;
                 }
+            }
+        }
 
-                ref var reqc = ref reqe.GetComponent<SetAudioByTypeReq>();
+        private void ProcessReqByType()
+        {
+            ref var dataC = ref dataE.GetComponent<InternalAudioData>();
 
-                switch (reqc.type)
+            foreach (var reqe in typeReqF)
+            {
+                try
                 {
-                    case AudioType.General:
-                        if (reqc.volume != null)
-                        {
-                            RecalculateAllVolumes(ref reqc, ref dataC);
-                        }
-                        break;
-                    case AudioType.Music:
-                        if (reqc.volume != null)
-                        {
-                            SetMusicVolume(
-                                (float)reqc.volume,
-                                dataC.generalVolume,
-                                ref dataC
+                    if (!ReqUtils.RegisterCall(reqe))
+                    {
+                        continue;
+                    }
+
+                    ref var reqc = ref reqe.GetComponent<SetAudioByTypeReq>();
+
+                    switch (reqc.type)
+                    {
+                        case AudioType.General:
+                            if (reqc.volume != null)
+                            {
+                                RecalculateAllVolumes(ref reqc, ref dataC);
+                            }
+                            break;
+                        case AudioType.Music:
+                            if (reqc.volume != null)
+                            {
+                                SetMusicVolume(
+                                    (float)reqc.volume,
+                                    dataC.generalVolume,
+                                    ref dataC
+                                );
+                            }
+                            break;
+                        case AudioType.Environment:
+                            if (reqc.volume != null)
+                            {
+                                SetEnvironmentVolume(
+                                    (float)reqc.volume,
+                                    dataC.generalVolume,
+                                    ref dataC
+                                );
+                            }
+                            break;
+                        default:
+                            Log.Error(
+                                "unrecognized audio type {0} => skip",
+                                reqc.type
                             );
-                        }
-                        break;
-                    case AudioType.Environment:
-                        if (reqc.volume != null)
-                        {
-                            SetEnvironmentVolume(
-                                (float)reqc.volume,
-                                dataC.generalVolume,
-                                ref dataC
-                            );
-                        }
-                        break;
-                    default:
-                        Log.Error(
-                            "unrecognized audio type {0} => skip",
-                            reqc.type
-                        );
-                        break;
+                            break;
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Log.Skip(reqe, exc);
+                    continue;
                 }
             }
         }

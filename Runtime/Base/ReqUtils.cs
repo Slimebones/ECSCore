@@ -1,10 +1,11 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Logging;
 using System;
 using System.Collections.Generic;
 
 namespace Slimebones.ECSCore.Base
 {
-    public static class RequestComponentUtils
+    public static class ReqUtils
     {
         private static List<Type> lockedTypes = new List<Type>();
 

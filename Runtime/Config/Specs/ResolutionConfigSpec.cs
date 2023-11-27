@@ -50,7 +50,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendSetResolutionRequest(Resolution resolution)
         {
             ref var req =
-                ref RequestComponentUtils.Create<SetGraphicsRequest>(
+                ref ReqUtils.Create<SetGraphicsRequest>(
                     1,
                     world
                 );

@@ -3,7 +3,7 @@ using System;
 
 namespace Slimebones.ECSCore.Base
 {
-    public static class EventComponentUtils
+    public static class EvtUtils
     {
         public static ref T Create<T>(
             World world

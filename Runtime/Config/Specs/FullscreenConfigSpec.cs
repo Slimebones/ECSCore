@@ -55,7 +55,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendFullscreenModeReq(FullScreenMode mode)
         {
             ref var req =
-                ref RequestComponentUtils.Create<SetGraphicsRequest>(
+                ref ReqUtils.Create<SetGraphicsRequest>(
                     1,
                     World
                 );

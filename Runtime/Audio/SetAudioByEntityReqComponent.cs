@@ -1,3 +1,4 @@
+using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using Slimebones.ECSCore.Base;
 using Unity.IL2CPP.CompilerServices;
@@ -8,7 +9,7 @@ namespace Slimebones.ECSCore.Audio
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class SetAudioByKeyReqComponent: MonoProvider<SetAudioByKeyReq>
+    public sealed class SetAudioByEntityReqComponent: MonoProvider<SetAudioByEntityReq>
     {
     }
 
@@ -16,9 +17,9 @@ namespace Slimebones.ECSCore.Audio
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SetAudioByKeyReq: IRequestComponent
+    public struct SetAudioByEntityReq: IRequestComponent
     {
-        public string key;
+        public Entity e;
 
         public AudioClip clip;
     }

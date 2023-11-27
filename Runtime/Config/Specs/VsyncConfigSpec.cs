@@ -66,7 +66,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendStateReq(bool flag)
         {
             ref var req =
-                ref RequestComponentUtils.Create<SetGraphicsRequest>(
+                ref ReqUtils.Create<SetGraphicsRequest>(
                     1,
                     world
                 );

@@ -29,7 +29,7 @@ namespace Slimebones.ECSCore.Graphics
         {
             foreach (var reqE in setResolutionReqF)
             {
-                if (!RequestComponentUtils.RegisterCall(reqE))
+                if (!ReqUtils.RegisterCall(reqE))
                 {
                     continue;
                 }

@@ -59,7 +59,7 @@ namespace Slimebones.ECSCore.Scene
 
                 ref LoadSceneRequest loadRequest = ref e
                     .GetComponent<LoadSceneRequest>();
-                RequestComponentUtils.RegisterCall(e);
+                ReqUtils.RegisterCall(e);
 
                 SceneStorage.nextRealScene = loadRequest.sceneName;
                 bool isLoadingScreenEnabled =

@@ -72,7 +72,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         private void SendVolumeReq(int volume)
         {
-            ref var reqc = ref RequestComponentUtils.Create<SetAudioByTypeReq>(
+            ref var reqc = ref ReqUtils.Create<SetAudioByTypeReq>(
                 1, World
             );
             reqc.type = AudioType.General;

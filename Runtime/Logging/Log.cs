@@ -1,3 +1,5 @@
+using Scellecs.Morpeh;
+using System;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Logging
@@ -7,6 +9,16 @@ namespace Slimebones.ECSCore.Logging
     //      logging support
     public static class Log
     {
+        public static void Skip(Entity e, Exception exc)
+        {
+            Error(
+                "exception {0} occured while processing entity {1}"
+                + " => skip",
+                exc,
+                e
+            );
+        }
+
         public static void Debug(string message, params object[] format)
         {
             Debug(string.Format(message, format));

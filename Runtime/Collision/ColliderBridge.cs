@@ -166,7 +166,7 @@ namespace Slimebones.ECSCore.Collision
 
         private ref CollisionEvent CreateRawCollisionEvent() {
             ref var collisionEvent =
-                ref EventComponentUtils.Create<CollisionEvent>(World);
+                ref EvtUtils.Create<CollisionEvent>(World);
             collisionEvent.hostEntity = entity;
             collisionEvent.hostCollider = hostCollider;
 

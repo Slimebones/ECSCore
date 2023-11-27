@@ -84,7 +84,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             ref var request =
-                ref RequestComponentUtils.Create<SetPanelStateRequest>(
+                ref ReqUtils.Create<SetPanelStateRequest>(
                     1,
                     world
                 );
