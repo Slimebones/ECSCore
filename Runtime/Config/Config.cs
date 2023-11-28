@@ -42,10 +42,8 @@ namespace Slimebones.ECSCore.Config
             {
                 if (specByKey.ContainsKey(spec.Key))
                 {
-                    Log.Error(
-                        "spec with key {0} already exists => skip",
-                        spec.Key
-                    );
+                    // silently skip for good interscening
+                    continue;
                 }
 
                 spec.World = World;
