@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 
 namespace Slimebones.ECSCore.Base
 {
-    public class RequestCleanupSystem: ICleanupSystem
+    public class ReqCleanupSystem: ICleanupSystem
     {
         private Filter requestF;
 
@@ -13,14 +13,14 @@ namespace Slimebones.ECSCore.Base
 
         public void OnAwake()
         {
-            requestF = World.Filter.With<RequestMeta>().Build();
+            requestF = World.Filter.With<ReqMeta>().Build();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (var e in requestF)
             {
-                ref var pointer = ref e.GetComponent<RequestMeta>();
+                ref var pointer = ref e.GetComponent<ReqMeta>();
                 if (pointer.callCount > pointer.requiredCallCountToComplete)
                 {
                     World.RemoveEntity(e);

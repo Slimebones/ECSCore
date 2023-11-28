@@ -7,7 +7,7 @@ namespace Slimebones.ECSCore.Base
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class RequestMetaComponent: MonoProvider<RequestMeta>
+    public sealed class ReqMetaComponent: MonoProvider<ReqMeta>
     {
     }
 
@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.Base
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct RequestMeta: IComponent
+    public struct ReqMeta: IComponent
     {
         public int requiredCallCountToComplete;
         public int callCount;

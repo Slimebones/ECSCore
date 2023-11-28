@@ -17,7 +17,7 @@ namespace Slimebones.ECSCore.UI.Panel
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct PanelStateEvent: IEventComponent
+    public struct PanelStateEvent: IEvtComponent
     {
         public string key;
         public bool isEnabled;

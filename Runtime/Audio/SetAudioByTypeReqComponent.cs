@@ -15,7 +15,7 @@ namespace Slimebones.ECSCore.Audio
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SetAudioByTypeReq: IRequestComponent
+    public struct SetAudioByTypeReq: IReqComponent
     {
         public AudioType type;
 

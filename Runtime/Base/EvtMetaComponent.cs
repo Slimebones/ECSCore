@@ -7,7 +7,7 @@ namespace Slimebones.ECSCore.Base
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class EventMetaComponent: MonoProvider<EventMeta>
+    public sealed class EvtMetaComponent: MonoProvider<EvtMeta>
     {
     }
 
@@ -15,7 +15,7 @@ namespace Slimebones.ECSCore.Base
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct EventMeta: IComponent
+    public struct EvtMeta: IComponent
     {
     }
 }

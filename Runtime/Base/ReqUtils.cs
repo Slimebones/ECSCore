@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Base
         public static ref T Create<T>(
             int requiredCallCountToComplete,
             World world
-        ) where T : struct, IRequestComponent
+        ) where T : struct, IReqComponent
         {
             if (requiredCallCountToComplete == 0)
             {
@@ -26,7 +26,7 @@ namespace Slimebones.ECSCore.Base
 
             // request is created anyway in order to conform with the
             // return type, but lock it via variable
-            ref var meta = ref e.AddComponent<RequestMeta>();
+            ref var meta = ref e.AddComponent<ReqMeta>();
             meta.callCount = 0;
             meta.requiredCallCountToComplete = requiredCallCountToComplete;
             meta.isLocked = lockedTypes.Contains(typeof(T));
@@ -51,7 +51,7 @@ namespace Slimebones.ECSCore.Base
         )
         {
             bool result = true;
-            ref var meta = ref e.GetComponent<RequestMeta>();
+            ref var meta = ref e.GetComponent<ReqMeta>();
 
             if (
                 meta.isLocked
@@ -69,12 +69,12 @@ namespace Slimebones.ECSCore.Base
         public static bool IsCompleted(Entity e)
         {
             ref var requestMeta =
-                ref e.GetComponent<RequestMeta>();
+                ref e.GetComponent<ReqMeta>();
             return IsCompletedMeta(ref requestMeta);
         }
 
         public static void Lock<T>()
-            where T: struct, IRequestComponent
+            where T: struct, IReqComponent
         {
             if (!lockedTypes.Contains(typeof(T)))
             {
@@ -83,7 +83,7 @@ namespace Slimebones.ECSCore.Base
         }
 
         public static void Unlock<T>()
-            where T: struct, IRequestComponent
+            where T: struct, IReqComponent
         {
             if (lockedTypes.Contains(typeof(T)))
             {
@@ -96,7 +96,7 @@ namespace Slimebones.ECSCore.Base
             lockedTypes.Clear();
         }
 
-        private static bool IsCompletedMeta(ref RequestMeta meta)
+        private static bool IsCompletedMeta(ref ReqMeta meta)
         {
             return
                 meta.callCount

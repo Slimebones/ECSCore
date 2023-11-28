@@ -7,11 +7,11 @@ namespace Slimebones.ECSCore.Base
     {
         public static ref T Create<T>(
             World world
-        ) where T : struct, IEventComponent
+        ) where T : struct, IEvtComponent
         {
             var e = world.CreateEntity();
             ref T c = ref e.AddComponent<T>();
-            ref var meta = ref e.AddComponent<EventMeta>();
+            ref var meta = ref e.AddComponent<EvtMeta>();
             return ref c;
         }
     }

@@ -8,7 +8,7 @@ namespace Slimebones.ECSCore.Input
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class InputEventComponent: MonoProvider<InputEvent>
+    public sealed class InputEvtComponent: MonoProvider<InputEvt>
     {
     }
 
@@ -16,9 +16,9 @@ namespace Slimebones.ECSCore.Input
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct InputEvent: IEventComponent
+    public struct InputEvt: IEvtComponent
     {
-        public InputEventType type;
+        public InputEvtType type;
         /// <summary>
         /// Unique name across all input events for the runtime.
         /// </summary>

@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 
 namespace Slimebones.ECSCore.Base
 {
-    public class EventCleanupSystem: ICleanupSystem
+    public class EvtCleanupSystem: ICleanupSystem
     {
         private Filter eventF;
 
@@ -13,7 +13,7 @@ namespace Slimebones.ECSCore.Base
 
         public void OnAwake()
         {
-            eventF = World.Filter.With<EventMeta>().Build();
+            eventF = World.Filter.With<EvtMeta>().Build();
         }
 
         public void OnUpdate(float deltaTime)

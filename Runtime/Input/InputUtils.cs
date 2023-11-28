@@ -22,11 +22,11 @@ namespace Slimebones.ECSCore.Input
             World world
         )
         {
-            Filter f = world.Filter.With<InputEvent>().Build();
+            Filter f = world.Filter.With<InputEvt>().Build();
 
             foreach (var e in f)
             {
-                ref var c = ref e.GetComponent<InputEvent>();
+                ref var c = ref e.GetComponent<InputEvt>();
                 if (c.name == name)
                 {
                     return true;
@@ -38,15 +38,15 @@ namespace Slimebones.ECSCore.Input
 
         public static bool Listen(
             string name,
-            InputEventType type,
+            InputEvtType type,
             World world
         )
         {
-            Filter f = world.Filter.With<InputEvent>().Build();
+            Filter f = world.Filter.With<InputEvt>().Build();
 
             foreach (var e in f)
             {
-                ref var c = ref e.GetComponent<InputEvent>();
+                ref var c = ref e.GetComponent<InputEvt>();
                 if (c.name == name && c.type == type)
                 {
                     return true;
@@ -56,16 +56,16 @@ namespace Slimebones.ECSCore.Input
             return false;
         }
 
-        public static ref InputEvent ListenReturn(
+        public static ref InputEvt ListenReturn(
             string name,
             World world
         )
         {
-            Filter f = world.Filter.With<InputEvent>().Build();
+            Filter f = world.Filter.With<InputEvt>().Build();
 
             foreach (var e in f)
             {
-                ref var c = ref e.GetComponent<InputEvent>();
+                ref var c = ref e.GetComponent<InputEvt>();
                 if (c.name == name)
                 {
                     return ref c;

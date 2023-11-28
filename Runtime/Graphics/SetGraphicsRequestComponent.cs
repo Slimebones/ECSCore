@@ -16,7 +16,7 @@ namespace Slimebones.ECSCore.Graphics
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SetGraphicsRequest: IRequestComponent
+    public struct SetGraphicsRequest: IReqComponent
     {
         public Resolution? resolution;
         public FullScreenMode? fullScreenMode;
