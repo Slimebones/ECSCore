@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.UI.Canvas;
 using Slimebones.ECSCore.UI.Panel;
@@ -44,7 +44,7 @@ namespace Slimebones.ECSCore.UI
 
         private void DisablePanels()
         {
-            var mainCanvasGO = GameObjectUtils.GetUnityOrError(
+            var mainCanvasGO = GOUtils.GetUnityOrError(
                 mainCanvasF.First()
             );
             var enabledGOIDSE =

@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Request;
 
 namespace Slimebones.ECSCore.UI.Panel
 {
@@ -84,7 +84,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             ref var request =
-                ref ReqUtils.Create<SetPanelStateRequest>(
+                ref RequestUtils.Create<SetPanelStateRequest>(
                     1,
                     world
                 );

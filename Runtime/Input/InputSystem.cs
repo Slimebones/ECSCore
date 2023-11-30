@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Event;
 using System.Collections.Generic;
 using static Slimebones.ECSCore.Utils.Delegates;
 
@@ -40,7 +40,7 @@ namespace Slimebones.ECSCore.Input
                     if (kvp.Value())
                     {
                         ref var inputEvt =
-                            ref EvtUtils.Create<InputEvt>(World);
+                            ref EventUtils.Create<InputEvt>(World);
                         inputEvt.type = kvp.Key;
                         inputEvt.name = spec.name;
                     }

@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Config.Specs;
 using Slimebones.ECSCore.Key;
 using Slimebones.ECSCore.Logging;
@@ -48,14 +49,14 @@ namespace Slimebones.ECSCore.Audio
             {
                 try
                 {
-                    if (!ReqUtils.RegisterCall(reqe))
+                    if (!RequestUtils.RegisterCall(reqe))
                     {
                         continue;
                     }
 
                     ref var reqc = ref reqe.GetComponent<SetAudioByEntityReq>();
 
-                    var audioSource = GameObjectUtils.GetUnityOrError(
+                    var audioSource = GOUtils.GetUnityOrError(
                         reqc.e
                     ).GetComponent<AudioSource>();
 
@@ -81,7 +82,7 @@ namespace Slimebones.ECSCore.Audio
             {
                 try
                 {
-                    if (!ReqUtils.RegisterCall(reqe))
+                    if (!RequestUtils.RegisterCall(reqe))
                     {
                         continue;
                     }
@@ -136,7 +137,7 @@ namespace Slimebones.ECSCore.Audio
         {
             foreach (var e in f)
             {
-                var audioSourceUnity = GameObjectUtils.GetUnityOrError(
+                var audioSourceUnity = GOUtils.GetUnityOrError(
                     e
                 ).GetComponent<AudioSource>();
                 ref var audioC = ref e.GetComponent<Audio>();

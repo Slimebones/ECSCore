@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Config.InternalSettingListeners;
 using Slimebones.ECSCore.File;
 using Slimebones.ECSCore.Logging;
@@ -69,7 +70,7 @@ namespace Slimebones.ECSCore.Config
 
             SubscribeByInputType(
                 key,
-                GameObjectUtils.GetUnityOrError(e),
+                GOUtils.GetUnityOrError(e),
                 uiInputType
             );
         }

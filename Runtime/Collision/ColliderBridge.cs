@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Event;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Collision
@@ -166,7 +167,7 @@ namespace Slimebones.ECSCore.Collision
 
         private ref CollisionEvent CreateRawCollisionEvent() {
             ref var collisionEvent =
-                ref EvtUtils.Create<CollisionEvent>(World);
+                ref EventUtils.Create<CollisionEvent>(World);
             collisionEvent.hostEntity = entity;
             collisionEvent.hostCollider = hostCollider;
 

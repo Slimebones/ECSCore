@@ -1,23 +1,23 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Base
+namespace Slimebones.ECSCore.Base.GO
 {
-    public static class GameObjectUtils
+    public static class GOUtils
     {
-        public static ref GameObjectData GetOrError(Entity e)
+        public static ref GOData GetOrError(Entity e)
         {
-            if (!e.Has<GameObjectData>())
+            if (!e.Has<GOData>())
             {
                 // every collider should have game object attached
                 throw new MissingECSGameObjectException(e);
             }
-            return ref e.GetComponent<GameObjectData>();
+            return ref e.GetComponent<GOData>();
         }
 
         public static GameObject GetUnityOrError(Entity e)
         {
-            ref GameObjectData GOECS = ref GetOrError(e);
+            ref GOData GOECS = ref GetOrError(e);
 
             if (GOECS.value == null)
             {

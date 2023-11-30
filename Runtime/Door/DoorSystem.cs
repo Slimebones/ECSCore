@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Condition;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.Door
             foreach (var e in f)
             {
                 ref var c = ref e.GetComponent<Door>();
-                var go = GameObjectUtils.GetUnityOrError(e);
+                var go = GOUtils.GetUnityOrError(e);
 
                 c.initialPosition = go.transform.position;
                 c.initialRotation = go.transform.rotation;
@@ -154,7 +154,7 @@ namespace Slimebones.ECSCore.Door
             float deltaTime
         )
         {
-            var go = GameObjectUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnityOrError(e);
             go.transform.position = Vector3.Lerp(
                 go.transform.position,
                 toPosition,

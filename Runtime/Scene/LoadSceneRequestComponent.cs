@@ -1,12 +1,13 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Request;
 using System;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Slimebones.ECSCore.Scene {
+namespace Slimebones.ECSCore.Scene
+{
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
@@ -18,7 +19,7 @@ namespace Slimebones.ECSCore.Scene {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct LoadSceneRequest : IReqComponent {
+    public struct LoadSceneRequest : IRequestComponent {
         public string sceneName;
         public bool isLoadingScreenEnabled;
     }

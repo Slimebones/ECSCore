@@ -1,17 +1,17 @@
 using Scellecs.Morpeh;
 using System;
 
-namespace Slimebones.ECSCore.Base
+namespace Slimebones.ECSCore.Base.Event
 {
-    public static class EvtUtils
+    public static class EventUtils
     {
         public static ref T Create<T>(
             World world
-        ) where T : struct, IEvtComponent
+        ) where T : struct, IEventComponent
         {
             var e = world.CreateEntity();
             ref T c = ref e.AddComponent<T>();
-            ref var meta = ref e.AddComponent<EvtMeta>();
+            ref var meta = ref e.AddComponent<EventMeta>();
             return ref c;
         }
     }

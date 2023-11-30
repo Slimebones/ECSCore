@@ -2,7 +2,7 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
 
 namespace Slimebones.ECSCore.Global
 {
@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.Global
 
             Entity globalE = globalF.First();
             ref Global _global = ref globalE.GetComponent<Global>();
-            ref GameObjectData gameObject = ref GameObjectUtils.GetOrError(
+            ref GOData gameObject = ref GOUtils.GetOrError(
                 globalE
             );
 

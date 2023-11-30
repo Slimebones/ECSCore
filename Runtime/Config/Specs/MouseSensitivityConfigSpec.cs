@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Input;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.React;
@@ -84,7 +84,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GameObjectUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnityOrError(e);
             Slider sliderUnity = go.GetComponent<Slider>();
 
             TextMeshProUGUI displayText =

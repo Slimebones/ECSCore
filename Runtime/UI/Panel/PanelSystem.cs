@@ -1,5 +1,7 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Event;
+using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Logging;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +35,7 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             foreach (var reqE in reqF)
             {
-                if (!ReqUtils.RegisterCall(reqE))
+                if (!RequestUtils.RegisterCall(reqE))
                 {
                     continue;
                 }
@@ -57,7 +59,7 @@ namespace Slimebones.ECSCore.UI.Panel
                 panelGOByKey[reqC.key].SetActive(finalState);
 
                 ref var evt =
-                    ref EvtUtils.Create<PanelStateEvent>(World);
+                    ref EventUtils.Create<PanelStateEvent>(World);
                 evt.key = reqC.key;
                 evt.isEnabled = finalState;
                 evt.go = panelGOByKey[reqC.key];
@@ -99,7 +101,7 @@ namespace Slimebones.ECSCore.UI.Panel
             foreach (var panelE in panelF)
             {
                 var key = panelE.GetComponent<Key.Key>().key;
-                var panelGO = GameObjectUtils.GetUnityOrError(
+                var panelGO = GOUtils.GetUnityOrError(
                     panelE
                 );
 

@@ -1,8 +1,9 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Request;
 using UnityEngine.SceneManagement;
 
-namespace Slimebones.ECSCore.Scene {
+namespace Slimebones.ECSCore.Scene
+{
     public static class SceneUtils {
         /// <summary>
         /// Loads level with next integer.
@@ -45,13 +46,13 @@ namespace Slimebones.ECSCore.Scene {
         ) {
             // create a request to scene systems to load a new scene
             ref LoadSceneRequest loadRequest =
-                ref ReqUtils.Create<LoadSceneRequest>(1, world);
+                ref RequestUtils.Create<LoadSceneRequest>(1, world);
             loadRequest.sceneName = name;
             loadRequest.isLoadingScreenEnabled = isLoadingScreenEnabled;
 
             if (shouldAllRequestsBeUnlocked)
             {
-                ReqUtils.UnlockAll();
+                RequestUtils.UnlockAll();
             }
         }
 

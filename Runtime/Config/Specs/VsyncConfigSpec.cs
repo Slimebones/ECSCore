@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Logging;
 using System;
@@ -66,7 +66,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendStateReq(bool flag)
         {
             ref var req =
-                ref ReqUtils.Create<SetGraphicsRequest>(
+                ref RequestUtils.Create<SetGraphicsRequest>(
                     1,
                     world
                 );

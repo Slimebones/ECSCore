@@ -3,16 +3,16 @@ using Slimebones.ECSCore.Logging;
 using System;
 using System.Collections.Generic;
 
-namespace Slimebones.ECSCore.Base
+namespace Slimebones.ECSCore.Base.Request
 {
-    public static class ReqUtils
+    public static class RequestUtils
     {
         private static List<Type> lockedTypes = new List<Type>();
 
         public static ref T Create<T>(
             int requiredCallCountToComplete,
             World world
-        ) where T : struct, IReqComponent
+        ) where T : struct, IRequestComponent
         {
             if (requiredCallCountToComplete == 0)
             {
@@ -26,7 +26,7 @@ namespace Slimebones.ECSCore.Base
 
             // request is created anyway in order to conform with the
             // return type, but lock it via variable
-            ref var meta = ref e.AddComponent<ReqMeta>();
+            ref var meta = ref e.AddComponent<RequestMeta>();
             meta.callCount = 0;
             meta.requiredCallCountToComplete = requiredCallCountToComplete;
             meta.isLocked = lockedTypes.Contains(typeof(T));
@@ -51,7 +51,7 @@ namespace Slimebones.ECSCore.Base
         )
         {
             bool result = true;
-            ref var meta = ref e.GetComponent<ReqMeta>();
+            ref var meta = ref e.GetComponent<RequestMeta>();
 
             if (
                 meta.isLocked
@@ -69,12 +69,12 @@ namespace Slimebones.ECSCore.Base
         public static bool IsCompleted(Entity e)
         {
             ref var requestMeta =
-                ref e.GetComponent<ReqMeta>();
+                ref e.GetComponent<RequestMeta>();
             return IsCompletedMeta(ref requestMeta);
         }
 
         public static void Lock<T>()
-            where T: struct, IReqComponent
+            where T : struct, IRequestComponent
         {
             if (!lockedTypes.Contains(typeof(T)))
             {
@@ -83,7 +83,7 @@ namespace Slimebones.ECSCore.Base
         }
 
         public static void Unlock<T>()
-            where T: struct, IReqComponent
+            where T : struct, IRequestComponent
         {
             if (lockedTypes.Contains(typeof(T)))
             {
@@ -96,7 +96,7 @@ namespace Slimebones.ECSCore.Base
             lockedTypes.Clear();
         }
 
-        private static bool IsCompletedMeta(ref ReqMeta meta)
+        private static bool IsCompletedMeta(ref RequestMeta meta)
         {
             return
                 meta.callCount

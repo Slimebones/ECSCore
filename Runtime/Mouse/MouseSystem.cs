@@ -2,7 +2,7 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
 
 namespace Slimebones.ECSCore.Mouse
 {
@@ -20,7 +20,7 @@ namespace Slimebones.ECSCore.Mouse
                 ref MouseInteractable interactable =
                     ref e.GetComponent<MouseInteractable>();
 
-                ref GameObjectData goECS = ref GameObjectUtils.GetOrError(e);
+                ref GOData goECS = ref GOUtils.GetOrError(e);
 
                 interactable.bridge =
                     goECS.value.AddComponent<MouseBridge>();

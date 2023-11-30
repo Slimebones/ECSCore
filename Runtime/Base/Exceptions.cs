@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Slimebones.ECSCore {
+namespace Slimebones.ECSCore.Base {
     public class MissingECSGameObjectException : Exception {
         public MissingECSGameObjectException(string misser)
             : base(string.Format(

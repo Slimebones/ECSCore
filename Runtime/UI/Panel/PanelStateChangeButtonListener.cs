@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.React;
 using UnityUI = UnityEngine.UI;
 
@@ -20,7 +21,7 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             this.e = e;
             this.world = world;
-            unityButton = GameObjectUtils.GetUnityOrError(
+            unityButton = GOUtils.GetUnityOrError(
                 e
             ).GetComponent<UnityUI.Button>();
 
@@ -35,7 +36,7 @@ namespace Slimebones.ECSCore.UI.Panel
         private void Call()
         {
             ref var req =
-                ref ReqUtils.Create<SetPanelStateRequest>(
+                ref RequestUtils.Create<SetPanelStateRequest>(
                     1,
                     world
                 );

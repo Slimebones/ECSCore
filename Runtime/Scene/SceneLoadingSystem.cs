@@ -3,8 +3,9 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine.SceneManagement;
-using Slimebones.ECSCore.Base;
 using Slimebones.ClumsyDelivery.Scene;
+using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Base.Request;
 
 namespace Slimebones.ECSCore.Scene
 {
@@ -59,7 +60,7 @@ namespace Slimebones.ECSCore.Scene
 
                 ref LoadSceneRequest loadRequest = ref e
                     .GetComponent<LoadSceneRequest>();
-                ReqUtils.RegisterCall(e);
+                RequestUtils.RegisterCall(e);
 
                 SceneStorage.nextRealScene = loadRequest.sceneName;
                 bool isLoadingScreenEnabled =
@@ -98,7 +99,7 @@ namespace Slimebones.ECSCore.Scene
                     ref loadingSpinnerE.GetComponent<LoadingSpinner>();
 
                 ref UnityEngine.GameObject loadingSpinnerGO = ref loadingSpinnerE
-                    .GetComponent<GameObjectData>().value;
+                    .GetComponent<GOData>().value;
                 loadingSpinnerGO.transform.Rotate(
                     new Vector3(0f, 0f, -loadingSpinner.animationSpeed * deltaTime)
                 );

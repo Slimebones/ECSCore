@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.Request;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Graphics
@@ -29,7 +29,7 @@ namespace Slimebones.ECSCore.Graphics
         {
             foreach (var reqE in setResolutionReqF)
             {
-                if (!ReqUtils.RegisterCall(reqE))
+                if (!RequestUtils.RegisterCall(reqE))
                 {
                     continue;
                 }

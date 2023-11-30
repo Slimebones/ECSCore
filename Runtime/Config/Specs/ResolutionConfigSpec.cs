@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Utils;
@@ -50,7 +51,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendSetResolutionRequest(Resolution resolution)
         {
             ref var req =
-                ref ReqUtils.Create<SetGraphicsRequest>(
+                ref RequestUtils.Create<SetGraphicsRequest>(
                     1,
                     world
                 );
@@ -59,7 +60,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GameObjectUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnityOrError(e);
             TMP_Dropdown dropdownUnity = go.GetComponent<TMP_Dropdown>();
             InitSettingOptions(dropdownUnity);
             return (string value) =>

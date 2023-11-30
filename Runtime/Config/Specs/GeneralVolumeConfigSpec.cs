@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Audio;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.UI.Settings;
@@ -27,7 +28,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GameObjectUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnityOrError(e);
             Slider sliderUnity = go.GetComponent<Slider>();
 
             TextMeshProUGUI displayText =
@@ -72,7 +73,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         private void SendVolumeReq(int volume)
         {
-            ref var reqc = ref ReqUtils.Create<SetAudioByTypeReq>(
+            ref var reqc = ref RequestUtils.Create<SetAudioByTypeReq>(
                 1, World
             );
             reqc.type = AudioType.General;
