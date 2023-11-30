@@ -2,11 +2,12 @@ using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.React;
+using UnityEngine.Serialization;
 using UnityUI = UnityEngine.UI;
 
 namespace Slimebones.ECSCore.UI.Panel
 {
-    public class PanelStateChangeButtonListener: IEntityListener
+    public class SetPanelStateButtonListener: IEntityListener
     {
         public string targetPanelKey;
         public PanelStateChange targetChangeState;
