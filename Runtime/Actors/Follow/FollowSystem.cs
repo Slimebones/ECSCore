@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.GO;
 
-namespace Slimebones.ECSCore.Follow
+namespace Slimebones.ECSCore.Actors.Follow
 {
     public class FollowSystem: ISystem
     {

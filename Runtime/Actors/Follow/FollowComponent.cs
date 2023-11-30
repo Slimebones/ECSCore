@@ -3,7 +3,7 @@ using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Follow
+namespace Slimebones.ECSCore.Actors.Follow
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]

@@ -22,8 +22,17 @@ namespace Slimebones.ECSCore.React
             {
                 ref var c = ref e.GetComponent<React>();
 
+                if (c.listeners == null)
+                {
+                    continue;
+                }
+
                 foreach (var listener in c.listeners)
                 {
+                    if (listener == null)
+                    {
+                        continue;
+                    }
                     listener.Subscribe(e, World);
                 }
             }

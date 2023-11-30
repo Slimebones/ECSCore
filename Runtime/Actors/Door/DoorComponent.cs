@@ -4,7 +4,7 @@ using Slimebones.ECSCore.Condition;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Door
+namespace Slimebones.ECSCore.Actors.Door
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]

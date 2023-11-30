@@ -1,4 +1,4 @@
-namespace Slimebones.ECSCore.Door
+namespace Slimebones.ECSCore.Actors.Door
 {
     public enum DoorState
     {

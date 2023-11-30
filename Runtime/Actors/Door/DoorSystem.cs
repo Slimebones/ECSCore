@@ -3,7 +3,7 @@ using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Condition;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Door
+namespace Slimebones.ECSCore.Actors.Door
 {
     public class DoorSystem: ISystem
     {
@@ -172,7 +172,7 @@ namespace Slimebones.ECSCore.Door
                 Vector3.Distance(
                     go.transform.position, toPosition
                 ) < Constants.VectorDistancePrecision
-                && (
+                &&
                     Mathf.Abs(q2.w - q1.w)
                         < Constants.QuaternionDiffPrecision
                     && Mathf.Abs(q2.x - q1.x)
@@ -181,7 +181,7 @@ namespace Slimebones.ECSCore.Door
                         < Constants.QuaternionDiffPrecision
                     && Mathf.Abs(q2.z - q1.z)
                         < Constants.QuaternionDiffPrecision
-                )
+
             )
             {
                 c.state = finalState;
