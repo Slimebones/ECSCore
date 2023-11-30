@@ -41,15 +41,10 @@ namespace Slimebones.ECSCore.Config
         {
             foreach (var spec in specs)
             {
-                if (specByKey.ContainsKey(spec.Key))
-                {
-                    // silently skip for good interscening
-                    continue;
-                }
-
+                // reset spec in any case - even if it is already exists
+                // in order to correctly setup settings after scene restarts
                 spec.World = World;
                 specByKey[spec.Key] = spec;
-
                 SetSpecValue(GetInitialValueForSpec(spec), spec);
             }
         }
