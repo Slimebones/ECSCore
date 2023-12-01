@@ -17,8 +17,7 @@ namespace Slimebones.ECSCore.Utils.Parsing
             )
             {
                 throw new NotFoundException(
-                    "parser for type",
-                    typeof(T).ToString()
+                    "parser for type " + typeof(T).ToString()
                 );
             }
 

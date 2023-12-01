@@ -60,7 +60,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GOUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnity(e);
             TMP_Dropdown dropdownUnity = go.GetComponent<TMP_Dropdown>();
             InitSettingOptions(dropdownUnity);
             return (string value) =>

@@ -9,7 +9,7 @@ namespace Slimebones.ECSCore.Config.Specs
     {
         public static Action<string> OnBasicToggleSettingInit(Entity e)
         {
-            var go = GOUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnity(e);
             Toggle toggleUnity = go.GetComponent<Toggle>();
             return (string value) =>
                 toggleUnity.SetIsOnWithoutNotify(value == "1");

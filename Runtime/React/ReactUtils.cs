@@ -20,8 +20,7 @@ namespace Slimebones.ECSCore.React
             }
 
             throw new NotFoundException(
-                "listener with type for entity",
-                e.ToString()
+                "listener with type for entity " + e.ToString()
             );
         }    
     }

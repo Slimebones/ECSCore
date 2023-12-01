@@ -32,7 +32,7 @@ namespace Slimebones.ECSCore.Mouse
             foreach (var e in mouseInteractableF)
             {
 
-                GameObject unityGO = GOUtils.GetUnityOrError(e);
+                GameObject unityGO = GOUtils.GetUnity(e);
 
                 // get button and mouse bridge unity components and setup a
                 // romantic date for them

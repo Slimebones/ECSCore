@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.Base
+namespace Slimebones.ECSCore.Base.Bridge
 {
     /// <summary>
     /// Connects Unity logic with ECS layer.

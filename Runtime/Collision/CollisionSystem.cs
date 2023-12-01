@@ -3,6 +3,11 @@ using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.Collision.Bridges;
+using Slimebones.ECSCore.Base.Bridge;
+using Slimebones.ECSCore.Utils;
+using System.Collections.Generic;
+using System;
 
 namespace Slimebones.ECSCore.Collision
 {
@@ -14,22 +19,68 @@ namespace Slimebones.ECSCore.Collision
         private Filter colliders;
 
         public override void OnAwake() {
-            colliders = World.Filter.With<Collider>().Build();
+            colliders = World.Filter.With<ColliderBridgeHost>().Build();
 
             foreach (Entity entity in colliders) {
-                ref Collider collider = ref entity.GetComponent<Collider>();
+                ref ColliderBridgeHost collider = ref entity.GetComponent<ColliderBridgeHost>();
 
-                // get collider's game object
-                GameObject GOUnity = GOUtils.GetUnityOrError(entity);
+                foreach (var colliderType in collider.bridgeTypes)
+                {
+                    BaseColliderBridge bridge;
 
-                // create a new MonoBehaviour as a ColliderBridge and attach it
-                // to a game object and it's ECS component
-                collider.bridge = GOUnity.AddComponent<ColliderBridge>();
-
-                // also propagate ECS data to the bridge in order to emit
-                // ECS events
-                collider.bridge.World = World;
-                collider.bridge.Entity = entity;
+                    switch (colliderType)
+                    {
+                        case ColliderBridgeType.CollisionEnter:
+                            bridge =
+                                entity
+                                .AddBridge<CollisionEnterColliderBridge>(
+                                    World
+                                );
+                            break;
+                        case ColliderBridgeType.CollisionStay:
+                            bridge =
+                                entity
+                                .AddBridge<CollisionStayColliderBridge>(
+                                    World
+                                );
+                            break;
+                        case ColliderBridgeType.CollisionExit:
+                            bridge =
+                                entity
+                                .AddBridge<CollisionExitColliderBridge>(
+                                    World
+                                );
+                            break;
+                        case ColliderBridgeType.TriggerEnter:
+                            bridge =
+                                entity
+                                .AddBridge<TriggerEnterColliderBridge>(
+                                    World
+                                );
+                            break;
+                        case ColliderBridgeType.TriggerStay:
+                            bridge =
+                                entity
+                                .AddBridge<TriggerStayColliderBridge>(
+                                    World
+                                );
+                            break;
+                        case ColliderBridgeType.TriggerExit:
+                            bridge =
+                                entity
+                                .AddBridge<TriggerExitColliderBridge>(
+                                    World
+                                );
+                            break;
+                        default:
+                            throw new UnsupportedException(
+                                string.Format(
+                                    "collider type {0}",
+                                    colliderType
+                                )
+                            );
+                    }
+                }
             }
         }
 

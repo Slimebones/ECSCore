@@ -16,7 +16,7 @@ namespace Slimebones.ECSCore.Key
                 }
             }
 
-            throw new NotFoundException("entity with key", key);
+            throw new NotFoundException("entity with key " + key);
         }
 
         public static Entity GetEntity(
@@ -33,7 +33,7 @@ namespace Slimebones.ECSCore.Key
                 }
             }
 
-            throw new NotFoundException("entity with key", key);
+            throw new NotFoundException("entity with key " + key);
         }
     }
 }

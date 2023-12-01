@@ -5,7 +5,7 @@ namespace Slimebones.ECSCore.Base.GO
 {
     public static class GOUtils
     {
-        public static ref GOData GetOrError(Entity e)
+        public static ref GOData Get(Entity e)
         {
             if (!e.Has<GOData>())
             {
@@ -15,9 +15,9 @@ namespace Slimebones.ECSCore.Base.GO
             return ref e.GetComponent<GOData>();
         }
 
-        public static GameObject GetUnityOrError(Entity e)
+        public static GameObject GetUnity(Entity e)
         {
-            ref GOData GOECS = ref GetOrError(e);
+            ref GOData GOECS = ref Get(e);
 
             if (GOECS.value == null)
             {

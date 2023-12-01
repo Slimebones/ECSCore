@@ -1,15 +1,17 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
+using Slimebones.ECSCore.Collision.Bridges;
 using System;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Slimebones.ECSCore.Collision {
+namespace Slimebones.ECSCore.Collision
+{
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class ColliderComponent : MonoProvider<Collider> {
+    public sealed class ColliderBridgeHostComponent : MonoProvider<ColliderBridgeHost> {
     }
 
     /// <summary>
@@ -19,8 +21,7 @@ namespace Slimebones.ECSCore.Collision {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct Collider : IComponent {
-        [HideInInspector]
-        public ColliderBridge bridge;
+    public struct ColliderBridgeHost : IComponent {
+        public ColliderBridgeType[] bridgeTypes;
     }
 }

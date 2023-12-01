@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.Actors.Follow
             foreach (var e in f)
             {
                 ref var c = ref e.GetComponent<Follow>();
-                var cgo = GOUtils.GetUnityOrError(e);
+                var cgo = GOUtils.GetUnity(e);
 
                 cgo.transform.position =
                     c.targetGO.transform.position + c.offset;

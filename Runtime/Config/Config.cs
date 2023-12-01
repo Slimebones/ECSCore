@@ -65,7 +65,7 @@ namespace Slimebones.ECSCore.Config
 
             SubscribeByInputType(
                 key,
-                GOUtils.GetUnityOrError(e),
+                GOUtils.GetUnity(e),
                 uiInputType
             );
         }
@@ -93,7 +93,7 @@ namespace Slimebones.ECSCore.Config
                     break;
                 default:
                     throw new NotFoundException(
-                        "input type", uiInputType.ToString()
+                        "input type " + uiInputType.ToString()
                     );
             }
 
@@ -106,7 +106,7 @@ namespace Slimebones.ECSCore.Config
         {
             if (!file.KeyExists(key, DefaultSectionName))
             {
-                throw new NotFoundException("key", key);
+                throw new NotFoundException("key " + key);
             }
             return file.Read(key, DefaultSectionName);
         }
@@ -177,10 +177,7 @@ namespace Slimebones.ECSCore.Config
         {
             if (!specByKey.ContainsKey(key))
             {
-                throw new NotFoundException(
-                    "config spec with key",
-                    key
-                );
+                throw new NotFoundException("config spec with key " + key);
             }
         }
 

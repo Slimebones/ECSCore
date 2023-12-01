@@ -34,7 +34,7 @@ namespace Slimebones.ECSCore.UI
 
         private void EnablePanels()
         {
-            var mainCanvasGO = GOUtils.GetUnityOrError(
+            var mainCanvasGO = GOUtils.GetUnity(
                 mainCanvasF.First()
             );
 

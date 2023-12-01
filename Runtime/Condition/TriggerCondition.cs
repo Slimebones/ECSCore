@@ -60,7 +60,7 @@ namespace Slimebones.ECSCore.Condition
                 if (hostCollider != null)
                 {
                     UnityEngine.Collider factHostCollider =
-                        collisionEvent.hostCollider;
+                        collisionEvent.unityHostCollider;
                         
 
                     if (factHostCollider == null)
@@ -88,9 +88,9 @@ namespace Slimebones.ECSCore.Condition
                 // check if the same collider and the same host entity as
                 // allowed
                 if (
-                    collisionEvent.collider != null
+                    collisionEvent.guestCollider != null
                     && (
-                        collisionEvent.collider.GetInstanceID()
+                        collisionEvent.guestCollider.GetInstanceID()
                             == trigger.GetInstanceID()
                     )
                 )

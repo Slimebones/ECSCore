@@ -84,7 +84,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GOUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnity(e);
             Slider sliderUnity = go.GetComponent<Slider>();
 
             TextMeshProUGUI displayText =

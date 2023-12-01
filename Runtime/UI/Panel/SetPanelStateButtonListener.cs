@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             this.e = e;
             this.world = world;
-            unityButton = GOUtils.GetUnityOrError(
+            unityButton = GOUtils.GetUnity(
                 e
             ).GetComponent<UnityUI.Button>();
 

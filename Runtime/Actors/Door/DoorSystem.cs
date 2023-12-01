@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.Actors.Door
             foreach (var e in f)
             {
                 ref var c = ref e.GetComponent<Door>();
-                var go = GOUtils.GetUnityOrError(e);
+                var go = GOUtils.GetUnity(e);
 
                 c.initialPosition = go.transform.position;
                 c.initialRotation = go.transform.rotation;
@@ -154,7 +154,7 @@ namespace Slimebones.ECSCore.Actors.Door
             float deltaTime
         )
         {
-            var go = GOUtils.GetUnityOrError(e);
+            var go = GOUtils.GetUnity(e);
             go.transform.position = Vector3.Lerp(
                 go.transform.position,
                 toPosition,

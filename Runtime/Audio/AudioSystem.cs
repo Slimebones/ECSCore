@@ -56,7 +56,7 @@ namespace Slimebones.ECSCore.Audio
 
                     ref var reqc = ref reqe.GetComponent<SetAudioByEntityReq>();
 
-                    var audioSource = GOUtils.GetUnityOrError(
+                    var audioSource = GOUtils.GetUnity(
                         reqc.e
                     ).GetComponent<AudioSource>();
 
@@ -137,7 +137,7 @@ namespace Slimebones.ECSCore.Audio
         {
             foreach (var e in f)
             {
-                var audioSourceUnity = GOUtils.GetUnityOrError(
+                var audioSourceUnity = GOUtils.GetUnity(
                     e
                 ).GetComponent<AudioSource>();
                 ref var audioC = ref e.GetComponent<Audio>();

@@ -67,7 +67,7 @@ namespace Slimebones.ECSCore.Scene
         {
             this.e = e;
             this.world = world;
-            unityButton = GOUtils.GetUnityOrError(
+            unityButton = GOUtils.GetUnity(
                 e
             ).GetComponent<UnityUI.Button>();
 

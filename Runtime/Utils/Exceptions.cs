@@ -7,8 +7,8 @@ namespace Slimebones.ECSCore.Utils {
     /// The instance is not supported.
     /// </summary>
     public class UnsupportedException : Exception {
-        public UnsupportedException(string title, string value)
-            : base(String.Format("{0} <{1}> is unsupported", title, value)) {}
+        public UnsupportedException(string value)
+            : base(string.Format("{0} is unsupported", value)) {}
     }
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.Utils {
         public UnavailableFeatureException(
             string feature,
             string explanation
-        ) : base(String.Format(
+        ) : base(string.Format(
             "{0} is unavailable: {1}", feature, explanation
         )) {}
     }
@@ -28,19 +28,10 @@ namespace Slimebones.ECSCore.Utils {
     /// </summary>
     public class NotFoundException : Exception {
         public NotFoundException(
-            string title,
             string value
         ) : base (
             string.Format(
-                "{0} <{1}> is not found", title, value
-            )
-        ) {}
-
-        public NotFoundException(
-            string title
-        ) : base (
-            string.Format(
-                "{0} is not found", title
+                "{0} is not found", value
             )
         ) {}
     }
@@ -50,17 +41,35 @@ namespace Slimebones.ECSCore.Utils {
     /// </summary>
     public class CannotBeNullException : Exception {
         public CannotBeNullException(
-            string title
+            string value
         ) : base (
-            title + " cannot be none"
+            value + " cannot be none"
         ) {}
+    }
+
+    public class AlreadyEventException: Exception
+    {
+        public AlreadyEventException(
+            string value,
+            string evt
+        ) : base(
+            string.Format(
+                "{0} already {1}",
+                value,
+                evt
+            )
+        )
+        {
+        }
     }
 
     public abstract class ExpectException: Exception
     {
         public ExpectException(
             string message
-        ): base(message) {}
+        ) {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>

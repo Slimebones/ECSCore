@@ -44,7 +44,7 @@ namespace Slimebones.ECSCore.UI
 
         private void DisablePanels()
         {
-            var mainCanvasGO = GOUtils.GetUnityOrError(
+            var mainCanvasGO = GOUtils.GetUnity(
                 mainCanvasF.First()
             );
             var enabledGOIDSE =
