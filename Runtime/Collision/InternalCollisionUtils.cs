@@ -41,13 +41,17 @@ namespace Slimebones.ECSCore.Collision
                 world
             );
 
-            collisionEvent.guestCollider = collider;
+            collisionEvent.unityGuestCollider = collider;
             collisionEvent.isTrigger = true;
 
-            BaseColliderBridge otherColliderBridge =
+            // take first possible collider bridge with base
+            // this will work exactly as expected as collider components
+            // with empty array types, as they often are guests
+            var otherColliderBridge =
                 collider.gameObject.GetComponent<BaseColliderBridge>();
             collisionEvent.guestEntity =
-                otherColliderBridge != null ? otherColliderBridge.Entity : null;
+                otherColliderBridge != null
+                ? otherColliderBridge.Entity : null;
 
             return ref collisionEvent;
         }

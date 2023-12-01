@@ -11,63 +11,69 @@ using System;
 
 namespace Slimebones.ECSCore.Collision
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    [CreateAssetMenu(menuName = "ECS/Systems/" + nameof(CollisionSystem))]
-    public sealed class CollisionSystem: UpdateSystem {
-        private Filter colliders;
+    public sealed class CollisionSystem: ISystem {
+        private Filter collidersF;
 
-        public override void OnAwake() {
-            colliders = World.Filter.With<ColliderBridgeHost>().Build();
+        public World World
+        {
+            get;
+            set;
+        }
 
-            foreach (Entity entity in colliders) {
-                ref ColliderBridgeHost collider = ref entity.GetComponent<ColliderBridgeHost>();
+        public void OnAwake() {
+        }
 
-                foreach (var colliderType in collider.bridgeTypes)
+        public void OnUpdate(float deltaTime)
+        {
+            collidersF = World.Filter.With<ColliderBridgeHost>().Build();
+
+            foreach (Entity e in collidersF) {
+                ref ColliderBridgeHost bridgeHost =
+                    ref e.GetComponent<ColliderBridgeHost>();
+
+                if (bridgeHost.isInitialized)
+                {
+                    continue;
+                }
+
+                if (bridgeHost.bridgeTypes.Length == 0)
+                {
+                    // add base collider bridge for components without any
+                    // types defined - in order to register them as guests
+                    // correctly on collisions
+                    e.AddBridge<BaseColliderBridge>(World);
+                }
+
+                foreach (var colliderType in bridgeHost.bridgeTypes)
                 {
                     BaseColliderBridge bridge;
 
                     switch (colliderType)
                     {
-                        case ColliderBridgeType.CollisionEnter:
-                            bridge =
-                                entity
-                                .AddBridge<CollisionEnterColliderBridge>(
-                                    World
-                                );
-                            break;
                         case ColliderBridgeType.CollisionStay:
                             bridge =
-                                entity
+                                e
                                 .AddBridge<CollisionStayColliderBridge>(
                                     World
                                 );
                             break;
                         case ColliderBridgeType.CollisionExit:
                             bridge =
-                                entity
+                                e
                                 .AddBridge<CollisionExitColliderBridge>(
-                                    World
-                                );
-                            break;
-                        case ColliderBridgeType.TriggerEnter:
-                            bridge =
-                                entity
-                                .AddBridge<TriggerEnterColliderBridge>(
                                     World
                                 );
                             break;
                         case ColliderBridgeType.TriggerStay:
                             bridge =
-                                entity
+                                e
                                 .AddBridge<TriggerStayColliderBridge>(
                                     World
                                 );
                             break;
                         case ColliderBridgeType.TriggerExit:
                             bridge =
-                                entity
+                                e
                                 .AddBridge<TriggerExitColliderBridge>(
                                     World
                                 );
@@ -81,10 +87,13 @@ namespace Slimebones.ECSCore.Collision
                             );
                     }
                 }
+
+                bridgeHost.isInitialized = true;
             }
         }
-
-        public override void OnUpdate(float deltaTime) {
+ 
+        public void Dispose()
+        {
         }
     }
 }

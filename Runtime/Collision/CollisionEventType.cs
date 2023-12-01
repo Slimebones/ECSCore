@@ -1,7 +1,6 @@
 namespace Slimebones.ECSCore.Collision {
     public enum CollisionEventType {
-        Enter = 0,
-        Stay = 1,
-        Exit = 2
+        Stay = 0,
+        Exit = 1
     }
 }

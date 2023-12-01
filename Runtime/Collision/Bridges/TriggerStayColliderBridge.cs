@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.Bridge;
 using Slimebones.ECSCore.Base.Event;
+using Slimebones.ECSCore.Logging;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Collision.Bridges
@@ -10,7 +11,7 @@ namespace Slimebones.ECSCore.Collision.Bridges
     /// </summary>
     public class TriggerStayColliderBridge: BaseColliderBridge
     {
-        public void OnTriggerStay(UnityEngine.Collider collider)
+        public void OnTriggerStay(Collider collider)
         {
             ref CollisionEvent collisionEvent =
                 ref InternalCollisionUtils.CreateTriggerCollisionEvent(

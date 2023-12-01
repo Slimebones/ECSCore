@@ -5,6 +5,83 @@ using static Slimebones.ECSCore.Utils.Delegates;
 
 namespace Slimebones.ECSCore.Collision {
     public static class CollisionUtils {
+        public static void ExecuteForEachCollisionEventAnyComponent<
+            TComponent1,
+            TComponent2
+        >(
+            ActionRef<CollisionEvent, TComponent1, TComponent2> action,
+            World world
+        )
+            where TComponent1: struct, IComponent
+            where TComponent2: struct, IComponent
+        {
+            ActionRef<CollisionEvent, TComponent1> actionWrapper =
+                (ref CollisionEvent collisionEvent, ref TComponent1 c1) =>
+                {
+                    var hostE = collisionEvent.hostEntity;
+                    var guestE = collisionEvent.guestEntity;
+
+                    if (!hostE.IsDisposed() && hostE.Has<TComponent2>())
+                    {
+                        ref TComponent2 c2 =
+                            ref hostE.GetComponent<TComponent2>();
+                        action(ref collisionEvent, ref c1, ref c2);
+                        return;
+                    }
+                    if (
+                        guestE != null
+                        && !guestE.IsDisposed()
+                        && guestE.Has<TComponent1>()
+                    )
+                    {
+                        ref TComponent2 c2 =
+                            ref guestE.GetComponent<TComponent2>();
+                        action(ref collisionEvent, ref c1, ref c2);
+                        return;
+                    }
+                };
+            ExecuteForEachCollisionEventAnyComponent(
+                actionWrapper,
+                world
+            );
+        }
+
+        public static void ExecuteForEachCollisionEventAnyComponent<
+            TComponent1
+        >(
+            ActionRef<CollisionEvent, TComponent1> action,
+            World world
+        )
+            where TComponent1: struct, IComponent
+        {
+            ActionRef<CollisionEvent> actionWrapper =
+                (ref CollisionEvent collisionEvent) =>
+                {
+                    var hostE = collisionEvent.hostEntity;
+                    var guestE = collisionEvent.guestEntity;
+
+                    if (!hostE.IsDisposed() && hostE.Has<TComponent1>())
+                    {
+                        ref TComponent1 c =
+                            ref hostE.GetComponent<TComponent1>();
+                        action(ref collisionEvent, ref c);
+                        return;
+                    }
+                    if (
+                        guestE != null
+                        && !guestE.IsDisposed()
+                        && guestE.Has<TComponent1>()
+                    )
+                    {
+                        ref TComponent1 c =
+                            ref guestE.GetComponent<TComponent1>();
+                        action(ref collisionEvent, ref c);
+                        return;
+                    }
+                };
+            ExecuteForEachCollisionEvent(actionWrapper, world);
+        }
+
         /// <summary>
         /// Executes action for each collision event.
         /// </summary>

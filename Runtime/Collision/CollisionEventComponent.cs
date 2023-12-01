@@ -29,8 +29,8 @@ namespace Slimebones.ECSCore.Collision
     public struct CollisionEvent : IEventComponent {
         public CollisionEventType type;
         public UnityEngine.Collider unityHostCollider;
+        public UnityEngine.Collider unityGuestCollider;
         public UnityEngine.Collision unityCollision;
-        public UnityEngine.Collider guestCollider;
         public Entity hostEntity;
         public Entity guestEntity;
         public bool isTrigger;

@@ -22,6 +22,11 @@ namespace Slimebones.ECSCore.Collision
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct ColliderBridgeHost : IComponent {
+        // on empty bridge types a base bridge host will be registered in
+        // order to correctly register a guest entity on collisions
         public ColliderBridgeType[] bridgeTypes;
+
+        [HideInInspector]
+        public bool isInitialized;
     }
 }

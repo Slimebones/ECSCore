@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ClumsyDelivery.UI.Panel;
 using Slimebones.ECSCore.Collision;
+using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.UI.Panel;
 using System;
 using UnityEngine;
@@ -11,8 +12,9 @@ namespace Slimebones.ECSCore.Condition
     [Serializable]
     public class TriggerCondition: ICondition
     {
-        public UnityEngine.Collider hostCollider;
-        public UnityEngine.Collider trigger;
+        // doesn't matter which collider is host
+        public UnityEngine.Collider unityCollider1;
+        public UnityEngine.Collider unityCollider2;
 
         [Tooltip(
             "How long the host object should stay in the trigger in order"
@@ -43,7 +45,7 @@ namespace Slimebones.ECSCore.Condition
             World world
         )
         {
-            if (trigger == null)
+            if (unityCollider1 == null || unityCollider2 == null)
             {
                 // trigger as like it has been staying
                 return Trigger(world);
@@ -57,43 +59,24 @@ namespace Slimebones.ECSCore.Condition
                 ref var collisionEvent =
                     ref eventE.GetComponent<CollisionEvent>();
 
-                if (hostCollider != null)
-                {
-                    UnityEngine.Collider factHostCollider =
-                        collisionEvent.unityHostCollider;
-                        
-
-                    if (factHostCollider == null)
-                    {
-                        // also skip if game object found, but there is no
-                        // collider on it, but it is not possible due to
-                        // how the collisions work
-                        Debug.LogWarningFormat(
-                            "cannot get collider of host entity {0}, but"
-                            + "the collision is somehow happened"
-                        );
-                        continue;
-                    }
-
-                    if (
-                        factHostCollider.GetInstanceID()
-                            != hostCollider.GetInstanceID()
+                bool isCollider1InEvent = (
+                    unityCollider1 != null
+                    && (
+                        collisionEvent.unityHostCollider == unityCollider1
+                        || collisionEvent.unityGuestCollider == unityCollider1
                     )
-                    {
-                        // unmatched colliders
-                        continue;
-                    }
-                }
+                );
+                bool isCollider2InEvent = (
+                    unityCollider2 != null
+                    && (
+                        collisionEvent.unityHostCollider == unityCollider2
+                        || collisionEvent.unityGuestCollider == unityCollider2
+                    )
+                );
 
                 // check if the same collider and the same host entity as
                 // allowed
-                if (
-                    collisionEvent.guestCollider != null
-                    && (
-                        collisionEvent.guestCollider.GetInstanceID()
-                            == trigger.GetInstanceID()
-                    )
-                )
+                if (isCollider1InEvent && isCollider2InEvent)
                 {
                     if (collisionEvent.type == CollisionEventType.Stay)
                     {

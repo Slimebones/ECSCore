@@ -9,8 +9,7 @@ namespace Slimebones.ECSCore.Base.Bridge
         public static T AddBridge<T>(
             this Entity e,
             World world
-        )
-            where T : Bridge
+        ) where T : Bridge
         {
             var go = e.GetUnityGO();
 
@@ -19,7 +18,7 @@ namespace Slimebones.ECSCore.Base.Bridge
                 throw new AlreadyEventException(
                     string.Format("game object {0}", go),
                     string.Format(
-                        "has bridge {1} attached",
+                        "has bridge {0} attached",
                         go.GetComponent<T>().GetType().ToString()
                     )
                 );
@@ -29,6 +28,13 @@ namespace Slimebones.ECSCore.Base.Bridge
             bridge.Entity = e;
             bridge.World = world;
             return bridge;
+        }
+
+        public static bool HasBridge<T>(
+            this Entity e
+        ) where T : Bridge
+        {
+            return e.GetUnityGO().GetComponent<T>() != null;
         }
     }
 }
