@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.GO;
 
-namespace Slimebones.ECSCore.Base
+namespace Slimebones.ECSCore.Base.CoreEntity
 {
     public static class EntityExtensions
     {
@@ -21,7 +21,9 @@ namespace Slimebones.ECSCore.Base
             }
         }
         // Destroy Entity and attached GameObject (if any attached).
-        public static void DestroyWithGameObject(this Entity entity)
+        public static void DestroyWithGameObject(
+            this Entity entity
+        )
         {
             GOData gameObject =
                 entity.GetComponent<GOData>(out bool hasGameObject);

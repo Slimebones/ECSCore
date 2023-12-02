@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Condition;
+using Slimebones.ECSCore.Utils;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Actors.Door
@@ -171,16 +172,16 @@ namespace Slimebones.ECSCore.Actors.Door
             if (
                 Vector3.Distance(
                     go.transform.position, toPosition
-                ) < Constants.VectorDistancePrecision
+                ) < VectorConstants.VectorDistancePrecision
                 &&
                     Mathf.Abs(q2.w - q1.w)
-                        < Constants.QuaternionDiffPrecision
+                        < VectorConstants.QuaternionDiffPrecision
                     && Mathf.Abs(q2.x - q1.x)
-                        < Constants.QuaternionDiffPrecision
+                        < VectorConstants.QuaternionDiffPrecision
                     && Mathf.Abs(q2.y - q1.y)
-                        < Constants.QuaternionDiffPrecision
+                        < VectorConstants.QuaternionDiffPrecision
                     && Mathf.Abs(q2.z - q1.z)
-                        < Constants.QuaternionDiffPrecision
+                        < VectorConstants.QuaternionDiffPrecision
 
             )
             {
