@@ -31,15 +31,21 @@ namespace Slimebones.ECSCore.Defer
 
         private void OnEntity(Entity e)
         {
+            ref var c = ref e.GetComponent<DeferRequest>();
+            if (c.launchOnUpdateType != UpdateType.Update)
+            {
+                return;
+            }
+            if (c.skippedFrames < c.framesToSkip)
+            {
+                c.skippedFrames++;
+                return;
+            }
             if (!RequestUtils.RegisterCall(e))
             {
                 return;
             }
-            ref var c = ref e.GetComponent<DeferRequest>();
-            if (c.launchOnUpdateType == UpdateType.Update)
-            {
-                c.action();
-            }
+            c.action();
         }
     }
 }

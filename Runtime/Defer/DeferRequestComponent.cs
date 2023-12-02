@@ -4,6 +4,7 @@ using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Utils;
 using System;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace Slimebones.ECSCore.Defer
 {
@@ -22,5 +23,8 @@ namespace Slimebones.ECSCore.Defer
     {
         public UpdateType launchOnUpdateType;
         public Action action;
+        public int framesToSkip;
+
+        internal int skippedFrames;
     }
 }
