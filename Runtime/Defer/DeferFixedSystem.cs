@@ -6,7 +6,7 @@ using Unity.VisualScripting.YamlDotNet.Serialization;
 
 namespace Slimebones.ECSCore.Defer
 {
-    public class DeferSystem: ISystem
+    public class DeferFixedSystem: IFixedSystem
     {
         private Filter deferRequestF;
 
@@ -36,7 +36,7 @@ namespace Slimebones.ECSCore.Defer
                 return;
             }
             ref var c = ref e.GetComponent<DeferRequest>();
-            if (c.launchOnUpdateType == UpdateType.Update)
+            if (c.launchOnUpdateType == UpdateType.FixedUpdate)
             {
                 c.action();
             }
