@@ -4,6 +4,7 @@
     {
         Update = 0,
         FixedUpdate = 1,
-        LateUpdate = 2
+        LateUpdate = 2,
+        Cleanup = 3
     }
 }

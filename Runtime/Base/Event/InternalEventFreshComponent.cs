@@ -1,21 +1,19 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
+using System;
 using Unity.IL2CPP.CompilerServices;
 
 namespace Slimebones.ECSCore.Base.Event
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class EventMetaComponent: MonoProvider<EventMeta>
+    internal class InternalEventFreshComponent
     {
     }
 
-    [System.Serializable]
+    [Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct EventMeta: IComponent
+    public struct InternalEventFresh: IComponent
     {
     }
 }
