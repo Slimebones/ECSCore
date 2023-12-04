@@ -52,8 +52,7 @@ namespace Slimebones.ECSCore.Config.Specs
         {
             ref var req =
                 ref RequestUtils.Create<SetGraphicsRequest>(
-                    1,
-                    world
+                    1
                 );
             req.resolution = resolution;
         }

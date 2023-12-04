@@ -74,7 +74,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendVolumeReq(int volume)
         {
             ref var reqc = ref RequestUtils.Create<SetAudioByTypeReq>(
-                1, World
+                1
             );
             reqc.type = AudioType.Music;
             reqc.volume = (float)volume / MaxValue;

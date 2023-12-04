@@ -56,8 +56,7 @@ namespace Slimebones.ECSCore.Config.Specs
         {
             ref var req =
                 ref RequestUtils.Create<SetGraphicsRequest>(
-                    1,
-                    World
+                    1
                 );
             req.fullScreenMode = mode;
         }

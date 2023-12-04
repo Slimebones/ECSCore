@@ -42,7 +42,7 @@ namespace Slimebones.ECSCore.Defer
         {
             ref var c = ref e.GetComponent<DeferRequest>();
             if (
-                c.launchOnUpdateType != RequiredUpdateType
+                c.updateType != RequiredUpdateType
                 || c.callOrder != callOrder
             )
             {

@@ -21,8 +21,8 @@ namespace Slimebones.ECSCore.Defer
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct DeferRequest: IRequestComponent
     {
-        public UpdateType launchOnUpdateType;
         public Action action;
+        public UpdateType updateType;
         public SystemCallOrder callOrder;
         public int framesToSkip;
 

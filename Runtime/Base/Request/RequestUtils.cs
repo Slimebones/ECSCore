@@ -10,8 +10,7 @@ namespace Slimebones.ECSCore.Base.Request
         private static List<Type> lockedTypes = new List<Type>();
 
         public static ref T Create<T>(
-            int requiredCallCountToComplete,
-            World world
+            int requiredCallCountToComplete
         ) where T : struct, IRequestComponent
         {
             if (requiredCallCountToComplete == 0)
@@ -21,7 +20,7 @@ namespace Slimebones.ECSCore.Base.Request
                 );
             }
 
-            var e = world.CreateEntity();
+            var e = World.Default.CreateEntity();
             ref T c = ref e.AddComponent<T>();
 
             // request is created anyway in order to conform with the
