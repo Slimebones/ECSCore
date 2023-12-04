@@ -68,5 +68,17 @@ namespace Slimebones.ECSCore.Lock
         {
             return e.Has<InternalLock>();
         }
+
+        public static void UnlockAll()
+        {
+            foreach (var e in LockedFB.Build())
+            {
+                Unlock(e);
+            }
+            foreach (var e in LockedByComponentFB.Build())
+            {
+                World.Default.RemoveEntity(e);
+            }
+        }
     }
 }
