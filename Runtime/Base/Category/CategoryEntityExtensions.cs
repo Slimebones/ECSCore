@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-namespace Slimebones.ECSCore.Utils
+namespace Slimebones.ECSCore.Base.Category
 {
     public static class CategoryEntityExtensions
     {

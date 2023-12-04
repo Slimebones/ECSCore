@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Slimebones.ECSCore {
+namespace Slimebones.ECSCore.Base.Category
+{
     /// <summary>
     /// Represents Filter returning special combination of Components which
     /// define some logical object.

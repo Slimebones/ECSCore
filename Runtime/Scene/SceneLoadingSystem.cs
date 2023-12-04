@@ -28,7 +28,7 @@ namespace Slimebones.ECSCore.Scene
                 .Build();
             loadingOperationF =
                 World.Filter.With<SceneLoadingOperation>().Build();
-            loadRequestsF = World.Filter.With<LoadSceneRequest>().Build();
+            loadRequestsF = RequestUtils.FB.With<LoadSceneRequest>().Build();
 
             if (SceneStorage.currentRealScene == null) {
                 SceneStorage.currentRealScene =
@@ -60,11 +60,12 @@ namespace Slimebones.ECSCore.Scene
 
                 ref LoadSceneRequest loadRequest = ref e
                     .GetComponent<LoadSceneRequest>();
-                RequestUtils.RegisterCall(e);
 
                 SceneStorage.nextRealScene = loadRequest.sceneName;
                 bool isLoadingScreenEnabled =
                     loadRequest.isLoadingScreenEnabled;
+
+                RequestUtils.Complete(e);
 
                 if (isLoadingScreenEnabled)
                 {

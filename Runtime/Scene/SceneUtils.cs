@@ -1,6 +1,5 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.Request;
-using Slimebones.ECSCore.Lock;
 using UnityEngine.SceneManagement;
 
 namespace Slimebones.ECSCore.Scene
@@ -11,7 +10,6 @@ namespace Slimebones.ECSCore.Scene
         /// </summary>
         /// <param name="world"></param>
         public static void LoadNextLevelOrBackup(
-            World world,
             string prefix,
             string backup
         )
@@ -28,10 +26,10 @@ namespace Slimebones.ECSCore.Scene
             string finalName = prefix + levelNumber;
             if (IsExists(finalName))
             {
-                Load(finalName, world);
+                Load(finalName);
                 return;
             }
-            Load(backup, world);
+            Load(backup);
         }
 
         public static bool IsExists(string name)
@@ -41,20 +39,13 @@ namespace Slimebones.ECSCore.Scene
 
         public static void Load(
             string name,
-            World world,
-            bool isLoadingScreenEnabled = false,
-            bool shouldAllRequestsBeUnlocked = true
+            bool isLoadingScreenEnabled = false
         ) {
             // create a request to scene systems to load a new scene
             ref LoadSceneRequest loadRequest =
                 ref RequestUtils.Create<LoadSceneRequest>();
             loadRequest.sceneName = name;
             loadRequest.isLoadingScreenEnabled = isLoadingScreenEnabled;
-
-            if (shouldAllRequestsBeUnlocked)
-            {
-                LockUtils.UnlockAll();
-            }
         }
 
         /// <summary>
@@ -62,13 +53,11 @@ namespace Slimebones.ECSCore.Scene
         /// </summary>
         /// <param name="world"></param>
         public static void Restart(
-            World world,
             bool isLoadingScreenEnabled = false
         )
         {
             Load(
                 SceneManager.GetActiveScene().name,
-                world,
                 isLoadingScreenEnabled
             );
         }

@@ -30,24 +30,19 @@ namespace Slimebones.ECSCore.Scene
             {
                 public string name;
                 public bool isLoadingScreenEnabled = false;
-                public bool shouldAllRequestsBeUnlocked = true;
-
-                public World world;
             }
 
             private static void Load(Args args)
             {
                 SceneUtils.Load(
                     args.name,
-                    args.world,
-                    args.isLoadingScreenEnabled,
-                    args.shouldAllRequestsBeUnlocked
+                    args.isLoadingScreenEnabled
                 );
             }
 
             private static void Restart(Args args)
             {
-                SceneUtils.Restart(args.world);
+                SceneUtils.Restart();
             }
         }
 
@@ -73,11 +68,8 @@ namespace Slimebones.ECSCore.Scene
 
             sceneLoadActionsArgs = new SceneLoadActions.Args();
             sceneLoadActionsArgs.name = name;
-            sceneLoadActionsArgs.world = world;
             sceneLoadActionsArgs.isLoadingScreenEnabled =
                 isLoadingScreenEnabled;
-            sceneLoadActionsArgs.shouldAllRequestsBeUnlocked =
-                shouldAllRequestsBeUnlocked;
 
             unityButton.onClick.AddListener(Call);
         }

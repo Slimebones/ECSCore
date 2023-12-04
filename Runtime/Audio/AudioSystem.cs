@@ -26,8 +26,8 @@ namespace Slimebones.ECSCore.Audio
 
         public void OnAwake()
         {
-            typeReqF = World.Filter.With<SetAudioByTypeReq>().Build();
-            keyReqF = World.Filter.With<SetAudioByEntityReq>().Build();
+            typeReqF = RequestUtils.FB.With<SetAudioByTypeReq>().Build();
+            keyReqF = RequestUtils.FB.With<SetAudioByEntityReq>().Build();
             musicAudioF =
                 World.Filter.With<Audio>().With<MusicAudio>().Build();
             environmentAudioF =
@@ -49,11 +49,6 @@ namespace Slimebones.ECSCore.Audio
             {
                 try
                 {
-                    if (!RequestUtils.RegisterCall(reqe))
-                    {
-                        continue;
-                    }
-
                     ref var reqc = ref reqe.GetComponent<SetAudioByEntityReq>();
 
                     var audioSource = GOUtils.GetUnity(
@@ -65,6 +60,7 @@ namespace Slimebones.ECSCore.Audio
                         audioSource.clip = reqc.clip;
                         audioSource.Play();
                     }
+                    RequestUtils.Complete(reqe);
                 }
                 catch (Exception exc)
                 {
@@ -82,11 +78,6 @@ namespace Slimebones.ECSCore.Audio
             {
                 try
                 {
-                    if (!RequestUtils.RegisterCall(reqe))
-                    {
-                        continue;
-                    }
-
                     ref var reqc = ref reqe.GetComponent<SetAudioByTypeReq>();
 
                     switch (reqc.type)
@@ -124,6 +115,8 @@ namespace Slimebones.ECSCore.Audio
                             );
                             break;
                     }
+
+                    RequestUtils.Complete(reqe);
                 }
                 catch (Exception exc)
                 {

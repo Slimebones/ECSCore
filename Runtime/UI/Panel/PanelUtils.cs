@@ -1,82 +1,140 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.Request;
+using System;
 
 namespace Slimebones.ECSCore.UI.Panel
 {
     public static class PanelUtils
     {
         public static void Enable(
-            Entity e,
-            World world
+            Entity e
         )
         {
-            SetState(e, PanelStateChange.Enable, world);
+            SetState(e, PanelStateChange.Enable);
         }
 
+        public static void Enable(
+            string key
+        )
+        {
+            SetState(key, PanelStateChange.Enable);
+        }
+
+        public static void Disable(
+            Entity e
+        )
+        {
+            SetState(e, PanelStateChange.Disable);
+        }
+
+        [Obsolete("use version without passing world")]
         public static void Enable(
             string key,
             World world
         )
         {
-            SetState(key, PanelStateChange.Enable, world);
+            SetState(key, PanelStateChange.Enable);
         }
 
+        [Obsolete("use version without passing world")]
         public static void Disable(
             Entity e,
             World world
         )
         {
-            SetState(e, PanelStateChange.Disable, world);
+            SetState(e, PanelStateChange.Disable);
         }
 
+        [Obsolete("use version without passing world")]
         public static void Disable(
             string key,
             World world
         )
         {
-            SetState(key, PanelStateChange.Disable, world);
+            SetState(key, PanelStateChange.Disable);
         }
 
+        public static void Disable(
+            string key
+        )
+        {
+            SetState(key, PanelStateChange.Disable);
+        }
+
+        [Obsolete("use version without passing world")]
         public static void Toggle(
             Entity e,
             World world
         )
         {
-            SetState(e, PanelStateChange.Toggle, world);
+            SetState(e, PanelStateChange.Toggle);
         }
 
+        public static void Toggle(
+            Entity e
+        )
+        {
+            SetState(e, PanelStateChange.Toggle);
+        }
+
+        [Obsolete("use version without passing world")]
         public static void Toggle(
             string key,
             World world
         )
         {
-            SetState(key, PanelStateChange.Toggle, world);
+            SetState(key, PanelStateChange.Toggle);
         }
 
+        [Obsolete("use version without passing world")]
         public static void DecideEnable(
-            bool isEnabled, Entity e, World world
+            bool isEnabled,
+            Entity e,
+            World world
         )
         {
             if (isEnabled)
             {
-                Enable(e, world);
+                Enable(e);
                 return;
             }
-            Disable(e, world);
+            Disable(e);
         }
 
+        public static void Toggle(
+            string key
+        )
+        {
+            SetState(key, PanelStateChange.Toggle);
+        }
+
+        public static void DecideEnable(
+            bool isEnabled,
+            Entity e
+        )
+        {
+            if (isEnabled)
+            {
+                Enable(e);
+                return;
+            }
+            Disable(e);
+        }
+
+        [Obsolete("use version without passing world")]
         public static void DecideEnable(
             bool isEnabled, string key, World world
         )
         {
             if (isEnabled)
             {
-                Enable(key, world);
+                Enable(key);
                 return;
             }
-            Disable(key, world);
+            Disable(key);
         }
 
+        [Obsolete("use version without passing world")]
         public static void SetState(
             string key,
             PanelStateChange state,
@@ -84,14 +142,13 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             ref var request =
-                ref RequestUtils.Create<SetPanelStateRequest>(
-                    1
-                );
+                ref RequestUtils.Create<SetPanelStateRequest>();
 
             request.key = key;
             request.state = state;
         }
 
+        [Obsolete("use version without passing world")]
         public static void SetState(
             Entity e,
             PanelStateChange state,
@@ -100,8 +157,42 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             SetState(
                 e.GetComponent<Key.Key>().key,
-                state,
-                world
+                state
+            );
+        }
+
+        public static void DecideEnable(
+            bool isEnabled, string key
+        )
+        {
+            if (isEnabled)
+            {
+                Enable(key);
+                return;
+            }
+            Disable(key);
+        }
+
+        public static void SetState(
+            string key,
+            PanelStateChange state
+        )
+        {
+            ref var request =
+                ref RequestUtils.Create<SetPanelStateRequest>();
+
+            request.key = key;
+            request.state = state;
+        }
+
+        public static void SetState(
+            Entity e,
+            PanelStateChange state
+        )
+        {
+            SetState(
+                e.GetComponent<Key.Key>().key,
+                state
             );
         }
     }

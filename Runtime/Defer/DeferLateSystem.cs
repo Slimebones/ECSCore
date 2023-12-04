@@ -27,7 +27,7 @@ namespace Slimebones.ECSCore.Defer
 
         public void OnAwake()
         {
-            deferRequestF = World.Filter.With<DeferRequest>().Build();
+            deferRequestF = RequestUtils.FB.With<DeferRequest>().Build();
         }
 
         public void OnUpdate(float deltaTime)
@@ -54,11 +54,8 @@ namespace Slimebones.ECSCore.Defer
                 c.skippedFrames++;
                 return;
             }
-            if (!RequestUtils.RegisterCall(e))
-            {
-                return;
-            }
             c.action();
+            RequestUtils.Complete(e);
         }
     }
 }

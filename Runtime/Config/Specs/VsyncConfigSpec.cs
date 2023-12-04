@@ -66,9 +66,7 @@ namespace Slimebones.ECSCore.Config.Specs
         private void SendStateReq(bool flag)
         {
             ref var req =
-                ref RequestUtils.Create<SetGraphicsRequest>(
-                    1
-                );
+                ref RequestUtils.Create<SetGraphicsRequest>();
             req.isVsyncEnabled = flag;
         }
     }

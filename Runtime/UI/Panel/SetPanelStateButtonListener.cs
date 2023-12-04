@@ -12,16 +12,12 @@ namespace Slimebones.ECSCore.UI.Panel
         public string targetPanelKey;
         public PanelStateChange targetChangeState;
 
-        private Entity e;
         private UnityUI.Button unityButton;
-        private World world;
 
         public void Subscribe(
             Entity e, World world
         )
         {
-            this.e = e;
-            this.world = world;
             unityButton = GOUtils.GetUnity(
                 e
             ).GetComponent<UnityUI.Button>();
@@ -36,10 +32,7 @@ namespace Slimebones.ECSCore.UI.Panel
 
         private void Call()
         {
-            ref var req =
-                ref RequestUtils.Create<SetPanelStateRequest>(
-                    1
-                );
+            ref var req = ref RequestUtils.Create<SetPanelStateRequest>();
             req.key = targetPanelKey;
             req.state = targetChangeState;
         }

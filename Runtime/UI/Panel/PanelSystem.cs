@@ -13,8 +13,6 @@ namespace Slimebones.ECSCore.UI.Panel
         private Filter panelF;
         private Filter reqF;
 
-        private bool isStorageInitialized;
-
         private Dictionary<string, GameObject> panelGOByKey =
             new Dictionary<string, GameObject>();
 
@@ -25,7 +23,7 @@ namespace Slimebones.ECSCore.UI.Panel
 
         public void OnAwake()
         {
-            reqF = World.Filter.With<SetPanelStateRequest>().Build();
+            reqF = RequestUtils.FB.With<SetPanelStateRequest>().Build();
             panelF = World.Filter.With<Panel>().Build();
 
             InitStorage();
@@ -35,11 +33,6 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             foreach (var reqE in reqF)
             {
-                if (!RequestUtils.RegisterCall(reqE))
-                {
-                    continue;
-                }
-
                 ref var reqC = ref reqE.GetComponent<SetPanelStateRequest>();
 
                 if (!panelGOByKey.ContainsKey(reqC.key))
@@ -63,6 +56,8 @@ namespace Slimebones.ECSCore.UI.Panel
                 evt.key = reqC.key;
                 evt.isEnabled = finalState;
                 evt.go = panelGOByKey[reqC.key];
+
+                RequestUtils.Complete(reqE);
             }
         }
 

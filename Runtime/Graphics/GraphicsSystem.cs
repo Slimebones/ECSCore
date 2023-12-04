@@ -19,7 +19,7 @@ namespace Slimebones.ECSCore.Graphics
         public void OnAwake()
         {
             setResolutionReqF =
-                World.Filter.With<SetGraphicsRequest>().Build();
+               RequestUtils.FB.With<SetGraphicsRequest>().Build();
 
             lastResolution = Screen.currentResolution;
             lastMode = Screen.fullScreenMode;
@@ -29,11 +29,6 @@ namespace Slimebones.ECSCore.Graphics
         {
             foreach (var reqE in setResolutionReqF)
             {
-                if (!RequestUtils.RegisterCall(reqE))
-                {
-                    continue;
-                }
-
                 ref var reqC =
                     ref reqE.GetComponent<SetGraphicsRequest>();
 
@@ -74,6 +69,8 @@ namespace Slimebones.ECSCore.Graphics
 
                 lastResolution = finalResolution;
                 lastMode = finalMode;
+
+                RequestUtils.Complete(reqE);
             }
 
         }
