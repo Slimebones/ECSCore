@@ -45,9 +45,7 @@ namespace Slimebones.ECSCore.Base.Request
         /// for compatibility reasons. False typically means that the
         /// request shouldn't be processed (e.g. is locked).
         /// </returns>
-        public static bool RegisterCall(
-            Entity e
-        )
+        public static bool RegisterCall(Entity e)
         {
             bool result = true;
             ref var meta = ref e.GetComponent<RequestMeta>();
