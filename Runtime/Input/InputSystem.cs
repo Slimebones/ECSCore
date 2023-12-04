@@ -40,7 +40,7 @@ namespace Slimebones.ECSCore.Input
                     if (kvp.Value())
                     {
                         ref var inputEvt =
-                            ref EventUtils.Create<InputEvt>(World);
+                            ref EventUtils.Create<InputEvent>();
                         inputEvt.type = kvp.Key;
                         inputEvt.name = spec.name;
                     }

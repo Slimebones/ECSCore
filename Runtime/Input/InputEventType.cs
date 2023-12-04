@@ -1,6 +1,6 @@
 namespace Slimebones.ECSCore.Input
 {
-    public enum InputEvtType
+    public enum InputEventType
     {
         WasPressedThisFrame = 0,
         IsPressed = 1,

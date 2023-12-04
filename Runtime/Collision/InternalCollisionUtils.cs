@@ -62,7 +62,7 @@ namespace Slimebones.ECSCore.Collision
             World world
         ) {
             ref var collisionEvent =
-                ref EventUtils.Create<CollisionEvent>(world);
+                ref EventUtils.Create<CollisionEvent>();
             collisionEvent.hostEntity = e;
             collisionEvent.unityHostCollider = unityHostCollider;
 

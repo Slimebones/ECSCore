@@ -59,7 +59,7 @@ namespace Slimebones.ECSCore.UI.Panel
                 panelGOByKey[reqC.key].SetActive(finalState);
 
                 ref var evt =
-                    ref EventUtils.Create<PanelStateEvent>(World);
+                    ref EventUtils.Create<PanelStateEvent>();
                 evt.key = reqC.key;
                 evt.isEnabled = finalState;
                 evt.go = panelGOByKey[reqC.key];

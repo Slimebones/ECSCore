@@ -6,12 +6,6 @@ using Slimebones.ECSCore.Base.Event;
 
 namespace Slimebones.ECSCore.Collision
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class CollisionEventComponent : MonoProvider<CollisionEvent> {
-    }
-
     /// <summary>
     /// Event of collision of two objects.
     /// </summary>
@@ -28,8 +22,8 @@ namespace Slimebones.ECSCore.Collision
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct CollisionEvent : IEventComponent {
         public CollisionEventType type;
-        public UnityEngine.Collider unityHostCollider;
-        public UnityEngine.Collider unityGuestCollider;
+        public Collider unityHostCollider;
+        public Collider unityGuestCollider;
         public UnityEngine.Collision unityCollision;
         public Entity hostEntity;
         public Entity guestEntity;

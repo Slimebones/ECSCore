@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base.Event;
 using Slimebones.ECSCore.Utils;
 using System.Collections.Generic;
 
@@ -7,26 +8,24 @@ namespace Slimebones.ECSCore.Input
     public static class InputUtils
     {
         public static ref InputSpecStorage InitInputSpecStorage(
-            List<InputSpec> specs,
-            World world
+            List<InputSpec> specs
         )
         {
-            var e = world.CreateEntity();
+            var e = World.Default.CreateEntity();
             ref var c = ref e.AddComponent<InputSpecStorage>();
             c.specs = specs;
             return ref c;
         }
 
         public static bool Listen(
-            string name,
-            World world
+            string name
         )
         {
-            Filter f = world.Filter.With<InputEvt>().Build();
+            Filter f = EventUtils.FB.With<InputEvent>().Build();
 
             foreach (var e in f)
             {
-                ref var c = ref e.GetComponent<InputEvt>();
+                ref var c = ref e.GetComponent<InputEvent>();
                 if (c.name == name)
                 {
                     return true;
@@ -38,15 +37,14 @@ namespace Slimebones.ECSCore.Input
 
         public static bool Listen(
             string name,
-            InputEvtType type,
-            World world
+            InputEventType type
         )
         {
-            Filter f = world.Filter.With<InputEvt>().Build();
+            Filter f = EventUtils.FB.With<InputEvent>().Build();
 
             foreach (var e in f)
             {
-                ref var c = ref e.GetComponent<InputEvt>();
+                ref var c = ref e.GetComponent<InputEvent>();
                 if (c.name == name && c.type == type)
                 {
                     return true;
@@ -56,16 +54,15 @@ namespace Slimebones.ECSCore.Input
             return false;
         }
 
-        public static ref InputEvt ListenReturn(
-            string name,
-            World world
+        public static ref InputEvent ListenReturn(
+            string name
         )
         {
-            Filter f = world.Filter.With<InputEvt>().Build();
+            Filter f = EventUtils.FB.With<InputEvent>().Build();
 
             foreach (var e in f)
             {
-                ref var c = ref e.GetComponent<InputEvt>();
+                ref var c = ref e.GetComponent<InputEvent>();
                 if (c.name == name)
                 {
                     return ref c;

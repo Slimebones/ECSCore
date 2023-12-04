@@ -5,15 +5,12 @@ namespace Slimebones.ECSCore.Base.Event
 {
     public static class EventUtils
     {
-        public static FilterBuilder GetEventFB
-        {
-            get =>
-                World
-                .Default
-                .Filter
-                .With<InternalEventMeta>()
-                .Without<InternalEventFresh>();
-        }
+        public static readonly FilterBuilder FB = 
+            World
+            .Default
+            .Filter
+            .With<InternalEventMeta>()
+            .Without<InternalEventFresh>();
 
         public static ref T Create<T>() where T: struct, IEventComponent
         {

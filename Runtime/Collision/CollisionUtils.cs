@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Base.Event;
 using System;
 using System.Linq;
 using static Slimebones.ECSCore.Utils.Delegates;
@@ -9,8 +10,7 @@ namespace Slimebones.ECSCore.Collision {
             TComponent1,
             TComponent2
         >(
-            ActionRef<CollisionEvent, TComponent1, TComponent2> action,
-            World world
+            ActionRef<CollisionEvent, TComponent1, TComponent2> action
         )
             where TComponent1: struct, IComponent
             where TComponent2: struct, IComponent
@@ -41,16 +41,14 @@ namespace Slimebones.ECSCore.Collision {
                     }
                 };
             ExecuteForEachCollisionEventAnyComponent(
-                actionWrapper,
-                world
+                actionWrapper
             );
         }
 
         public static void ExecuteForEachCollisionEventAnyComponent<
             TComponent1
         >(
-            ActionRef<CollisionEvent, TComponent1> action,
-            World world
+            ActionRef<CollisionEvent, TComponent1> action
         )
             where TComponent1: struct, IComponent
         {
@@ -79,7 +77,7 @@ namespace Slimebones.ECSCore.Collision {
                         return;
                     }
                 };
-            ExecuteForEachCollisionEvent(actionWrapper, world);
+            ExecuteForEachCollisionEvent(actionWrapper);
         }
 
         /// <summary>
@@ -90,10 +88,10 @@ namespace Slimebones.ECSCore.Collision {
         /// <param name="allowedTypes"></param>
         public static void ExecuteForEachCollisionEvent(
             ActionRef<CollisionEvent> action,
-            World world,
             CollisionEventType[] allowedTypes = null
         ) {
-            Filter collisionEventFilter = world.Filter.With<CollisionEvent>().Build();
+            Filter collisionEventFilter =
+                EventUtils.FB.With<CollisionEvent>().Build();
 
             foreach (Entity collisionEventEntity in collisionEventFilter) {
                 ref CollisionEvent collisionEvent =
@@ -117,7 +115,6 @@ namespace Slimebones.ECSCore.Collision {
         /// <param name="allowedTypes"></param>
         public static void ExecuteForEachCollisionEvent<HostComponent>(
             ActionRef<CollisionEvent, HostComponent> action,
-            World world,
             CollisionEventType[] allowedTypes = null
         ) where HostComponent : struct, IComponent {
             // create action wrapper for less detailed overload of this method
@@ -132,7 +129,7 @@ namespace Slimebones.ECSCore.Collision {
                         action(ref collisionEvent, ref hostComponent);
                     }
                 };
-            ExecuteForEachCollisionEvent(actionWrapper, world, allowedTypes);
+            ExecuteForEachCollisionEvent(actionWrapper, allowedTypes);
         }
 
         /// <summary>
@@ -149,7 +146,6 @@ namespace Slimebones.ECSCore.Collision {
             GuestComponent
         >(
             ActionRef<CollisionEvent, HostComponent, GuestComponent> action,
-            World world,
             CollisionEventType[] allowedTypes = null
         )
             where HostComponent: struct, IComponent
@@ -182,8 +178,8 @@ namespace Slimebones.ECSCore.Collision {
                     }
                 };
 
-            ExecuteForEachCollisionEvent<HostComponent>(
-                actionWrapper, world, allowedTypes
+            ExecuteForEachCollisionEvent(
+                actionWrapper, allowedTypes
             );
         }
 

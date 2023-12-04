@@ -17,11 +17,11 @@ namespace Slimebones.ECSCore.Input
         /// If some event type is undefined, no checks will be performed for
         /// that type.
         /// </remarks>
-        public Dictionary<InputEvtType, ReturnFunc<bool>> map;
+        public Dictionary<InputEventType, ReturnFunc<bool>> map;
 
         public InputSpec(
             string name,
-            Dictionary<InputEvtType, ReturnFunc<bool>> map
+            Dictionary<InputEventType, ReturnFunc<bool>> map
         )
         {
             this.name = name;
