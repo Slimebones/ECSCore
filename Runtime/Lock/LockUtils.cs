@@ -30,6 +30,14 @@ namespace Slimebones.ECSCore.Lock
             e.RemoveComponent<Lock>();
         }
 
+        public static void UnlockAll()
+        {
+            foreach (var lockedE in LockedFB.Build())
+            {
+                lockedE.RemoveComponent<Lock>();
+            }
+        }
+
         public static bool IsLocked(Entity e)
         {
             return e.Has<Lock>();

@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.Lock;
 using UnityEngine.SceneManagement;
 
 namespace Slimebones.ECSCore.Scene
@@ -46,13 +47,13 @@ namespace Slimebones.ECSCore.Scene
         ) {
             // create a request to scene systems to load a new scene
             ref LoadSceneRequest loadRequest =
-                ref RequestUtils.Create<LoadSceneRequest>(1);
+                ref RequestUtils.Create<LoadSceneRequest>();
             loadRequest.sceneName = name;
             loadRequest.isLoadingScreenEnabled = isLoadingScreenEnabled;
 
             if (shouldAllRequestsBeUnlocked)
             {
-                RequestUtils.UnlockAll();
+                LockUtils.UnlockAll();
             }
         }
 
