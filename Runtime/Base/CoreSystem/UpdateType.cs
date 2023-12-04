@@ -1,4 +1,4 @@
-﻿namespace Slimebones.ECSCore.Utils
+﻿namespace Slimebones.ECSCore.Base.CoreSystem
 {
     public enum UpdateType
     {

@@ -1,14 +1,24 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Base.CoreSystem;
 using Slimebones.ECSCore.Base.Request;
-using Slimebones.ECSCore.Utils;
 using Unity.VisualScripting.YamlDotNet.Serialization;
 
 namespace Slimebones.ECSCore.Defer
 {
     public class DeferLateSystem: ILateSystem
     {
+        private const UpdateType RequiredUpdateType = UpdateType.LateUpdate;
+
+        private SystemCallOrder callOrder;
         private Filter deferRequestF;
+
+        public DeferLateSystem(
+            SystemCallOrder callOrder
+        )
+        {
+            this.callOrder = callOrder;
+        }
+
 
         public World World
         {
@@ -32,7 +42,10 @@ namespace Slimebones.ECSCore.Defer
         private void OnEntity(Entity e)
         {
             ref var c = ref e.GetComponent<DeferRequest>();
-            if (c.launchOnUpdateType != UpdateType.LateUpdate)
+            if (
+                c.launchOnUpdateType != RequiredUpdateType
+                || c.callOrder != callOrder
+            )
             {
                 return;
             }

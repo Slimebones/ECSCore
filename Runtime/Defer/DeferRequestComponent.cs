@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
+using Slimebones.ECSCore.Base.CoreSystem;
 using Slimebones.ECSCore.Base.Request;
-using Slimebones.ECSCore.Utils;
 using System;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
@@ -23,6 +23,7 @@ namespace Slimebones.ECSCore.Defer
     {
         public UpdateType launchOnUpdateType;
         public Action action;
+        public SystemCallOrder callOrder;
         public int framesToSkip;
 
         internal int skippedFrames;
