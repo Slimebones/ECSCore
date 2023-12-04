@@ -38,10 +38,11 @@ namespace Slimebones.ECSCore.UI.Panel
                 if (!panelGOByKey.ContainsKey(reqC.key))
                 {
                     Log.Error(
-                        "[Panel] unregistered request's key "
+                        "unregistered request's key "
                         + reqC.key
                         + " => skip"
                     );
+                    RequestUtils.Complete(reqE);
                     continue;
                 }
 
