@@ -10,11 +10,11 @@ using UnityEngine.UI;
 namespace Slimebones.ECSCore.Condition
 {
     [Serializable]
-    public class TriggerCondition: ICondition
+    public struct TriggerCondition: ICondition
     {
-        // doesn't matter which collider is host
-        public UnityEngine.Collider unityCollider1;
-        public UnityEngine.Collider unityCollider2;
+        // doesn't matter which collider is a host
+        public Collider unityCollider1;
+        public Collider unityCollider2;
 
         [Tooltip(
             "How long the host object should stay in the trigger in order"
@@ -33,12 +33,12 @@ namespace Slimebones.ECSCore.Condition
 
         public PanelProviderData displayPanel;
 
-        public bool isAlwaysTrueWhileEntered = false;
+        public bool isAlwaysTrueWhileEntered;
 
         [HideInInspector]
-        public float lastTriggeredTime = 0f;
+        public float lastTriggeredTime;
 
-        private bool isEntered = false;
+        private bool isEntered;
 
         public bool Check(
             Entity e,
