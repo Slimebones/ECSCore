@@ -31,7 +31,7 @@ namespace Slimebones.ECSCore.Collision {
                     if (
                         guestE != null
                         && !guestE.IsDisposed()
-                        && guestE.Has<TComponent1>()
+                        && guestE.Has<TComponent2>()
                     )
                     {
                         ref TComponent2 c2 =
