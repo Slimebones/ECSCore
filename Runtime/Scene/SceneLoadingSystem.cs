@@ -4,8 +4,8 @@ using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine.SceneManagement;
 using Slimebones.ClumsyDelivery.Scene;
-using Slimebones.ECSCore.Base.GO;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Request;
 
 namespace Slimebones.ECSCore.Scene
 {

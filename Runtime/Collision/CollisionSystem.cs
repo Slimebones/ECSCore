@@ -2,12 +2,12 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Collision.Bridges;
-using Slimebones.ECSCore.Base.Bridge;
 using Slimebones.ECSCore.Utils;
 using System.Collections.Generic;
 using System;
+using Slimebones.ECSCore.Bridging;
 
 namespace Slimebones.ECSCore.Collision
 {

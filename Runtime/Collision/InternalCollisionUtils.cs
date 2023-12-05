@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Event;
 using Slimebones.ECSCore.Collision.Bridges;
+using Slimebones.ECSCore.Event;
 using System.Xml;
 using UnityEngine;
 

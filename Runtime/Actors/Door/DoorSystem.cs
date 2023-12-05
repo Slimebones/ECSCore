@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
 using Slimebones.ECSCore.Condition;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Utils;
 using UnityEngine;
 

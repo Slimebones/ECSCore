@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.Request;
 using System;
 
 namespace Slimebones.ECSCore.Config.Specs

@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.React;
+using Slimebones.ECSCore.Request;
 using UnityEngine.Serialization;
 using UnityUI = UnityEngine.UI;
 

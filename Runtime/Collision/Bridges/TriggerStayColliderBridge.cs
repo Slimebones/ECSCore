@@ -1,7 +1,3 @@
-using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Bridge;
-using Slimebones.ECSCore.Base.Event;
-using Slimebones.ECSCore.Logging;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Collision.Bridges

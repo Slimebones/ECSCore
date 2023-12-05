@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base.Event;
+using Slimebones.ECSCore.Event;
 using Unity.IL2CPP.CompilerServices;
 
 namespace Slimebones.ECSCore.Input

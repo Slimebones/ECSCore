@@ -1,9 +1,9 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Audio;
-using Slimebones.ECSCore.Base.GO;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.React;
+using Slimebones.ECSCore.Request;
 using Slimebones.ECSCore.UI.Settings;
 using System;
 using TMPro;

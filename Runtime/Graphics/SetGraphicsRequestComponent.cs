@@ -1,5 +1,5 @@
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.Request;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 

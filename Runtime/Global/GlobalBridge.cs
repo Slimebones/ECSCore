@@ -1,7 +1,7 @@
 using Slimebones.ECSCore.Mouse;
 using Scellecs.Morpeh;
 using UnityEngine;
-using Slimebones.ECSCore.Base.Bridge;
+using Slimebones.ECSCore.Bridging;
 
 namespace Slimebones.ECSCore.Global
 {

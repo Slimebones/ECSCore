@@ -1,8 +1,8 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.Request;
 using Slimebones.ECSCore.Utils;
 using Slimebones.ECSCore.Utils.Parsing;
 using System;

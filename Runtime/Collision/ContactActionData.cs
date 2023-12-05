@@ -1,4 +1,4 @@
-﻿using Slimebones.ECSCore.Base.ActionSpec;
+﻿using Slimebones.ECSCore.ActionSpec;
 using System;
 using UnityEngine;
 

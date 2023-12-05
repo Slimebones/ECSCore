@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.GO;
 
 namespace Slimebones.ECSCore.Actors.Follow
 {

@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Lock;
+using Slimebones.ECSCore.Request;
 using UnityEngine.SceneManagement;
 
 namespace Slimebones.ECSCore.Scene

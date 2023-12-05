@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using UnityEngine;
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
-using Slimebones.ECSCore.Base.Event;
+using Slimebones.ECSCore.Event;
 
 namespace Slimebones.ECSCore.Collision
 {

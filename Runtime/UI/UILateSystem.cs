@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.UI.Canvas;
 using Slimebones.ECSCore.UI.Panel;

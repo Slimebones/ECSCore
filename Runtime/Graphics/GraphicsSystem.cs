@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.Request;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Graphics

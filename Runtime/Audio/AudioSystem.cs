@@ -1,9 +1,9 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
-using Slimebones.ECSCore.Base.Request;
 using Slimebones.ECSCore.Config.Specs;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Key;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.Request;
 using Slimebones.ECSCore.Utils;
 using System;
 using UnityEngine;

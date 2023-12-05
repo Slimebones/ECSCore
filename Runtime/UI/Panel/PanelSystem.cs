@@ -1,8 +1,8 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Event;
-using Slimebones.ECSCore.Base.GO;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.Event;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Logging;
+using Slimebones.ECSCore.Request;
 using System.Collections.Generic;
 using UnityEngine;
 

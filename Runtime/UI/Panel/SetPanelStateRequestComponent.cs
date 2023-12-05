@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.Request;
 using Unity.IL2CPP.CompilerServices;
 
 namespace Slimebones.ECSCore.UI.Panel

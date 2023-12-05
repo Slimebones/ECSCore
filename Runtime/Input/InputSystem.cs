@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Event;
+using Slimebones.ECSCore.Event;
 using System.Collections.Generic;
 using static Slimebones.ECSCore.Utils.Delegates;
 

@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base;
+using Slimebones.ECSCore;
 using Slimebones.ECSCore.React;
 using TMPro;
 

@@ -1,10 +1,11 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Event;
+using Slimebones.ECSCore.Event;
 using System;
 using System.Linq;
 using static Slimebones.ECSCore.Utils.Delegates;
 
-namespace Slimebones.ECSCore.Collision {
+namespace Slimebones.ECSCore.Collision
+{
     public static class CollisionUtils {
         public static void ExecuteForEachCollisionEventAnyComponent<
             TComponent1,

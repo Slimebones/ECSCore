@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.Request;
+using Slimebones.ECSCore.Request;
 using System;
 
 namespace Slimebones.ECSCore.UI.Panel

@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Base.GO;
+using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Input;
 using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.React;
