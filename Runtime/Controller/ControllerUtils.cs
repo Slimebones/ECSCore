@@ -75,14 +75,13 @@ namespace Slimebones.ECSCore.Controller
             TController2,
             TController3
         >(
-            bool isEnabled,
-            World world
+            bool isEnabled
         )
             where TController1: IController
             where TController2: IController
             where TController3: IController
         {
-            foreach (var e in world.Filter.With<Controlled>().Build())
+            foreach (var e in World.Default.Filter.With<Controlled>().Build())
             {
                 ref var c = ref e.GetComponent<Controlled>();
 
