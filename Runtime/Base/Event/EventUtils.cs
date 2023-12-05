@@ -14,11 +14,17 @@ namespace Slimebones.ECSCore.Base.Event
 
         public static ref T Create<T>() where T: struct, IEventComponent
         {
+            return ref CreateReturnEntity<T>().GetComponent<T>();
+        }
+
+        public static Entity CreateReturnEntity<T>()
+            where T: struct, IEventComponent
+        {
             var e = World.Default.CreateEntity();
             e.AddComponent<InternalEventFresh>();
             e.AddComponent<InternalEventMeta>();
-            ref T c = ref e.AddComponent<T>();
-            return ref c;
+            e.AddComponent<T>();
+            return e;
         }
     }
 }

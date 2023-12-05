@@ -4,7 +4,7 @@ using System;
 namespace Slimebones.ClumsyDelivery.UI.Panel
 {
     [Serializable]
-    public class PanelProviderRef
+    public class PanelProviderData
     {
         public string key;
         public PanelComponent provider;

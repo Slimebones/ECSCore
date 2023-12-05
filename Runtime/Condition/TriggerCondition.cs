@@ -31,7 +31,7 @@ namespace Slimebones.ECSCore.Condition
 
         public Filter allowedEntitiesF;
 
-        public PanelProviderRef displayPanelRef;
+        public PanelProviderData displayPanel;
 
         public bool isAlwaysTrueWhileEntered = false;
 
@@ -110,13 +110,13 @@ namespace Slimebones.ECSCore.Condition
             if (isActive)
             {
                 PanelUtils.Enable(
-                    displayPanelRef.key,
+                    displayPanel.key,
                     world
                 );
                 return;
             }
             PanelUtils.Disable(
-                displayPanelRef.key,
+                displayPanel.key,
                 world
             );
         }
@@ -142,7 +142,7 @@ namespace Slimebones.ECSCore.Condition
 
             if (IsDisplayPanelRefDefined())
             {
-                displayPanelRef
+                displayPanel
                     .provider
                     .GetComponentInChildren<Slider>()
                     .value =
@@ -169,9 +169,9 @@ namespace Slimebones.ECSCore.Condition
         public bool IsDisplayPanelRefDefined()
         {
             return (
-                displayPanelRef != null
-                && displayPanelRef.key != ""
-                && displayPanelRef.provider != null
+                displayPanel != null
+                && displayPanel.key != ""
+                && displayPanel.provider != null
             );
         }
     }

@@ -10,7 +10,7 @@ namespace Slimebones.ECSCore.Collision
         public static ref CollisionEvent CreateCollisionEvent(
             UnityEngine.Collision collision,
             Entity e,
-            UnityEngine.Collider unityHostCollider,
+            Collider unityHostCollider,
             World world
         ) {
             ref CollisionEvent collisionEvent = ref CreateRawCollisionEvent(
@@ -30,9 +30,9 @@ namespace Slimebones.ECSCore.Collision
         }
 
         public static ref CollisionEvent CreateTriggerCollisionEvent(
-            UnityEngine.Collider collider,
+            Collider collider,
             Entity e,
-            UnityEngine.Collider unityHostCollider,
+            Collider unityHostCollider,
             World world
         ) {
             ref CollisionEvent collisionEvent = ref CreateRawCollisionEvent(
@@ -57,16 +57,23 @@ namespace Slimebones.ECSCore.Collision
         }
 
         private static ref CollisionEvent CreateRawCollisionEvent(
-            Entity e,
-            UnityEngine.Collider unityHostCollider,
+            Entity hostE,
+            Collider unityHostCollider,
             World world
         ) {
-            ref var collisionEvent =
-                ref EventUtils.Create<CollisionEvent>();
-            collisionEvent.hostEntity = e;
-            collisionEvent.unityHostCollider = unityHostCollider;
+            Entity evte = EventUtils.CreateReturnEntity<CollisionEvent>();
+            ref var evt =
+                ref evte.GetComponent<CollisionEvent>();
 
-            return ref collisionEvent;
+            evt.hostEntity = hostE;
+            evt.unityHostCollider = unityHostCollider;
+
+            if (hostE.Has<ContactActions>())
+            {
+                evte.AddComponent<ContactActionsEventPointer>();
+            }
+
+            return ref evt;
         }
     }
 }

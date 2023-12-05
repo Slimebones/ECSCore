@@ -20,14 +20,15 @@ namespace Slimebones.ECSCore.Collision
             set;
         }
 
-        public void OnAwake() {
+        public void OnAwake()
+        {
+            collidersF = World.Filter.With<ColliderBridgeHost>().Build();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            collidersF = World.Filter.With<ColliderBridgeHost>().Build();
-
-            foreach (Entity e in collidersF) {
+            foreach (Entity e in collidersF)
+            {
                 ref ColliderBridgeHost bridgeHost =
                     ref e.GetComponent<ColliderBridgeHost>();
 
