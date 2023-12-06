@@ -9,6 +9,6 @@ namespace Slimebones.ECSCore.Collision
     {
         public Collider collider;
         [SerializeReference]
-        public IActionSpec2E actionSpec;
+        public IActionSpec actionSpec;
     }
 }

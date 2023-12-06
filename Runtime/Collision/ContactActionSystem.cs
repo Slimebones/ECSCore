@@ -49,7 +49,9 @@ namespace Slimebones.ECSCore.Collision
                     {
                         data.actionSpec.Call(
                             evtc.hostEntity,
-                            evtc.guestEntity
+                            evtc.guestEntity,
+                            default,
+                            default
                         );
                     }
                 }
