@@ -27,8 +27,17 @@ namespace Slimebones.ECSCore.Collision
             foreach (var evte in collisionEventF)
             {
                 ref var evtc = ref evte.GetComponent<CollisionEvent>();
+
+                if (
+                    evtc.hostEntity.IsNullOrDisposed()
+                    || !evtc.hostEntity.Has<ContactActions>()
+                )
+                {
+                    continue;
+                }
                 ContactActionData[] actionData =
                     evtc.hostEntity.GetComponent<ContactActions>().actions;
+
                 foreach (var data in actionData)
                 {
                     if (

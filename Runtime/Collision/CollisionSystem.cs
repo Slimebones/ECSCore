@@ -51,6 +51,13 @@ namespace Slimebones.ECSCore.Collision
 
                     switch (colliderType)
                     {
+                        case ColliderBridgeType.Base:
+                            bridge =
+                                e
+                                .AddBridge<BaseColliderBridge>(
+                                    World
+                                );
+                            break;
                         case ColliderBridgeType.CollisionStay:
                             bridge =
                                 e

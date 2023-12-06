@@ -19,6 +19,7 @@ namespace Slimebones.ECSCore.Collision
                 world
             );
             collisionEvent.unityCollision = collision;
+            collisionEvent.unityGuestCollider = collision.collider;
             collisionEvent.isTrigger = false;
             
             BaseColliderBridge otherColliderBridge =

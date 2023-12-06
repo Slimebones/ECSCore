@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.Collision
                     var hostE = collisionEvent.hostEntity;
                     var guestE = collisionEvent.guestEntity;
 
-                    if (!hostE.IsDisposed() && hostE.Has<TComponent2>())
+                    if (!hostE.IsNullOrDisposed() && hostE.Has<TComponent2>())
                     {
                         ref TComponent2 c2 =
                             ref hostE.GetComponent<TComponent2>();
@@ -30,8 +30,7 @@ namespace Slimebones.ECSCore.Collision
                         return;
                     }
                     if (
-                        guestE != null
-                        && !guestE.IsDisposed()
+                        !guestE.IsNullOrDisposed()
                         && guestE.Has<TComponent2>()
                     )
                     {
@@ -59,7 +58,7 @@ namespace Slimebones.ECSCore.Collision
                     var hostE = collisionEvent.hostEntity;
                     var guestE = collisionEvent.guestEntity;
 
-                    if (!hostE.IsDisposed() && hostE.Has<TComponent1>())
+                    if (!hostE.IsNullOrDisposed() && hostE.Has<TComponent1>())
                     {
                         ref TComponent1 c =
                             ref hostE.GetComponent<TComponent1>();
@@ -67,8 +66,7 @@ namespace Slimebones.ECSCore.Collision
                         return;
                     }
                     if (
-                        guestE != null
-                        && !guestE.IsDisposed()
+                        !guestE.IsNullOrDisposed()
                         && guestE.Has<TComponent1>()
                     )
                     {
@@ -122,6 +120,10 @@ namespace Slimebones.ECSCore.Collision
             ActionRef<CollisionEvent> actionWrapper =
                 (ref CollisionEvent collisionEvent) => {
                     Entity hostEntity = collisionEvent.hostEntity;
+                    if (hostEntity.IsNullOrDisposed())
+                    {
+                        return;
+                    }
                     ref HostComponent hostComponent =
                         ref hostEntity.GetComponent<HostComponent>(
                             out bool isTargetHostComponent
@@ -161,7 +163,7 @@ namespace Slimebones.ECSCore.Collision
                 ) => {
                     Entity guestEntity = collisionEvent.guestEntity;
 
-                    if (guestEntity == null) {
+                    if (guestEntity.IsNullOrDisposed()) {
                         return; 
                     }
 

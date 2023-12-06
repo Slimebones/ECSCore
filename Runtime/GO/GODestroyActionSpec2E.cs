@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.ActionSpec;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -7,33 +8,36 @@ namespace Slimebones.ECSCore.GO
 {
     public struct GODestroyActionSpec2E: IActionSpec2E
     {
-        public int[] entityIndexesToDestroy;
-        public float[] entityDestroyDelays;
+        public EntityArg[] entitiesToDestroy;
+        public float destroyDelayEntity1;
+        public float destroyDelayEntity2;
 
         public void Call(Entity e1, Entity e2)
         {
-            if (entityIndexesToDestroy == null)
+            if (entitiesToDestroy == null)
             {
                 // destroy nothing if indexes unspecified
                 return;
             }
 
-            for (int i = 1; i < 3; i++)
+            foreach (EntityArg entityArg in Enum.GetValues(typeof(EntityArg)))
             {
-                if (entityIndexesToDestroy.Contains(i))
+                if (entitiesToDestroy.Contains(entityArg))
                 {
-                    Destroy(e1, i);
+                    DestroyByEntityArg(e1, entityArg);
                 }
             }
         }
 
-        private void Destroy(Entity e, int index)
+        private void DestroyByEntityArg(Entity e, EntityArg entityArg)
         {
             float destroyDelay =
-                entityDestroyDelays == null
-                ? 0f
-                : entityDestroyDelays[index];
-            Object.Destroy(e.GetUnityGO(), destroyDelay);
+                entityArg == EntityArg.Entity1
+                ? destroyDelayEntity1
+                : entityArg == EntityArg.Entity2
+                    ? destroyDelayEntity2
+                    : 0f;
+            UnityEngine.Object.Destroy(e.GetUnityGO(), destroyDelay);
         }
     }
 }
