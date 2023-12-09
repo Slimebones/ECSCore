@@ -28,11 +28,6 @@ namespace Slimebones.ECSCore.Input
             ref var specStorage =
                 ref StorageUtils.Get<InputSpecStorage>();
 
-            if (!specStorage.isEnabled)
-            {
-                return;
-            }
-
             // TODO(ryzhovalex):
             //      event checking can be concurred, but for each type
             //      separately

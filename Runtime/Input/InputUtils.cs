@@ -15,7 +15,6 @@ namespace Slimebones.ECSCore.Input
             ref var storage = ref StorageUtils.Create<InputSpecStorage>();
             storage.specs = specs;
             storage.disabledSpecIndexes = new List<int>();
-            storage.isEnabled = true;
             return ref storage;
         }
 
@@ -68,13 +67,27 @@ namespace Slimebones.ECSCore.Input
         public static void EnableAllSpecs()
         {
             ref var storage = ref StorageUtils.Get<InputSpecStorage>();
-            storage.isEnabled = false;
+
+            for (int i = 0; i < storage.specs.Count; i++)
+            {
+                if (storage.disabledSpecIndexes.Contains(i))
+                {
+                    storage.disabledSpecIndexes.Remove(i);
+                }
+            }
         }
 
         public static void DisableAllSpecs()
         {
             ref var storage = ref StorageUtils.Get<InputSpecStorage>();
-            storage.isEnabled = false;
+
+            for (int i = 0; i < storage.specs.Count; i++)
+            {
+                if (!storage.disabledSpecIndexes.Contains(i))
+                {
+                    storage.disabledSpecIndexes.Add(i);
+                }
+            }
         }
 
         public static void DecideEnableAllSpecs(bool flag)

@@ -14,6 +14,5 @@ namespace Slimebones.ECSCore.Input
     {
         public List<InputSpec> specs;
         public List<int> disabledSpecIndexes;
-        public bool isEnabled;
     }
 }
