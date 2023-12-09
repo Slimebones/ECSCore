@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Event;
+using Slimebones.ECSCore.Storage;
 using Slimebones.ECSCore.Utils;
 using System.Collections.Generic;
 
@@ -11,10 +12,79 @@ namespace Slimebones.ECSCore.Input
             List<InputSpec> specs
         )
         {
-            var e = World.Default.CreateEntity();
-            ref var c = ref e.AddComponent<InputSpecStorage>();
-            c.specs = specs;
-            return ref c;
+            ref var storage = ref StorageUtils.Create<InputSpecStorage>();
+            storage.specs = specs;
+            storage.disabledSpecIndexes = new List<int>();
+            storage.isEnabled = true;
+            return ref storage;
+        }
+
+        public static void EnableSpec(string code)
+        {
+            ref var storage = ref StorageUtils.Get<InputSpecStorage>();
+
+            for (int i = 0; i < storage.specs.Count; i++)
+            {
+                if (storage.specs[i].code == code)
+                {
+                    if (!storage.disabledSpecIndexes.Contains(i))
+                    {
+                        throw new AlreadyEventException(
+                            "spec " + storage.specs[i],
+                            "enabled"
+                        );
+                    }
+                    storage.disabledSpecIndexes.Remove(i);
+                    return;
+                }
+            }
+
+            throw new NotFoundException("no spec found for code " + code);
+        }
+
+        public static void DisableSpec(string code)
+        {
+            ref var storage = ref StorageUtils.Get<InputSpecStorage>();
+
+            for (int i = 0; i < storage.specs.Count; i++)
+            {
+                if (storage.specs[i].code == code)
+                {
+                    if (storage.disabledSpecIndexes.Contains(i))
+                    {
+                        throw new AlreadyEventException(
+                            "spec " + storage.specs[i],
+                            "disabled"
+                        );
+                    }
+                    storage.disabledSpecIndexes.Add(i);
+                    return;
+                }
+            }
+
+            throw new NotFoundException("no spec found for code " + code);
+        }
+
+        public static void EnableAllSpecs()
+        {
+            ref var storage = ref StorageUtils.Get<InputSpecStorage>();
+            storage.isEnabled = false;
+        }
+
+        public static void DisableAllSpecs()
+        {
+            ref var storage = ref StorageUtils.Get<InputSpecStorage>();
+            storage.isEnabled = false;
+        }
+
+        public static void DecideEnableAllSpecs(bool flag)
+        {
+            if (flag)
+            {
+                EnableAllSpecs();
+                return;
+            }
+            DisableAllSpecs();
         }
 
         public static bool Listen(

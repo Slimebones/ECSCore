@@ -9,7 +9,8 @@ namespace Slimebones.ECSCore.CoreSystem
     {
         public static void IterateEntities(
             Filter f,
-            Action<Entity> onEntity,
+            Action<Entity, float> onEntity,
+            float deltaTime,
             int _startIterationCount = 0
         )
         {
@@ -30,14 +31,14 @@ namespace Slimebones.ECSCore.CoreSystem
                     }
 
                     iterationCurrentE = e;
-                    onEntity(e);
+                    onEntity(e, deltaTime);
                 }
             }
             catch (Exception exc)
             {
                 Log.Skip(iterationCurrentE, exc);
                 // start with the next iteration
-                IterateEntities(f, onEntity, iterationCount + 1);
+                IterateEntities(f, onEntity, deltaTime, iterationCount + 1);
             }
         }
     }

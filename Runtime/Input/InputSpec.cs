@@ -9,7 +9,7 @@ namespace Slimebones.ECSCore.Input
     /// </summary>
     public struct InputSpec
     {
-        public string name;
+        public string code;
         /// <summary>
         /// Dict binding input event types to checking functions.
         /// </summary>
@@ -20,11 +20,11 @@ namespace Slimebones.ECSCore.Input
         public Dictionary<InputEventType, ReturnFunc<bool>> map;
 
         public InputSpec(
-            string name,
+            string code,
             Dictionary<InputEventType, ReturnFunc<bool>> map
         )
         {
-            this.name = name;
+            this.code = code;
             this.map = map;
         }
     }

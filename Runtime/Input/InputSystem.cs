@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Event;
+using Slimebones.ECSCore.Storage;
 using System.Collections.Generic;
 using static Slimebones.ECSCore.Utils.Delegates;
 
@@ -24,17 +25,26 @@ namespace Slimebones.ECSCore.Input
 
         public void OnUpdate(float deltaTime)
         {
-            ref var inputSpecStorage =
-                ref inputSpecStorageF
-                .First()
-                .GetComponent<InputSpecStorage>();
+            ref var specStorage =
+                ref StorageUtils.Get<InputSpecStorage>();
+
+            if (!specStorage.isEnabled)
+            {
+                return;
+            }
 
             // TODO(ryzhovalex):
             //      event checking can be concurred, but for each type
             //      separately
 
-            foreach (var spec in inputSpecStorage.specs)
+            for (int i = 0; i < specStorage.specs.Count; i++)
             {
+                if (specStorage.disabledSpecIndexes.Contains(i))
+                {
+                    continue;
+                }
+
+                var spec = specStorage.specs[i];
                 foreach (var kvp in spec.map)
                 {
                     if (kvp.Value())
@@ -42,7 +52,7 @@ namespace Slimebones.ECSCore.Input
                         ref var inputEvt =
                             ref EventUtils.Create<InputEvent>();
                         inputEvt.type = kvp.Key;
-                        inputEvt.name = spec.name;
+                        inputEvt.name = spec.code;
                     }
                 }
             }

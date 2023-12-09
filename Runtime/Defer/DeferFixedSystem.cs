@@ -30,14 +30,14 @@ namespace Slimebones.ECSCore.Defer
 
         public void OnUpdate(float deltaTime)
         {
-            SystemUtils.IterateEntities(deferRequestF, OnEntity);
+            SystemUtils.IterateEntities(deferRequestF, OnEntity, deltaTime);
         }
 
         public void Dispose()
         {
         }
 
-        private void OnEntity(Entity e)
+        private void OnEntity(Entity e, float deltaTime)
         {
             ref var c = ref e.GetComponent<DeferRequest>();
             if (
