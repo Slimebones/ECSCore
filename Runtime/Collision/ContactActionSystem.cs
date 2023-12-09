@@ -1,4 +1,6 @@
 using Scellecs.Morpeh;
+using System;
+using System.Linq;
 
 namespace Slimebones.ECSCore.Collision
 {
@@ -41,10 +43,15 @@ namespace Slimebones.ECSCore.Collision
                 foreach (var data in actionData)
                 {
                     if (
-                        // on null collider every collision an action is
-                        // called
-                        data.collider == null
-                        || data.collider == evtc.unityGuestCollider
+                        data.colliders == null
+                        || data.colliders.Length == 0
+                        || data.isExcept 
+                            ? !data.colliders.Contains(
+                                evtc.unityGuestCollider
+                            )
+                            : data.colliders.Contains(
+                                evtc.unityGuestCollider
+                            )
                     )
                     {
                         data.actionSpec.Call(
@@ -57,7 +64,7 @@ namespace Slimebones.ECSCore.Collision
                 }
             }
         }
- 
+
         public void Dispose()
         {
         }
