@@ -1,7 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ClumsyDelivery.UI.Panel;
 using Slimebones.ECSCore.Collision;
-using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.UI.Panel;
 using System;
 using UnityEngine;

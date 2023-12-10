@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.Logging;
+using Slimebones.CSKit.Logging;
 using System;
 using System.Collections.Generic;
 

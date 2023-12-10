@@ -1,11 +1,7 @@
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Providers;
 using Slimebones.ECSCore.GO;
-using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.UI.Canvas;
 using Slimebones.ECSCore.UI.Panel;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Slimebones.ECSCore.UI
 {
