@@ -10,7 +10,7 @@ namespace Slimebones.ECSCore.KeyCode
             foreach (var e in world.Filter.With<Code>().Build())
             {
                 ref var c = ref e.GetComponent<Code>();
-                if (c.key == refcode)
+                if (c.refcode == refcode)
                 {
                     return e;
                 }
@@ -27,7 +27,7 @@ namespace Slimebones.ECSCore.KeyCode
             foreach (var e in fb.With<Code>().Build())
             {
                 ref var c = ref e.GetComponent<Code>();
-                if (c.key == refcode)
+                if (c.refcode == refcode)
                 {
                     return e;
                 }

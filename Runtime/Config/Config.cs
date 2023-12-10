@@ -50,7 +50,7 @@ namespace Slimebones.ECSCore.Config
 
         public static void SubscribeSetting(Entity e, UIInputType uiInputType)
         {
-            var key = e.GetComponent<Code>().key;
+            var key = e.GetComponent<Code>().refcode;
             CheckContainsKey(key);
 
             if (!settingUpdateActionsByKey.ContainsKey(key))

@@ -2,6 +2,7 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using TriInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.Serialization;
 
 namespace Slimebones.ECSCore.KeyCode
 {
@@ -19,6 +20,7 @@ namespace Slimebones.ECSCore.KeyCode
     public struct Code: IComponent
     {
         [HideLabel]
-        public string key;
+        [FormerlySerializedAs("key")]
+        public string refcode;
     }
 }

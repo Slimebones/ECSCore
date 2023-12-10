@@ -157,7 +157,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Code>().key,
+                e.GetComponent<Code>().refcode,
                 state
             );
         }
@@ -192,7 +192,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Code>().key,
+                e.GetComponent<Code>().refcode,
                 state
             );
         }
