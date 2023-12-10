@@ -23,16 +23,12 @@ namespace Slimebones.ECSCore.Condition
 
         public static bool All(
             ICondition[] conditions,
-            Entity e,
-            World world
+            Entity e
         )
         {
             foreach (var condition in conditions)
             {
-                if (!condition.Check(
-                    e,
-                    world
-                ))
+                if (!condition.Check(e))
                 {
                     return false;
                 }

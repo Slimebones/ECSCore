@@ -5,9 +5,6 @@ namespace Slimebones.ECSCore.Condition
 {
     public interface ICondition
     {
-        public bool Check(
-            Entity e,
-            World world
-        );
+        public bool Check(Entity e);
     }
 }

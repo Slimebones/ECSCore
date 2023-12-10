@@ -56,8 +56,7 @@ namespace Slimebones.ECSCore.Actors.Door
                     c.openConditions == null
                     || ConditionUtils.All(
                         c.openConditions,
-                        e,
-                        World
+                        e
                     );
 
                 // change a door state if external conditions have been

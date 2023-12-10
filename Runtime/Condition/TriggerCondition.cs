@@ -40,19 +40,16 @@ namespace Slimebones.ECSCore.Condition
 
         private bool isEntered;
 
-        public bool Check(
-            Entity e,
-            World world
-        )
+        public bool Check(Entity e)
         {
             if (unityCollider1 == null || unityCollider2 == null)
             {
                 // trigger as like it has been staying
-                return Trigger(world);
+                return Trigger();
             }
 
             Filter collisionEventF =
-                world.Filter.With<CollisionEvent>().Build();
+                World.Default.Filter.With<CollisionEvent>().Build();
 
             foreach (var eventE in collisionEventF)
             {
@@ -80,7 +77,7 @@ namespace Slimebones.ECSCore.Condition
                 {
                     if (collisionEvent.type == CollisionEventType.Stay)
                     {
-                        return Trigger(world);
+                        return Trigger();
                     }
 
                     if (collisionEvent.type == CollisionEventType.Exit)
@@ -88,7 +85,7 @@ namespace Slimebones.ECSCore.Condition
                         isEntered = false;
                         if (IsDisplayPanelRefDefined())
                         {
-                            SetDisplayPanelState(false, world);
+                            SetDisplayPanelState(false);
                         }
                     }
                 }
@@ -105,29 +102,27 @@ namespace Slimebones.ECSCore.Condition
             return false;
         }
 
-        private void SetDisplayPanelState(bool isActive, World world)
+        private void SetDisplayPanelState(bool isActive)
         {
             if (isActive)
             {
                 PanelUtils.Enable(
-                    displayPanel.key,
-                    world
+                    displayPanel.key
                 );
                 return;
             }
             PanelUtils.Disable(
-                displayPanel.key,
-                world
+                displayPanel.key
             );
         }
 
-        private bool Trigger(World world)
+        private bool Trigger()
         {
             if (!isEntered)
             {
                 if (IsDisplayPanelRefDefined())
                 {
-                    SetDisplayPanelState(true, world);
+                    SetDisplayPanelState(true);
                 }
 
                 isEntered = true;
