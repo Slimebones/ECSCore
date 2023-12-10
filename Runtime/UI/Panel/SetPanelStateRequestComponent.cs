@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.UI.Panel
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct SetPanelStateRequest: IRequestComponent
     {
-        public string key;
+        public string refcode;
         public PanelStateChange state;
     }
 }

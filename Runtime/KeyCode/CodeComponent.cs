@@ -1,13 +1,14 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
+using TriInspector;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Slimebones.ECSCore.Key
+namespace Slimebones.ECSCore.KeyCode
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class KeyComponent: MonoProvider<Key>
+    public sealed class CodeComponent: MonoProvider<Code>
     {
     }
 
@@ -15,8 +16,9 @@ namespace Slimebones.ECSCore.Key
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct Key: IComponent
+    public struct Code: IComponent
     {
+        [HideLabel]
         public string key;
     }
 }

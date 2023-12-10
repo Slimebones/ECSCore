@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.KeyCode;
 using Slimebones.ECSCore.Request;
 using System;
 
@@ -14,10 +15,10 @@ namespace Slimebones.ECSCore.UI.Panel
         }
 
         public static void Enable(
-            string key
+            string refcode
         )
         {
-            SetState(key, PanelStateChange.Enable);
+            SetState(refcode, PanelStateChange.Enable);
         }
 
         public static void Disable(
@@ -29,11 +30,11 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void Enable(
-            string key,
+            string refcode,
             World world
         )
         {
-            SetState(key, PanelStateChange.Enable);
+            SetState(refcode, PanelStateChange.Enable);
         }
 
         [Obsolete("use version without passing world")]
@@ -47,18 +48,18 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void Disable(
-            string key,
+            string refcode,
             World world
         )
         {
-            SetState(key, PanelStateChange.Disable);
+            SetState(refcode, PanelStateChange.Disable);
         }
 
         public static void Disable(
-            string key
+            string refcode
         )
         {
-            SetState(key, PanelStateChange.Disable);
+            SetState(refcode, PanelStateChange.Disable);
         }
 
         [Obsolete("use version without passing world")]
@@ -79,11 +80,11 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void Toggle(
-            string key,
+            string refcode,
             World world
         )
         {
-            SetState(key, PanelStateChange.Toggle);
+            SetState(refcode, PanelStateChange.Toggle);
         }
 
         [Obsolete("use version without passing world")]
@@ -102,10 +103,10 @@ namespace Slimebones.ECSCore.UI.Panel
         }
 
         public static void Toggle(
-            string key
+            string refcode
         )
         {
-            SetState(key, PanelStateChange.Toggle);
+            SetState(refcode, PanelStateChange.Toggle);
         }
 
         public static void DecideEnable(
@@ -123,15 +124,15 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void DecideEnable(
-            bool isEnabled, string key, World world
+            bool isEnabled, string refcode, World world
         )
         {
             if (isEnabled)
             {
-                Enable(key);
+                Enable(refcode);
                 return;
             }
-            Disable(key);
+            Disable(refcode);
         }
 
         [Obsolete("use version without passing world")]
@@ -144,7 +145,7 @@ namespace Slimebones.ECSCore.UI.Panel
             ref var request =
                 ref RequestUtils.Create<SetPanelStateRequest>();
 
-            request.key = key;
+            request.refcode = key;
             request.state = state;
         }
 
@@ -156,21 +157,21 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Key.Key>().key,
+                e.GetComponent<Code>().key,
                 state
             );
         }
 
         public static void DecideEnable(
-            bool isEnabled, string key
+            bool isEnabled, string refcode
         )
         {
             if (isEnabled)
             {
-                Enable(key);
+                Enable(refcode);
                 return;
             }
-            Disable(key);
+            Disable(refcode);
         }
 
         public static void SetState(
@@ -181,7 +182,7 @@ namespace Slimebones.ECSCore.UI.Panel
             ref var request =
                 ref RequestUtils.Create<SetPanelStateRequest>();
 
-            request.key = key;
+            request.refcode = key;
             request.state = state;
         }
 
@@ -191,7 +192,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Key.Key>().key,
+                e.GetComponent<Code>().key,
                 state
             );
         }

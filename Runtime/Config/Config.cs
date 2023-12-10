@@ -2,6 +2,7 @@ using Scellecs.Morpeh;
 using Slimebones.ECSCore.Config.InternalSettingListeners;
 using Slimebones.ECSCore.File;
 using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.KeyCode;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.UI;
 using Slimebones.ECSCore.Utils;
@@ -49,7 +50,7 @@ namespace Slimebones.ECSCore.Config
 
         public static void SubscribeSetting(Entity e, UIInputType uiInputType)
         {
-            var key = e.GetComponent<Key.Key>().key;
+            var key = e.GetComponent<Code>().key;
             CheckContainsKey(key);
 
             if (!settingUpdateActionsByKey.ContainsKey(key))

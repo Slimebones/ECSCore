@@ -2,6 +2,7 @@ using Scellecs.Morpeh;
 using Slimebones.CSKit.Logging;
 using Slimebones.ECSCore.Event;
 using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.KeyCode;
 using Slimebones.ECSCore.Request;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,11 +36,11 @@ namespace Slimebones.ECSCore.UI.Panel
             {
                 ref var reqC = ref reqE.GetComponent<SetPanelStateRequest>();
 
-                if (!panelGOByKey.ContainsKey(reqC.key))
+                if (!panelGOByKey.ContainsKey(reqC.refcode))
                 {
                     Log.Error(
                         "unregistered request's key "
-                        + reqC.key
+                        + reqC.refcode
                         + " => skip"
                     );
                     RequestUtils.Complete(reqE);
@@ -48,15 +49,15 @@ namespace Slimebones.ECSCore.UI.Panel
 
                 bool finalState = GetFinalState(
                     ref reqC,
-                    panelGOByKey[reqC.key]
+                    panelGOByKey[reqC.refcode]
                 );
-                panelGOByKey[reqC.key].SetActive(finalState);
+                panelGOByKey[reqC.refcode].SetActive(finalState);
 
                 ref var evt =
                     ref EventUtils.Create<PanelStateEvent>();
-                evt.key = reqC.key;
+                evt.key = reqC.refcode;
                 evt.isEnabled = finalState;
-                evt.go = panelGOByKey[reqC.key];
+                evt.go = panelGOByKey[reqC.refcode];
 
                 RequestUtils.Complete(reqE);
             }
@@ -96,7 +97,7 @@ namespace Slimebones.ECSCore.UI.Panel
         {
             foreach (var panelE in panelF)
             {
-                var key = panelE.GetComponent<Key.Key>().key;
+                var key = panelE.GetComponent<Code>().key;
                 var panelGO = GOUtils.GetUnity(
                     panelE
                 );
