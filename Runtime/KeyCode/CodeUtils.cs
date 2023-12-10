@@ -5,35 +5,35 @@ namespace Slimebones.ECSCore.KeyCode
 {
     public static class CodeUtils
     {
-        public static Entity GetEntity(string refcode, World world)
+        public static Entity GetEntity(string code, World world)
         {
             foreach (var e in world.Filter.With<Code>().Build())
             {
                 ref var c = ref e.GetComponent<Code>();
-                if (c.refcode == refcode)
+                if (c.code == code)
                 {
                     return e;
                 }
             }
 
-            throw new NotFoundException("entity with code " + refcode);
+            throw new NotFoundException("entity with code " + code);
         }
 
         public static Entity GetEntity(
-            string refcode,
+            string code,
             FilterBuilder fb
         )
         {
             foreach (var e in fb.With<Code>().Build())
             {
                 ref var c = ref e.GetComponent<Code>();
-                if (c.refcode == refcode)
+                if (c.code == code)
                 {
                     return e;
                 }
             }
 
-            throw new NotFoundException("entity with code " + refcode);
+            throw new NotFoundException("entity with code " + code);
         }
     }
 }

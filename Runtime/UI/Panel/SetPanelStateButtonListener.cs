@@ -33,7 +33,7 @@ namespace Slimebones.ECSCore.UI.Panel
         private void Call()
         {
             ref var req = ref RequestUtils.Create<SetPanelStateRequest>();
-            req.refcode = targetPanelKey;
+            req.code = targetPanelKey;
             req.state = targetChangeState;
         }
     }

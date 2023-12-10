@@ -15,10 +15,10 @@ namespace Slimebones.ECSCore.UI.Panel
         }
 
         public static void Enable(
-            string refcode
+            string code
         )
         {
-            SetState(refcode, PanelStateChange.Enable);
+            SetState(code, PanelStateChange.Enable);
         }
 
         public static void Disable(
@@ -30,11 +30,11 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void Enable(
-            string refcode,
+            string code,
             World world
         )
         {
-            SetState(refcode, PanelStateChange.Enable);
+            SetState(code, PanelStateChange.Enable);
         }
 
         [Obsolete("use version without passing world")]
@@ -48,18 +48,18 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void Disable(
-            string refcode,
+            string code,
             World world
         )
         {
-            SetState(refcode, PanelStateChange.Disable);
+            SetState(code, PanelStateChange.Disable);
         }
 
         public static void Disable(
-            string refcode
+            string code
         )
         {
-            SetState(refcode, PanelStateChange.Disable);
+            SetState(code, PanelStateChange.Disable);
         }
 
         [Obsolete("use version without passing world")]
@@ -80,11 +80,11 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void Toggle(
-            string refcode,
+            string code,
             World world
         )
         {
-            SetState(refcode, PanelStateChange.Toggle);
+            SetState(code, PanelStateChange.Toggle);
         }
 
         [Obsolete("use version without passing world")]
@@ -103,10 +103,10 @@ namespace Slimebones.ECSCore.UI.Panel
         }
 
         public static void Toggle(
-            string refcode
+            string code
         )
         {
-            SetState(refcode, PanelStateChange.Toggle);
+            SetState(code, PanelStateChange.Toggle);
         }
 
         public static void DecideEnable(
@@ -124,15 +124,15 @@ namespace Slimebones.ECSCore.UI.Panel
 
         [Obsolete("use version without passing world")]
         public static void DecideEnable(
-            bool isEnabled, string refcode, World world
+            bool isEnabled, string code, World world
         )
         {
             if (isEnabled)
             {
-                Enable(refcode);
+                Enable(code);
                 return;
             }
-            Disable(refcode);
+            Disable(code);
         }
 
         [Obsolete("use version without passing world")]
@@ -145,7 +145,7 @@ namespace Slimebones.ECSCore.UI.Panel
             ref var request =
                 ref RequestUtils.Create<SetPanelStateRequest>();
 
-            request.refcode = key;
+            request.code = key;
             request.state = state;
         }
 
@@ -157,21 +157,21 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Code>().refcode,
+                e.GetComponent<Code>().code,
                 state
             );
         }
 
         public static void DecideEnable(
-            bool isEnabled, string refcode
+            bool isEnabled, string code
         )
         {
             if (isEnabled)
             {
-                Enable(refcode);
+                Enable(code);
                 return;
             }
-            Disable(refcode);
+            Disable(code);
         }
 
         public static void SetState(
@@ -182,7 +182,7 @@ namespace Slimebones.ECSCore.UI.Panel
             ref var request =
                 ref RequestUtils.Create<SetPanelStateRequest>();
 
-            request.refcode = key;
+            request.code = key;
             request.state = state;
         }
 
@@ -192,7 +192,7 @@ namespace Slimebones.ECSCore.UI.Panel
         )
         {
             SetState(
-                e.GetComponent<Code>().refcode,
+                e.GetComponent<Code>().code,
                 state
             );
         }

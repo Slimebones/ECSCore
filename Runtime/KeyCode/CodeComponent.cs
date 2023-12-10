@@ -21,6 +21,6 @@ namespace Slimebones.ECSCore.KeyCode
     {
         [HideLabel]
         [FormerlySerializedAs("key")]
-        public string refcode;
+        public string code;
     }
 }
