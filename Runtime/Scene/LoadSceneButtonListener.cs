@@ -3,6 +3,7 @@ using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.React;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityUI = UnityEngine.UI;
 
 namespace Slimebones.ECSCore.Scene
@@ -18,12 +19,14 @@ namespace Slimebones.ECSCore.Scene
             > ActionByType = new Dictionary<ActionType, Action<Args>> {
                 { ActionType.Load, Load },
                 { ActionType.Restart, Restart },
+                { ActionType.LoadNextInBuild, LoadNextInBuild },
             };
 
             public enum ActionType
             {
                 Load = 0,
                 Restart = 1,
+                LoadNextInBuild = 3
             }
 
             public class Args
@@ -43,6 +46,18 @@ namespace Slimebones.ECSCore.Scene
             private static void Restart(Args args)
             {
                 SceneUtils.Restart();
+            }
+
+            private static void LoadNextInBuild(Args args)
+            {
+                string path = SceneUtility.GetScenePathByBuildIndex(
+                    SceneManager.GetActiveScene().buildIndex + 1
+                );
+                int slash = path.LastIndexOf('/');
+                string name = path.Substring(slash + 1);
+                int dot = name.LastIndexOf('.');
+                var res = name.Substring(0, dot);
+                SceneUtils.Load(res, args.isLoadingScreenEnabled);
             }
         }
 
