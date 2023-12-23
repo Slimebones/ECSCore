@@ -2,6 +2,7 @@ using Scellecs.Morpeh;
 using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.React;
 using UnityUI = UnityEngine.UI;
+using UnityEngine;
 
 namespace Slimebones.ECSCore.Scene
 {
@@ -34,7 +35,7 @@ namespace Slimebones.ECSCore.Scene
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quit();
+            UnityEngine.Application.Quit();
 #endif
         }
     }
