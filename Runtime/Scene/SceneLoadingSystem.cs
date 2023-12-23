@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using Slimebones.ClumsyDelivery.Scene;
 using Slimebones.ECSCore.GO;
 using Slimebones.ECSCore.Request;
+using Slimebones.ECSCore.Input;
 
 namespace Slimebones.ECSCore.Scene
 {
@@ -99,7 +100,7 @@ namespace Slimebones.ECSCore.Scene
                 ref LoadingSpinner loadingSpinner =
                     ref loadingSpinnerE.GetComponent<LoadingSpinner>();
 
-                ref UnityEngine.GameObject loadingSpinnerGO = ref loadingSpinnerE
+                ref GameObject loadingSpinnerGO = ref loadingSpinnerE
                     .GetComponent<GOData>().value;
                 loadingSpinnerGO.transform.Rotate(
                     new Vector3(0f, 0f, -loadingSpinner.animationSpeed * deltaTime)
@@ -118,6 +119,13 @@ namespace Slimebones.ECSCore.Scene
             string nextRealScene = SceneStorage.nextRealScene;
             SceneStorage.currentRealScene = nextRealScene;
             SceneStorage.nextRealScene = null;
+
+            // unlock cursor and input in all cases to prevent nasty bugs of
+            // jumping to another scene e.g. from ingame menu
+            //
+            // later it can be done only if according request's flag is given
+            CursorUtils.UnlockCursor();
+            InputUtils.EnableAllSpecs();
 
             SceneManager.LoadScene(nextRealScene);
         }
