@@ -1,5 +1,5 @@
 using System;
-using UnityEditor;
+using System.Globalization;
 
 namespace Slimebones.ECSCore.Utils.Parsing
 {
@@ -147,11 +147,17 @@ namespace Slimebones.ECSCore.Utils.Parsing
             return false;
         }
 
+        /// <summary>
+        /// Parses to float using standard USA format.
+        /// </summary>
+        /// <remarks>
+        /// Suitable for config parsing, where the locale does not matter.
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static float ParseLocaleSafe(string value)
         {
-            // adhoc fix for multi-locale parsing problem of the config-like
-            // data
-            return float.Parse(value.Replace(",", "."));
+            return float.Parse(value, CultureInfo.GetCultureInfo("en"));
         }
    }
 
