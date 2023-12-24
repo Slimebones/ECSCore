@@ -54,7 +54,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         private float Parse(string value)
         {
-            float res = ApplyPrecision(float.Parse(value));
+            float res = ApplyPrecision(ParsingUtils.ParseLocaleSafe(value));
 
             if (res < MinValue || res > MaxValue)
             {

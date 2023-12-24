@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 
 namespace Slimebones.ECSCore.Utils.Parsing
 {
@@ -144,6 +145,13 @@ namespace Slimebones.ECSCore.Utils.Parsing
             }
 
             return false;
+        }
+
+        public static float ParseLocaleSafe(string value)
+        {
+            // adhoc fix for multi-locale parsing problem of the config-like
+            // data
+            return float.Parse(value.Replace(",", "."));
         }
    }
 
