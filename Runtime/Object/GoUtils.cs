@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Slimebones.ECSCore.Utils;
 using UnityEngine;
 
 namespace Slimebones.ECSCore.Object
@@ -15,7 +16,18 @@ namespace Slimebones.ECSCore.Object
             return ref e.GetComponent<Go>();
         }
 
-        public static UnityEngine.GameObject GetUnity(Entity e)
+        public static ref Entity GetFromUnity(GameObject unityGo)
+        {
+            var provider = unityGo.GetComponent<GoComponent>();
+            if (provider == null)
+            {
+                throw new NotFoundException(
+                    "go provider for game object " + unityGo.ToString()
+                );
+            }
+        }
+
+        public static GameObject GetUnity(Entity e)
         {
             ref Go GOECS = ref Get(e);
 
