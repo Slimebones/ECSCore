@@ -4,11 +4,11 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.GO
+namespace Slimebones.ECSCore.Object
 {
-    public struct GODestroyActionSpec: IActionSpec
+    public struct GoDestroyActionSpec: IActionSpec
     {
-        public GODestroyActionSpecEntityData[] entities;
+        public GoDestroyActionSpecEntityData[] entities;
 
         public void Call(Entity e1, Entity e2, Entity e3, Entity e4)
         {
@@ -33,7 +33,7 @@ namespace Slimebones.ECSCore.GO
                                 e2,
                                 e3,
                                 e4
-                            ).GetUnityGO(),
+                            ).GetUnityGo(),
                             data.destroyDelay
                         );
                     }

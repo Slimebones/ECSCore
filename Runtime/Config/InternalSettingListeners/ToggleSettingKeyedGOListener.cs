@@ -12,7 +12,7 @@ namespace Slimebones.ECSCore.Config.InternalSettingListeners
         private string key;
         private Toggle toggleUnity;
 
-        public void Subscribe(string key, GameObject go, World world)
+        public void Subscribe(string key, UnityEngine.GameObject go, World world)
         {
             this.key = key;
             toggleUnity = go.GetComponent<Toggle>();

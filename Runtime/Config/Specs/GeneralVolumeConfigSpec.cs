@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.CSKit.Logging;
 using Slimebones.ECSCore.Audio;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.Request;
 using Slimebones.ECSCore.UI.Settings;
@@ -28,7 +28,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GOUtils.GetUnity(e);
+            var go = GoUtils.GetUnity(e);
             Slider sliderUnity = go.GetComponent<Slider>();
 
             TextMeshProUGUI displayText =

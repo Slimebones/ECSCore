@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.React;
 using UnityUI = UnityEngine.UI;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.Scene
         {
             this.e = e;
             this.world = world;
-            unityButton = GOUtils.GetUnity(
+            unityButton = GoUtils.GetUnity(
                 e
             ).GetComponent<UnityUI.Button>();
 

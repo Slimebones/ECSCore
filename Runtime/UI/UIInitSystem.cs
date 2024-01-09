@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.UI.Canvas;
 using Slimebones.ECSCore.UI.Panel;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace Slimebones.ECSCore.UI
 
         private void EnablePanels()
         {
-            var mainCanvasGO = GOUtils.GetUnity(
+            var mainCanvasGO = GoUtils.GetUnity(
                 mainCanvasF.First()
             );
 

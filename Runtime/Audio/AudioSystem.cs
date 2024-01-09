@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.CSKit.Logging;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.Request;
 using System;
 using UnityEngine;
@@ -48,7 +48,7 @@ namespace Slimebones.ECSCore.Audio
                 {
                     ref var reqc = ref reqe.GetComponent<SetAudioByEntityReq>();
 
-                    var audioSource = GOUtils.GetUnity(
+                    var audioSource = GoUtils.GetUnity(
                         reqc.e
                     ).GetComponent<AudioSource>();
 
@@ -127,7 +127,7 @@ namespace Slimebones.ECSCore.Audio
         {
             foreach (var e in f)
             {
-                var audioSourceUnity = GOUtils.GetUnity(
+                var audioSourceUnity = GoUtils.GetUnity(
                     e
                 ).GetComponent<AudioSource>();
                 ref var audioC = ref e.GetComponent<Audio>();

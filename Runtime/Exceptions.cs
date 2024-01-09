@@ -37,7 +37,7 @@ namespace Slimebones.ECSCore
     public class MissingUnityComponentException<TComponent>: Exception
     {
         public MissingUnityComponentException(
-            GameObject go
+            UnityEngine.GameObject go
         )
             : base(string.Format(
                 "missing Unity component <{0}> on Unity game object <{1}>",
@@ -52,7 +52,7 @@ namespace Slimebones.ECSCore
         : Exception where TComponent : struct, IComponent
     {
         public MissingECSComponentException(
-            GameObject unityGO
+            UnityEngine.GameObject unityGO
         )
             : base(string.Format(
                 "missing ECS component <{0}> on Unity game object <{1}>",

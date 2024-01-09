@@ -3,7 +3,7 @@ using System;
 namespace Slimebones.ECSCore.ActionSpec
 {
     [Serializable]
-    public struct GODestroyActionSpecEntityData: IActionSpecEntityData
+    public struct GoDestroyActionSpecEntityData: IActionSpecEntityData
     {
         public EntityArg arg;
         public float destroyDelay;

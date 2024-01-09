@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine.SceneManagement;
 using Slimebones.ClumsyDelivery.Scene;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.Request;
 using Slimebones.ECSCore.Input;
 
@@ -101,7 +101,7 @@ namespace Slimebones.ECSCore.Scene
                     ref loadingSpinnerE.GetComponent<LoadingSpinner>();
 
                 ref GameObject loadingSpinnerGO = ref loadingSpinnerE
-                    .GetComponent<GOData>().value;
+                    .GetComponent<Go>().value;
                 loadingSpinnerGO.transform.Rotate(
                     new Vector3(0f, 0f, -loadingSpinner.animationSpeed * deltaTime)
                 );

@@ -6,7 +6,7 @@ namespace Slimebones.ECSCore.React
     public interface IKeyedGOListener
     {
         public void Subscribe(
-            string key, GameObject go, World world
+            string key, UnityEngine.GameObject go, World world
         );
         public void Unsubscribe();
     }

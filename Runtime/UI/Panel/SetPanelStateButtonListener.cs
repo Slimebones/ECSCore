@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.Request;
 using UnityEngine.Serialization;
@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.UI.Panel
             Entity e, World world
         )
         {
-            unityButton = GOUtils.GetUnity(
+            unityButton = GoUtils.GetUnity(
                 e
             ).GetComponent<UnityUI.Button>();
 

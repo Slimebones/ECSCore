@@ -3,7 +3,7 @@ using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
 using UnityEngine.UI;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 
 namespace Slimebones.ECSCore.Mouse
 {
@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.Mouse
         public override void OnAwake()
         {
             mouseInteractableF = World
-                .Filter.With<MouseInteractable>().With<GOData>().Build();
+                .Filter.With<MouseInteractable>().With<Go>().Build();
 
             // selects every mouse interactable and assigns it's mouse bridge to
             // it's button. If there is no button Unity component, just skip.
@@ -30,7 +30,7 @@ namespace Slimebones.ECSCore.Mouse
             foreach (var e in mouseInteractableF)
             {
 
-                GameObject unityGO = GOUtils.GetUnity(e);
+                UnityEngine.GameObject unityGO = GoUtils.GetUnity(e);
 
                 // get button and mouse bridge unity components and setup a
                 // romantic date for them

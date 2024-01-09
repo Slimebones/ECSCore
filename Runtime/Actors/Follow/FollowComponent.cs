@@ -18,7 +18,7 @@ namespace Slimebones.ECSCore.Actors.Follow
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct Follow: IComponent
     {
-        public GameObject targetGO;
+        public UnityEngine.GameObject targetGO;
         public Vector3 offset;
     }
 }

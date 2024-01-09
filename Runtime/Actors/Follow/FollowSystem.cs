@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 
 namespace Slimebones.ECSCore.Actors.Follow
 {
@@ -22,7 +22,7 @@ namespace Slimebones.ECSCore.Actors.Follow
             foreach (var e in f)
             {
                 ref var c = ref e.GetComponent<Follow>();
-                var cgo = GOUtils.GetUnity(e);
+                var cgo = GoUtils.GetUnity(e);
 
                 cgo.transform.position =
                     c.targetGO.transform.position + c.offset;

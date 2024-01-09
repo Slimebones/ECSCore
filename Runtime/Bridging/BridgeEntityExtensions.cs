@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.Utils;
 
 namespace Slimebones.ECSCore.Bridging
@@ -11,7 +11,7 @@ namespace Slimebones.ECSCore.Bridging
             World world
         ) where T : Bridge
         {
-            var go = e.GetUnityGO();
+            var go = e.GetUnityGo();
 
             if (go.GetComponent<T>() != null)
             {
@@ -34,7 +34,7 @@ namespace Slimebones.ECSCore.Bridging
             this Entity e
         ) where T : Bridge
         {
-            return e.GetUnityGO().GetComponent<T>() != null;
+            return e.GetUnityGo().GetComponent<T>() != null;
         }
     }
 }

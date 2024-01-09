@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Config.InternalSettingListeners;
 using Slimebones.ECSCore.File;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.KeyCode;
 using Slimebones.ECSCore.React;
 using Slimebones.ECSCore.UI;
@@ -64,14 +64,14 @@ namespace Slimebones.ECSCore.Config
 
             SubscribeByInputType(
                 key,
-                GOUtils.GetUnity(e),
+                GoUtils.GetUnity(e),
                 uiInputType
             );
         }
 
         private static void SubscribeByInputType(
             string key,
-            GameObject go,
+            UnityEngine.GameObject go,
             UIInputType uiInputType
         )
         {

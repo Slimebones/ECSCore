@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.CSKit.Logging;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.Graphics;
 using Slimebones.ECSCore.Request;
 using Slimebones.ECSCore.Utils;
@@ -57,7 +57,7 @@ namespace Slimebones.ECSCore.Config.Specs
 
         public Action<string> OnSettingInit(Entity e)
         {
-            var go = GOUtils.GetUnity(e);
+            var go = GoUtils.GetUnity(e);
             TMP_Dropdown dropdownUnity = go.GetComponent<TMP_Dropdown>();
             InitSettingOptions(dropdownUnity);
             return (string value) =>

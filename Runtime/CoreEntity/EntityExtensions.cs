@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 
 namespace Slimebones.ECSCore.CoreEntity
 {
@@ -25,8 +25,8 @@ namespace Slimebones.ECSCore.CoreEntity
             this Entity entity
         )
         {
-            GOData gameObject =
-                entity.GetComponent<GOData>(out bool hasGameObject);
+            Go gameObject =
+                entity.GetComponent<Go>(out bool hasGameObject);
 
             if (hasGameObject)
             {

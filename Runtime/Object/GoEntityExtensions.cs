@@ -1,13 +1,13 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace Slimebones.ECSCore.GO
+namespace Slimebones.ECSCore.Object
 {
-    public static class GOEntityExtensions
+    public static class GoEntityExtensions
     {
-        public static GameObject GetUnityGO(this Entity e)
+        public static GameObject GetUnityGo(this Entity e)
         {
-            ref GOData GOECS = ref GOUtils.Get(e);
+            ref Go GOECS = ref GoUtils.Get(e);
 
             if (GOECS.value == null)
             {

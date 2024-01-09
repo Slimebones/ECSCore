@@ -21,6 +21,6 @@ namespace Slimebones.ECSCore.UI.Panel
     {
         public string key;
         public bool isEnabled;
-        public GameObject go;
+        public UnityEngine.GameObject go;
     }
 }

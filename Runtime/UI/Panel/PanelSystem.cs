@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using Slimebones.CSKit.Logging;
 using Slimebones.ECSCore.Event;
-using Slimebones.ECSCore.GO;
+using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.KeyCode;
 using Slimebones.ECSCore.Request;
 using System.Collections.Generic;
@@ -14,8 +14,8 @@ namespace Slimebones.ECSCore.UI.Panel
         private Filter panelF;
         private Filter reqF;
 
-        private Dictionary<string, GameObject> panelGOByKey =
-            new Dictionary<string, GameObject>();
+        private Dictionary<string, UnityEngine.GameObject> panelGOByKey =
+            new Dictionary<string, UnityEngine.GameObject>();
 
         public World World
         {
@@ -69,7 +69,7 @@ namespace Slimebones.ECSCore.UI.Panel
 
         private bool GetFinalState(
             ref SetPanelStateRequest reqC,
-            GameObject reffedGO
+            UnityEngine.GameObject reffedGO
         )
         {
             switch (reqC.state)
@@ -98,7 +98,7 @@ namespace Slimebones.ECSCore.UI.Panel
             foreach (var panelE in panelF)
             {
                 var key = panelE.GetComponent<Code>().code;
-                var panelGO = GOUtils.GetUnity(
+                var panelGO = GoUtils.GetUnity(
                     panelE
                 );
 
