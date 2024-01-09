@@ -125,7 +125,6 @@ namespace Slimebones.ECSCore.Scene
             //
             // later it can be done only if according request's flag is given
             CursorUtils.UnlockCursor();
-            InputUtils.EnableAllSpecs();
 
             SceneManager.LoadScene(nextRealScene);
         }
