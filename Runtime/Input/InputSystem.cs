@@ -1,8 +1,6 @@
 using Scellecs.Morpeh;
 using Slimebones.ECSCore.Event;
 using Slimebones.ECSCore.Storage;
-using System.Collections.Generic;
-using static Slimebones.ECSCore.Utils.Delegates;
 
 namespace Slimebones.ECSCore.Input
 {
