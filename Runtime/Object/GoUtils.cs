@@ -16,15 +16,16 @@ namespace Slimebones.ECSCore.Object
             return ref e.GetComponent<Go>();
         }
 
-        public static ref Entity GetFromUnity(GameObject unityGo)
+        public static bool TryGetFromUnity(GameObject unityGo, out Entity e)
         {
             var provider = unityGo.GetComponent<GoComponent>();
+            e = default; 
             if (provider == null)
             {
-                throw new NotFoundException(
-                    "go provider for game object " + unityGo.ToString()
-                );
+                return false;
             }
+            e = provider.Entity;
+            return true;
         }
 
         public static GameObject GetUnity(Entity e)
