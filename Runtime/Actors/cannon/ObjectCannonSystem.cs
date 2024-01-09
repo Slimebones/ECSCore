@@ -27,7 +27,7 @@ namespace Slimebones.ECSCore.Actors.Cannon
                 ref var c = ref e.GetComponent<ObjectCannon>();
 
                 if (
-                    c.conditions == null
+                    (c.conditions == null || c.conditions.Length == 0)
                     || ConditionUtils.All(
                         c.conditions,
                         e
