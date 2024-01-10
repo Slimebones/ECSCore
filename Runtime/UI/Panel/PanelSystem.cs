@@ -1,5 +1,5 @@
 using Scellecs.Morpeh;
-using Slimebones.CSKit.Logging;
+using Slimebones.ECSCore.Logging;
 using Slimebones.ECSCore.Event;
 using Slimebones.ECSCore.Object;
 using Slimebones.ECSCore.KeyCode;

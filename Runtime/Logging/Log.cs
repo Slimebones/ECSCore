@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using System;
 using UnityEngine;
 
-namespace Slimebones.CSKit.Logging
+namespace Slimebones.ECSCore.Logging
 {
     // TODO(ryzhovalex):
     //      for now here only debug writes, but we want to add an advanced
